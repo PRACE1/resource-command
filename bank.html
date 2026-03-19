@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Command — Finance Portal | Zambia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#040B14;--gold:#F59E0B;--primary:#38BDF8;--copper:#E07B39;--success:#10B981;--danger:#EF4444;--purple:#A855F7;--text:#F0F6FF;--text-sub:#94A3B8;--text-muted:#4B6178;--border:rgba(255,255,255,0.06);--border-s:rgba(255,255,255,0.12);--glass:rgba(255,255,255,0.03)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(245,158,11,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(245,158,11,.025) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
+a{color:inherit;text-decoration:none}
+nav{position:sticky;top:0;z-index:100;background:rgba(4,11,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(245,158,11,.15);padding:0 32px;display:flex;align-items:center;gap:16px;height:60px}
+.nav-back{padding:7px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--gold);font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
+.nav-back:hover{background:rgba(245,158,11,.14)}
+.nav-brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.nav-logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--copper));display:flex;align-items:center;justify-content:center;font-size:14px}
+.nav-title{font-size:14px;font-weight:800}
+.nav-sub{font-size:10px;color:var(--text-muted)}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.b-gold{background:rgba(245,158,11,.1);color:var(--gold);border:1px solid rgba(245,158,11,.2)}
+.b-success{background:rgba(16,185,129,.1);color:var(--success);border:1px solid rgba(16,185,129,.2)}
+.b-danger{background:rgba(239,68,68,.1);color:var(--danger);border:1px solid rgba(239,68,68,.2)}
+.b-warning{background:rgba(245,158,11,.1);color:var(--gold);border:1px solid rgba(245,158,11,.2)}
+.b-info{background:rgba(56,189,248,.1);color:var(--primary);border:1px solid rgba(56,189,248,.2)}
+main{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:40px 32px 80px}
+.section{margin-bottom:52px}
+.sec-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px;margin-bottom:10px}
+.sec-title{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;letter-spacing:-.5px;margin-bottom:10px;line-height:1.2}
+.sec-desc{font-size:14px;color:var(--text-sub);line-height:1.75;max-width:680px}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--border-s);border-radius:16px;padding:24px;backdrop-filter:blur(12px)}
+.card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px}
+.card-hd h3{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:18px 16px}
+.kpi-val{font-size:1.8rem;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:2px}
+.kpi-lbl{font-size:11px;color:var(--text-muted)}
+.kpi-note{font-size:10px;color:var(--text-muted);margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:9px;font-size:12px;font-weight:700;border:none;cursor:pointer;transition:all .2s}
+.btn-gold{background:linear-gradient(135deg,var(--gold),rgba(245,158,11,.7));color:#040B14}
+.btn-gold:hover{box-shadow:0 0 24px rgba(245,158,11,.4);transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--border-s);color:var(--text-sub)}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-sm{padding:6px 12px;font-size:11px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:10px 14px;color:var(--text-muted);font-weight:600;font-size:11px;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px}
+td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+/* Rate engine */
+.rate-engine{background:linear-gradient(145deg,rgba(245,158,11,.06),rgba(16,185,129,.04));border:1px solid rgba(245,158,11,.2);border-radius:16px;padding:28px}
+.score-slider-wrap{margin:16px 0}
+input[type=range]{width:100%;accent-color:var(--gold);cursor:pointer}
+.rate-display{display:flex;align-items:center;justify-content:center;gap:32px;padding:24px;margin:16px 0;background:rgba(0,0,0,.2);border-radius:12px;flex-wrap:wrap}
+.rate-box{text-align:center}
+.rate-val{font-size:2.4rem;font-weight:900;font-family:'JetBrains Mono',monospace}
+.rate-lbl{font-size:11px;color:var(--text-muted);margin-top:4px}
+.rate-arrow{font-size:2rem;color:var(--success)}
+/* Climate */
+.climate-card{border-radius:12px;padding:18px;border:1px solid var(--border)}
+.climate-bar-wrap{height:8px;background:rgba(255,255,255,.06);border-radius:4px;margin-top:8px;overflow:hidden}
+.climate-bar{height:100%;border-radius:4px;transition:width 1s ease}
+/* Green bond */
+.gb-form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+label{font-size:11px;font-weight:600;color:var(--text-muted)}
+select,input{background:#060D18;border:1px solid var(--border-s);color:var(--text);border-radius:8px;padding:9px 12px;font-size:12px;font-family:inherit}
+select:focus,input:focus{outline:none;border-color:var(--gold)}
+/* Covenant */
+.cov-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:9px;border:1px solid var(--border);margin-bottom:8px}
+.cov-name{font-size:12px;font-weight:600}
+.cov-sub{font-size:11px;color:var(--text-muted)}
+.cov-status{font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px}
+@media(max-width:768px){.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="portal.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i>All Portals</a>
+  <div class="nav-brand">
+    <div class="nav-logo"><i class="fa-solid fa-building-columns"></i></div>
+    <div>
+      <div class="nav-title">Finance Intelligence Center</div>
+      <div class="nav-sub">AfDB · Zanaco · IFC · Stanbic · Development Finance</div>
+    </div>
+  </div>
+  <span class="badge b-gold">🏦 Finance Access</span>
+</nav>
+
+<main>
+
+<!-- KPIs -->
+<div class="g4 fade" style="margin-bottom:48px">
+  <div class="kpi"><div class="kpi-val" style="color:var(--gold)">$6.6B</div><div class="kpi-lbl">Total Finance Deployed</div><div class="kpi-note">Across 9 active projects</div></div>
+  <div class="kpi"><div class="kpi-val" style="color:var(--success)">82.4</div><div class="kpi-lbl">Avg Portfolio Risk Score</div><div class="kpi-note">↑ 4.1pts vs Q4 2025</div></div>
+  <div class="kpi"><div class="kpi-val" style="color:var(--danger)">2</div><div class="kpi-lbl">Covenant Alerts Active</div><div class="kpi-note">Vedanta + Mopani</div></div>
+  <div class="kpi"><div class="kpi-val" style="color:var(--primary)">$840M</div><div class="kpi-lbl">Available for Deployment</div><div class="kpi-note">Green bond tranche ready</div></div>
+</div>
+
+<!-- RATE ENGINE -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-percent"></i> Compliance Rate Engine</div>
+  <div class="sec-title">Compliance-Linked Interest Rates</div>
+  <div class="sec-desc" style="margin-bottom:20px">Higher compliance scores unlock lower borrowing rates. This creates a direct financial incentive for mining companies to maintain regulatory standards — better behaviour, cheaper capital.</div>
+  <div class="rate-engine">
+    <div style="font-size:13px;font-weight:600;margin-bottom:12px">Adjust company compliance score to see rate impact:</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <select id="rate-company" style="flex:1" onchange="updateRate()">
+        <option value="94">First Quantum Minerals — Score: 94</option>
+        <option value="91">Barrick Gold (Lumwana) — Score: 91</option>
+        <option value="78">Mopani Copper Mines — Score: 78</option>
+        <option value="67">Vedanta / KCM — Score: 67</option>
+      </select>
+    </div>
+    <div class="score-slider-wrap">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+        <span style="color:var(--danger)">0 (Non-Compliant)</span>
+        <span style="font-weight:700;color:var(--gold)" id="score-disp">94</span>
+        <span style="color:var(--success)">100 (Perfect)</span>
+      </div>
+      <input type="range" id="score-slider" min="0" max="100" value="94" oninput="updateRate()">
+    </div>
+    <div class="rate-display">
+      <div class="rate-box"><div class="rate-val" style="color:var(--danger)" id="rate-base">9.8%</div><div class="rate-lbl">Market Base Rate (Non-compliant)</div></div>
+      <div class="rate-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="rate-box"><div class="rate-val" style="color:var(--success)" id="rate-comp">5.4%</div><div class="rate-lbl">Compliance-Adjusted Rate</div></div>
+      <div class="rate-box"><div class="rate-val" style="color:var(--gold)" id="rate-saving">$22M/yr</div><div class="rate-lbl">Annual Interest Savings (at $500M loan)</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--text-sub);text-align:center;padding:10px;background:rgba(16,185,129,.05);border-radius:8px;border:1px solid rgba(16,185,129,.15)">
+      <i class="fa-solid fa-circle-info" style="color:var(--success)"></i>&nbsp;Rate model: Base 9.8% minus (Score × 0.046%). Current best rate: 5.2% at score 100. Verified against Zambia reference rate (Bank of Zambia MPR: 13.5%, Platform enables risk-adjusted discount).
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO TABLE -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-chart-pie"></i> Active Portfolio</div>
+  <div class="sec-title">Finance Positions — Live Risk Monitor</div>
+  <div class="sec-desc" style="margin-bottom:20px">All active loans and equity positions for Zambia mining &amp; energy. Risk scores update daily from compliance feed. Click any row for drill-down.</div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="card-hd" style="padding:16px 20px">
+      <h3><i class="fa-solid fa-table" style="color:var(--gold)"></i> Active Finance Positions</h3>
+      <button class="btn btn-ghost btn-sm" onclick="exportPF()"><i class="fa-solid fa-download"></i> Export</button>
+    </div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Project</th><th>Investor</th><th>Committed</th><th>Deployed</th><th>ROI Target</th><th>Type</th><th>Compliance Risk</th><th>Energy Risk</th><th>Status</th></tr></thead>
+        <tbody id="pf-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="section fade">
+  <div class="g2">
+    <div class="card">
+      <div class="card-hd"><h3><i class="fa-solid fa-chart-bar" style="color:var(--gold)"></i> Portfolio by Investor (USD M)</h3></div>
+      <canvas id="inv-chart" height="180"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-hd"><h3><i class="fa-solid fa-shield-halved" style="color:var(--primary)"></i> Compliance Risk Distribution</h3></div>
+      <canvas id="risk-chart" height="180"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- CLIMATE RISK -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-cloud-sun-rain"></i> Climate Physical Risk</div>
+  <div class="sec-title">30-Year Drought & Flood Risk by Mine Site</div>
+  <div class="sec-desc" style="margin-bottom:20px">Based on CMIP6 climate projections (SSP3-7.0 scenario). Factored into all loan covenant structures from 2026. A mine losing water access loses its production guarantee.</div>
+  <div class="g2" id="climate-grid"></div>
+</section>
+
+<!-- GREEN BOND BUILDER -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-leaf"></i> Green Bond Instrument Builder</div>
+  <div class="sec-title">Structure a Compliance-Linked Green Bond</div>
+  <div class="sec-desc" style="margin-bottom:20px">Build a green bond instrument tied to renewable energy deployment milestones at mine sites. Coupon rate steps down as the company hits verified green targets.</div>
+  <div class="card">
+    <div class="gb-form">
+      <div class="form-group"><label>Issuer / Borrower</label><select id="gb-issuer"><option>First Quantum Minerals</option><option>Barrick Gold (Lumwana)</option><option>CEC / Copperbelt Energy</option><option>IRH Mining</option></select></div>
+      <div class="form-group"><label>Instrument Type</label><select id="gb-type"><option>Use-of-Proceeds Green Bond</option><option>Sustainability-Linked Bond (SLB)</option><option>Green Loan (APLMA standard)</option><option>Blue Bond (water-linked)</option></select></div>
+      <div class="form-group"><label>Principal Amount (USD)</label><input id="gb-amount" type="number" value="150000000" placeholder="150,000,000"></div>
+      <div class="form-group"><label>Tenor (years)</label><input id="gb-tenor" type="number" value="7" min="1" max="30"></div>
+      <div class="form-group"><label>Base Coupon Rate (%)</label><input id="gb-rate" type="number" value="7.5" step="0.1"></div>
+      <div class="form-group"><label>KPI Target (MW Solar by Year 3)</label><input id="gb-kpi" type="number" value="50"></div>
+    </div>
+    <div style="margin-top:20px">
+      <button class="btn btn-gold" onclick="buildBond()"><i class="fa-solid fa-wand-magic-sparkles"></i> Build Instrument</button>
+    </div>
+    <div id="bond-result" style="display:none;margin-top:20px;background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:20px">
+      <div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:12px"><i class="fa-solid fa-file-contract"></i>&nbsp;INSTRUMENT TERM SHEET GENERATED</div>
+      <div id="bond-terms" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-sub);line-height:1.9"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COVENANTS -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-bell"></i> Covenant Monitor</div>
+  <div class="sec-title">Auto-Alert: Loan Covenant Status</div>
+  <div class="sec-desc" style="margin-bottom:20px">Covenant thresholds are verified against the live compliance feed every 24 hours. Breach = immediate notification to relationship manager + legal hold.</div>
+  <div id="covenants"></div>
+</section>
+
+
+
+</main>
+
+<script>
+const POSITIONS = [
+  {project:"Kansanshi S3 Expansion",investor:"IFC + Zanaco",committed:"$1.2B",deployed:"$980M",roi:"14.2%",type:"Project Finance",crisk:6,erisk:4,status:"On Track"},
+  {project:"Lumwana Mine Expansion",investor:"AfDB + Stanbic",committed:"$820M",deployed:"$640M",roi:"12.8%",type:"Corporate Loan",crisk:9,erisk:5,status:"On Track"},
+  {project:"Kabwe Tailings Rehab",investor:"World Bank IDA",committed:"$180M",deployed:"$90M",roi:"N/A",type:"Concessional",crisk:4,erisk:3,status:"On Track"},
+  {project:"ZESCO Itezhi-Tezhi Solar",investor:"AfDB Green Fund",committed:"$240M",deployed:"$0",roi:"9.1%",type:"Green Bond",crisk:3,erisk:2,status:"Disbursing"},
+  {project:"Vedanta KCM Restart",investor:"Stanbic Zambia",committed:"$300M",deployed:"$210M",roi:"15.5%",type:"Corporate Loan",crisk:33,erisk:28,status:"⚠ Watch"},
+  {project:"Mopani Phase 4 Deepening",investor:"Zanaco + PTA Bank",committed:"$420M",deployed:"$310M",roi:"13.1%",type:"Syndicated Loan",crisk:22,erisk:18,status:"⚠ Watch"},
+  {project:"Kafue Solar 200MW",investor:"DFI Coalition",committed:"$310M",deployed:"$45M",roi:"10.2%",type:"Green Bond",crisk:5,erisk:2,status:"Disbursing"},
+  {project:"IRH Kasempa Mine",investor:"Afreximbank",committed:"$95M",deployed:"$80M",roi:"18.4%",type:"Project Finance",crisk:12,erisk:8,status:"On Track"},
+];
+
+const CLIMATE = [
+  {mine:"Kansanshi (NW Province)",drought:42,flood:18,water:61,note:"Water table declining 1.8m/decade. Mitigation: closed-loop cooling system"},
+  {mine:"Lumwana (NW Province)",drought:46,flood:14,water:55,note:"High drought risk. Barrick installing 4 bore-field water storage units"},
+  {mine:"Nchanga / KCM (Copperbelt)",drought:31,flood:37,water:74,note:"Flood risk from Kafue tributaries. Drainage pumps at 85% capacity"},
+  {mine:"Muliashi (CNMC)",drought:38,flood:21,water:68,note:"CNMC has full water recycling plant. Risk partially mitigated"},
+];
+
+const COVENANTS = [
+  {company:"First Quantum Minerals",covenant:"Compliance Score ≥ 85",actual:94,threshold:85,pass:true,bank:"IFC / Zanaco"},
+  {company:"Barrick Gold",covenant:"Environmental Rating ≥ ZEMA B",actual:"A",threshold:"B",pass:true,bank:"AfDB / Stanbic"},
+  {company:"Vedanta / KCM",covenant:"Compliance Score ≥ 80",actual:67,threshold:80,pass:false,bank:"Stanbic Zambia"},
+  {company:"Mopani Copper Mines",covenant:"No active ZEMA penalty flags",actual:"2 Active",threshold:"0",pass:false,bank:"Zanaco / PTA"},
+  {company:"IRH Mining",covenant:"Royalty payments current",actual:"Current",threshold:"Current",pass:true,bank:"Afreximbank"},
+];
+
+function renderPortfolio() {
+  const tbody = document.getElementById('pf-tbody');
+  POSITIONS.forEach(p => {
+    const cr = p.crisk <= 10 ? 'b-success' : p.crisk <= 25 ? 'b-warning' : 'b-danger';
+    const er = p.erisk <= 10 ? 'b-success' : p.erisk <= 20 ? 'b-warning' : 'b-danger';
+    const sb = p.status.includes('⚠') ? 'b-warning' : p.status==='Disbursing' ? 'b-info' : 'b-success';
+    tbody.innerHTML += `<tr>
+      <td style="font-weight:600">${p.project}</td>
+      <td style="color:var(--text-sub);font-size:11px">${p.investor}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px">${p.committed}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold)">${p.deployed}</td>
+      <td style="font-weight:700;color:var(--success)">${p.roi}</td>
+      <td><span class="badge b-info" style="font-size:10px">${p.type}</span></td>
+      <td><span class="badge ${cr}">${p.crisk}/100</span></td>
+      <td><span class="badge ${er}">${p.erisk}/100</span></td>
+      <td><span class="badge ${sb}">${p.status}</span></td>
+    </tr>`;
+  });
+}
+
+function renderCharts() {
+  const opts={plugins:{legend:{labels:{color:'#94A3B8',font:{size:11}}}},scales:{x:{ticks:{color:'#4B6178'},grid:{color:'rgba(255,255,255,.04)'}},y:{ticks:{color:'#4B6178'},grid:{color:'rgba(255,255,255,.04)'}}}};
+  new Chart(document.getElementById('inv-chart'),{type:'bar',data:{labels:['IFC','AfDB','World Bank','Stanbic','Zanaco','Afreximbank'],datasets:[{label:'USD M',data:[1200,1060,180,720,420,95],backgroundColor:['rgba(245,158,11,.5)','rgba(56,189,248,.5)','rgba(16,185,129,.5)','rgba(168,85,247,.5)','rgba(224,123,57,.5)','rgba(56,189,248,.4)'],borderColor:['var(--gold)','var(--primary)','var(--success)','var(--purple)','var(--copper)','var(--primary)'],borderWidth:1.5,borderRadius:4}]},options:{...opts}});
+  new Chart(document.getElementById('risk-chart'),{type:'doughnut',data:{labels:['Low Risk (0-10)','Medium (11-25)','High (26-40)','Critical (41+)'],datasets:[{data:[5,2,1,0],backgroundColor:['rgba(16,185,129,.6)','rgba(245,158,11,.6)','rgba(239,68,68,.6)','rgba(168,85,247,.6)'],'borderColor':['var(--success)','var(--gold)','var(--danger)','var(--purple)'],borderWidth:1.5}]},options:{plugins:{legend:{labels:{color:'#94A3B8',font:{size:11}}}}}});
+}
+
+function renderClimate() {
+  const grid = document.getElementById('climate-grid');
+  CLIMATE.forEach(c => {
+    const dc = c.drought > 40 ? 'var(--danger)' : c.drought > 25 ? 'var(--gold)' : 'var(--success)';
+    const fc = c.flood > 30 ? 'var(--danger)' : c.flood > 15 ? 'var(--gold)' : 'var(--success)';
+    grid.innerHTML += `<div class="card">
+      <div style="font-size:13px;font-weight:700;margin-bottom:14px">${c.mine}</div>
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:var(--text-muted)">Drought Risk Score</span><span style="font-weight:700;color:${dc}">${c.drought}/100</span></div>
+        <div class="climate-bar-wrap"><div class="climate-bar" style="width:${c.drought}%;background:${dc}"></div></div>
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px"><span style="color:var(--text-muted)">Flood Risk Score</span><span style="font-weight:700;color:${fc}">${c.flood}/100</span></div>
+        <div class="climate-bar-wrap"><div class="climate-bar" style="width:${c.flood}%;background:${fc}"></div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px"><span style="color:var(--text-muted)">Water Security Score</span><span style="font-weight:700;color:var(--primary)">${c.water}/100</span></div>
+      <div style="font-size:11px;color:var(--text-muted);line-height:1.6;padding:10px;background:rgba(255,255,255,.02);border-radius:7px;border:1px solid var(--border);margin-top:6px">${c.note}</div>
+    </div>`;
+  });
+}
+
+function renderCovenants() {
+  const el = document.getElementById('covenants');
+  COVENANTS.forEach(c => {
+    el.innerHTML += `<div class="cov-row">
+      <div>
+        <div class="cov-name">${c.company}</div>
+        <div class="cov-sub">${c.bank} · Covenant: <em>${c.covenant}</em></div>
+      </div>
+      <div style="text-align:right">
+        <div class="cov-status" style="color:${c.pass?'var(--success)':'var(--danger)'}">
+          <i class="fa-solid fa-${c.pass?'circle-check':'triangle-exclamation'}"></i>
+          ${c.pass?'Covenant Met':'BREACH DETECTED'}
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:3px">Actual: <strong>${c.actual}</strong> · Threshold: ${c.threshold}</div>
+      </div>
+    </div>`;
+  });
+}
+
+function updateRate() {
+  const score = +document.getElementById('score-slider').value;
+  const sel = document.getElementById('rate-company');
+  sel.value = score; // won't always match, that's fine
+  document.getElementById('score-disp').textContent = score;
+  const base = 9.8;
+  const adjusted = Math.max(5.2, base - score * 0.046);
+  const saving = Math.round((base - adjusted) / 100 * 500);
+  document.getElementById('rate-base').textContent = base.toFixed(1) + '%';
+  document.getElementById('rate-comp').textContent = adjusted.toFixed(2) + '%';
+  document.getElementById('rate-saving').textContent = '$' + saving + 'M/yr';
+}
+
+function buildBond() {
+  const issuer = document.getElementById('gb-issuer').value;
+  const type = document.getElementById('gb-type').value;
+  const amount = (+document.getElementById('gb-amount').value / 1e6).toFixed(0);
+  const tenor = document.getElementById('gb-tenor').value;
+  const rate = document.getElementById('gb-rate').value;
+  const kpi = document.getElementById('gb-kpi').value;
+  const stepDown = (parseFloat(rate) - 0.5).toFixed(2);
+  const stepDown2 = (parseFloat(rate) - 1.5).toFixed(2);
+  document.getElementById('bond-result').style.display = 'block';
+  document.getElementById('bond-terms').innerHTML =
+    `ISSUER: ${issuer}\nINSTRUMENT: ${type}\nPRINCIPAL: USD ${amount}M\nTENOR: ${tenor} years\nCOUPON STEP-DOWN STRUCTURE:\n  Year 1-2: ${rate}% (Base Rate)\n  Year 3 (if KPI1 met — ${kpi}MW Solar installed, SAR-verified): ${stepDown}%\n  Year 5 (if KPI2 met — 80MW Solar + ZEMA Green rating): ${stepDown2}%\nKPI VERIFIER: Satellite + Platform compliance feed (automated)\nGOVERNING LAW: Laws of Zambia / IFC Performance Standards\nLISTING: LuSE Green Segment + London Stock Exchange (dual-listed)\nESTIMATED ISSUER ANNUAL SAVING (Year 3+): USD ${Math.round(amount*((parseFloat(rate)-parseFloat(stepDown))/100))}M`;
+}
+
+function exportPF() {
+  const rows = [['Project','Investor','Committed','Deployed','ROI','Type','Compliance Risk','Energy Risk','Status'],
+    ...POSITIONS.map(p=>[p.project,p.investor,p.committed,p.deployed,p.roi,p.type,p.crisk+'/100',p.erisk+'/100',p.status])];
+  const csv = rows.map(r=>r.join(',')).join('\n');
+  const a = document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv); a.download='rc_portfolio.csv'; a.click();
+}
+
+
+renderPortfolio(); renderCharts(); renderClimate(); renderCovenants(); updateRate();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Command — Government Portal | Zambia</title>
+<meta name="description" content="National Command Center — Ministry of Mines, Zambia. Real-time compliance, royalties, and audit intelligence across all mine operators.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --bg: #020C16;
+  --bg1: #040F1C;
+  --bg2: #060E1F;
+  --blue: #2DD4BF;
+  --blue2: #38BDF8;
+  --green: #10B981;
+  --gold: #F59E0B;
+  --copper: #E07B39;
+  --red: #EF4444;
+  --purple: #A855F7;
+  --text: #ECF4FF;
+  --sub: #8FA9C4;
+  --muted: #3D5A75;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.12);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(45,212,191,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,191,.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none; z-index: 0;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  height: 60px; padding: 0 36px;
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(2,12,22,.95); backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(45,212,191,.15);
+}
+.nav-back {
+  padding: 7px 14px; border-radius: 8px;
+  background: rgba(45,212,191,.07); border: 1px solid rgba(45,212,191,.2);
+  color: var(--blue); font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px; transition: background .2s;
+}
+.nav-back:hover { background: rgba(45,212,191,.14); }
+.nav-brand { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+.nav-logo {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: #020C16; font-weight: 900;
+}
+.nav-title { font-size: 14px; font-weight: 800; }
+.nav-sub { font-size: 10px; color: var(--muted); }
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 10px; font-weight: 700;
+}
+.b-blue { background: rgba(45,212,191,.1); color: var(--blue); border: 1px solid rgba(45,212,191,.2); }
+.b-red { background: rgba(239,68,68,.1); color: var(--red); border: 1px solid rgba(239,68,68,.2); }
+.b-green { background: rgba(16,185,129,.1); color: var(--green); border: 1px solid rgba(16,185,129,.2); }
+.b-gold { background: rgba(245,158,11,.1); color: var(--gold); border: 1px solid rgba(245,158,11,.2); }
+.b-warning { background: rgba(245,158,11,.1); color: var(--gold); border: 1px solid rgba(245,158,11,.2); }
+.b-muted { background: rgba(61,90,117,.15); color: var(--sub); border: 1px solid var(--border2); }
+.pulse-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  animation: blink 1.4s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* ── CRISIS BANNER ── */
+.crisis-banner {
+  position: relative; z-index: 1;
+  background: linear-gradient(135deg, rgba(239,68,68,.1), rgba(245,158,11,.05));
+  border-bottom: 1px solid rgba(239,68,68,.2);
+  padding: 12px 36px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.crisis-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--red);
+  display: flex; align-items: center; gap: 7px; white-space: nowrap;
+}
+.crisis-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+.crisis-stat { font-size: 12px; color: var(--sub); }
+.crisis-stat strong { color: var(--text); }
+
+/* ── MAIN ── */
+main {
+  position: relative; z-index: 1;
+  max-width: 1280px; margin: 0 auto;
+  padding: 40px 36px 80px;
+}
+.section { margin-bottom: 52px; }
+.sec-label {
+  font-size: 10px; font-weight: 700; color: var(--blue);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 7px; margin-bottom: 8px;
+}
+.sec-title {
+  font-size: clamp(1.3rem, 2.8vw, 1.85rem);
+  font-weight: 900; letter-spacing: -.5px; margin-bottom: 8px; line-height: 1.2;
+}
+.sec-desc { font-size: 13px; color: var(--sub); line-height: 1.75; max-width: 680px; }
+
+/* ── KPI ROW ── */
+.kpi-row {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 16px; margin-bottom: 48px;
+}
+.kpi {
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border2);
+  border-radius: 14px; padding: 20px 18px;
+  transition: border-color .2s;
+}
+.kpi:hover { border-color: rgba(45,212,191,.25); }
+.kpi-val {
+  font-size: 2rem; font-weight: 900;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -1px; margin-bottom: 4px;
+}
+.kpi-lbl { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.kpi-note { font-size: 10px; color: var(--muted); margin-top: 5px; }
+
+/* ── CARDS ── */
+.card {
+  background: rgba(255,255,255,.025);
+  border: 1px solid var(--border2); border-radius: 16px; padding: 24px;
+}
+.card-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px; gap: 12px;
+}
+.card-hd h3 {
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+}
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th {
+  text-align: left; padding: 10px 14px;
+  color: var(--muted); font-weight: 600; font-size: 10px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase; letter-spacing: .5px;
+}
+td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(45,212,191,.02); }
+
+/* ── SCORE BAR ── */
+.score-bar-wrap { width: 80px; height: 5px; background: rgba(255,255,255,.07); border-radius: 3px; overflow: hidden; display: inline-block; margin-left: 8px; vertical-align: middle; }
+.score-bar { height: 100%; border-radius: 3px; }
+
+/* ── BLOCKCHAIN PROOF STRIP ── */
+.proof-strip {
+  background: linear-gradient(135deg, rgba(45,212,191,.07), rgba(56,189,248,.04));
+  border: 1px solid rgba(45,212,191,.2);
+  border-radius: 12px; padding: 16px 20px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.proof-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(45,212,191,.12); color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.proof-body { flex: 1; min-width: 200px; }
+.proof-title { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+.proof-hash { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--blue); }
+.proof-tag { font-size: 10px; color: var(--sub); }
+
+/* ── AUDIT FLAG ── */
+.audit-row {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px; border-radius: 10px;
+  border: 1px solid var(--border); margin-bottom: 10px;
+  transition: border-color .2s;
+}
+.audit-row.active { border-color: rgba(239,68,68,.3); background: rgba(239,68,68,.04); }
+.audit-row.resolved { border-color: rgba(16,185,129,.2); background: rgba(16,185,129,.03); }
+.audit-icon {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+.audit-icon.active { background: rgba(239,68,68,.12); color: var(--red); }
+.audit-icon.resolved { background: rgba(16,185,129,.12); color: var(--green); }
+.audit-body { flex: 1; }
+.audit-title { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+.audit-meta { font-size: 11px; color: var(--sub); line-height: 1.5; }
+.audit-actions { text-align: right; flex-shrink: 0; }
+
+/* ── ROYALTY PROGRESS ── */
+.royalty-progress-wrap {
+  background: rgba(0,0,0,.25); border-radius: 12px;
+  padding: 20px 24px; border: 1px solid var(--border2); margin-bottom: 16px;
+}
+.rp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+.rp-label { font-size: 12px; font-weight: 700; }
+.rp-vals { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--sub); }
+.rp-bar-outer { height: 12px; background: rgba(255,255,255,.05); border-radius: 6px; overflow: hidden; position: relative; }
+.rp-bar-inner { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--gold), var(--copper)); position: relative; transition: width 1.2s ease; }
+.rp-bar-inner::after {
+  content: '';
+  position: absolute; right: 0; top: 0; bottom: 0; width: 3px;
+  background: #fff; border-radius: 3px; opacity: .7;
+  box-shadow: 0 0 8px var(--gold);
+}
+.rp-threshold {
+  display: flex; align-items: center; gap: 7px;
+  margin-top: 10px; font-size: 11px; color: var(--sub);
+}
+
+/* ── ENERGY MONITOR ── */
+.energy-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 0; border-bottom: 1px solid var(--border);
+}
+.energy-row:last-child { border-bottom: none; }
+.energy-mine { font-size: 12px; font-weight: 600; width: 160px; flex-shrink: 0; }
+.energy-bar-wrap { flex: 1; height: 6px; background: rgba(255,255,255,.07); border-radius: 3px; overflow: hidden; }
+.energy-bar { height: 100%; border-radius: 3px; transition: width .8s ease; }
+.energy-mw { font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700; width: 68px; text-align: right; flex-shrink: 0; }
+.energy-status { width: 80px; text-align: right; flex-shrink: 0; }
+
+/* ── SAR SECTION ── */
+.sar-row {
+  display: grid; grid-template-columns: 200px 1fr 1fr auto;
+  gap: 16px; align-items: center;
+  padding: 12px 14px; border-radius: 9px;
+  border: 1px solid var(--border); margin-bottom: 8px;
+  font-size: 12px;
+}
+.sar-row.flagged { border-color: rgba(239,68,68,.3); background: rgba(239,68,68,.04); }
+.sar-row.verified { border-color: rgba(16,185,129,.15); background: rgba(16,185,129,.03); }
+.sar-mine { font-weight: 700; }
+.sar-declared { color: var(--sub); }
+.sar-measured { font-weight: 700; }
+.sar-variance { font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.fade { animation: fadeUp .5s ease both; }
+
+/* ── SCROLLBAR ── */
+* { scrollbar-width: thin; scrollbar-color: var(--muted) transparent; }
+
+/* ── BUTTON ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 16px; border-radius: 8px;
+  font-size: 11px; font-weight: 700; border: none;
+  cursor: pointer; transition: all .2s;
+}
+.btn-blue {
+  background: rgba(45,212,191,.1); border: 1px solid rgba(45,212,191,.25);
+  color: var(--blue);
+}
+.btn-blue:hover { background: rgba(45,212,191,.18); }
+.btn-ghost {
+  background: rgba(255,255,255,.04); border: 1px solid var(--border2);
+  color: var(--sub);
+}
+.btn-ghost:hover { background: rgba(255,255,255,.08); }
+
+@media(max-width: 1024px) { .kpi-row { grid-template-columns: repeat(3, 1fr); } }
+@media(max-width: 768px) {
+  nav { padding: 0 16px; }
+  main { padding: 28px 16px 60px; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .g2 { grid-template-columns: 1fr; }
+  .sar-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Home</a>
+  <div class="nav-brand">
+    <div class="nav-logo">RC</div>
+    <div>
+      <div class="nav-title">National Command Center</div>
+      <div class="nav-sub">Ministry of Mines & Minerals Development — Republic of Zambia</div>
+    </div>
+  </div>
+  <span class="badge b-blue"><span class="pulse-dot" style="background:var(--blue)"></span> Live Feed</span>
+  <span class="badge b-red"><i class="fa-solid fa-triangle-exclamation"></i> Energy Crisis Active</span>
+</nav>
+
+<!-- CRISIS BANNER -->
+<div class="crisis-banner">
+  <div class="crisis-label"><i class="fa-solid fa-circle-exclamation"></i> Active National Energy Crisis</div>
+  <div class="crisis-stats">
+    <div class="crisis-stat">Kariba Reservoir: <strong>6% capacity</strong></div>
+    <div class="crisis-stat">Kafue Gorge: <strong>17% capacity</strong></div>
+    <div class="crisis-stat">Load shedding: <strong>17 hrs/day</strong></div>
+    <div class="crisis-stat">ZESCO mine cut: <strong>–40% power supply</strong></div>
+    <div class="crisis-stat">Investments at risk: <strong>$20B+</strong></div>
+  </div>
+</div>
+
+<main>
+
+<!-- KPI ROW -->
+<div class="kpi-row fade" style="animation-delay:.05s">
+  <div class="kpi">
+    <div class="kpi-val" style="color:var(--green)">87%</div>
+    <div class="kpi-lbl">National Compliance Average</div>
+    <div class="kpi-note">All 9 operators · Live from platform</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val" style="color:var(--gold)">$70M</div>
+    <div class="kpi-lbl">Royalties Collected YTD</div>
+    <div class="kpi-note">Verified on-chain · 70% to $100M threshold</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val" style="color:var(--red)">1</div>
+    <div class="kpi-lbl">Active Audit Flag</div>
+    <div class="kpi-note">Nchanga / Vedanta — SAR +13.9%</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val" style="color:var(--blue)">9 / 9</div>
+    <div class="kpi-lbl">Operators Reporting</div>
+    <div class="kpi-note">All mines submitting on-platform</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val" style="color:var(--copper)">44%</div>
+    <div class="kpi-lbl">Still on Paper (Pre-Platform)</div>
+    <div class="kpi-note">MRCA 2027 deadline: Jan 1</div>
+  </div>
+</div>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip fade" style="animation-delay:.1s">
+  <div class="proof-icon"><i class="fa-solid fa-shield-halved"></i></div>
+  <div class="proof-body">
+    <div class="proof-title">Zero-Knowledge Proof Verification — This data was not self-reported.</div>
+    <div class="proof-hash" id="main-hash">Computing: 0x2f8c4a1be3... · Block #4,821 · SHA-256 chain intact · AGO independent node in consensus</div>
+  </div>
+  <div class="proof-tag"><i class="fa-solid fa-link" style="color:var(--blue)"></i> Blockchain-verified · 3-node BFT consensus</div>
+</div>
+
+<!-- SECTION: MINE COMPLIANCE TABLE -->
+<section class="section fade" style="animation-delay:.15s">
+  <div class="sec-label"><i class="fa-solid fa-table-list"></i> All Mine Operators</div>
+  <div class="sec-title">Live Compliance Monitor</div>
+  <div class="sec-desc" style="margin-bottom:20px">
+    Compliance scores are computed from four independent streams: satellite SAR cross-check, ZKP proof submission, ZEMA environmental flag status, and ZRA royalty payment position. No self-reporting accepted.
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="card-hd" style="padding:16px 20px">
+      <h3><i class="fa-solid fa-gem" style="color:var(--copper)"></i> 9 Active Operators — <span style="color:var(--green)">All Reporting</span></h3>
+      <button class="btn btn-ghost" onclick="exportTable()"><i class="fa-solid fa-download"></i> Export CSV</button>
+    </div>
+    <div style="overflow-x:auto">
+      <table id="compliance-table">
+        <thead>
+          <tr>
+            <th>Mine Operator</th>
+            <th>Province</th>
+            <th>Compliance Score</th>
+            <th>Royalty Status</th>
+            <th>ZEMA Rating</th>
+            <th>SAR Status</th>
+            <th>ZKP Proof</th>
+            <th>Energy Draw</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="compliance-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: SAR SATELLITE CROSS-CHECK -->
+<section class="section fade" style="animation-delay:.2s">
+  <div class="sec-label"><i class="fa-solid fa-satellite"></i> Satellite Verification</div>
+  <div class="sec-title">SAR Cross-Check — Declared vs Satellite-Measured Output</div>
+  <div class="sec-desc" style="margin-bottom:20px">
+    Synthetic Aperture Radar (SAR) satellite imagery is processed every 30 days to measure actual mine output independently. Any variance above 5% triggers a mandatory audit under MRCA Section 47(2). Companies cannot self-report their way out of this.
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <div class="card-hd">
+      <h3><i class="fa-solid fa-satellite-dish" style="color:var(--blue)"></i> March 2026 SAR Run — 9 Sites Measured</h3>
+      <span class="badge b-red"><i class="fa-solid fa-circle-exclamation"></i> 1 Variance Flag Active</span>
+    </div>
+    <!-- Header row -->
+    <div style="display:grid;grid-template-columns:200px 1fr 1fr auto;gap:16px;padding:8px 14px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);margin-bottom:8px">
+      <span>Mine</span><span>Declared (t)</span><span>SAR Measured (t)</span><span>Variance</span>
+    </div>
+    <div id="sar-list"></div>
+  </div>
+
+  <div style="font-size:12px;color:var(--sub);padding:12px 16px;background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.15);border-radius:10px;line-height:1.7">
+    <i class="fa-solid fa-circle-info" style="color:var(--blue)"></i>&nbsp;
+    <strong>MRCA S.47(2):</strong> A production variance exceeding 5% between declared and satellite-measured output triggers mandatory MRC + ZRA joint audit within 14 working days. Results are immutably recorded on the platform blockchain. Mining licence suspension is available as an enforcement tool after a second breach.
+  </div>
+</section>
+
+<!-- SECTION: AUDIT FLAGS -->
+<section class="section fade" style="animation-delay:.25s">
+  <div class="sec-label"><i class="fa-solid fa-flag"></i> Enforcement</div>
+  <div class="sec-title">Audit Flags — Active & Recent</div>
+  <div class="sec-desc" style="margin-bottom:20px">
+    All audit triggers are system-generated. No manual discretion required to initiate. Every flag is blockchain-timestamped the moment the threshold is breached.
+  </div>
+
+  <div class="audit-row active fade">
+    <div class="audit-icon active"><i class="fa-solid fa-triangle-exclamation"></i></div>
+    <div class="audit-body">
+      <div class="audit-title">🔴 ACTIVE — Nchanga / Vedanta KCM · SAR Variance Flag</div>
+      <div class="audit-meta">
+        Declared: 95,000t &nbsp;·&nbsp; SAR Measured: 108,200t &nbsp;·&nbsp; Variance: <strong style="color:var(--red)">+13.9%</strong><br>
+        Triggered: March 4, 2026 &nbsp;·&nbsp; MRCA S.47(2) &nbsp;·&nbsp; MRC + ZRA joint audit initiated<br>
+        Block: #4,802 &nbsp;·&nbsp; 0x7f3d2b1a9c8e4f... &nbsp;·&nbsp; AGO node confirmed
+      </div>
+    </div>
+    <div class="audit-actions">
+      <span class="badge b-red" style="margin-bottom:6px;display:inline-flex">Audit Active</span><br>
+      <span style="font-size:10px;color:var(--muted)">Day 14 of 14</span>
+    </div>
+  </div>
+
+  <div class="audit-row resolved fade">
+    <div class="audit-icon resolved"><i class="fa-solid fa-circle-check"></i></div>
+    <div class="audit-body">
+      <div class="audit-title">✅ RESOLVED — Mopani Copper Mines · ZEMA Tailings Discharge</div>
+      <div class="audit-meta">
+        Discharge reading 14% above permitted level · Feb 3, 2026<br>
+        Inspector dispatched Feb 5 · Corrective works completed Feb 18 · ZEMA clearance Feb 22<br>
+        Block: #4,411 → #4,612 &nbsp;·&nbsp; Full audit trail immutable
+      </div>
+    </div>
+    <div class="audit-actions">
+      <span class="badge b-green" style="display:inline-flex">Resolved</span>
+    </div>
+  </div>
+
+  <div class="audit-row resolved fade">
+    <div class="audit-icon resolved"><i class="fa-solid fa-circle-check"></i></div>
+    <div class="audit-body">
+      <div class="audit-title">✅ RESOLVED — IRH Mining Kasempa · Royalty Payment Delay</div>
+      <div class="audit-meta">
+        Q4 2025 royalty payment 9 days overdue · ZRA notified automatically Dec 11<br>
+        Payment received Dec 14 · Late penalty assessed $220,000 · Closed Dec 15<br>
+        Block: #4,017 &nbsp;·&nbsp; Penalty verified on-chain
+      </div>
+    </div>
+    <div class="audit-actions">
+      <span class="badge b-green" style="display:inline-flex">Resolved</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: ROYALTY TRACKER -->
+<section class="section fade" style="animation-delay:.3s">
+  <div class="sec-label"><i class="fa-solid fa-coins"></i> Revenue Intelligence</div>
+  <div class="sec-title">Royalty Collection — Progress to Sovereign Fund Threshold</div>
+  <div class="sec-desc" style="margin-bottom:20px">
+    A smart contract automatically routes 20% of all royalty receipts to the Zambia Sovereign Wealth Fund the moment the annual run-rate crosses $100M. No ministerial order required. Code executes the policy.
+  </div>
+
+  <div class="royalty-progress-wrap fade">
+    <div class="rp-header">
+      <div>
+        <div class="rp-label">2026 Royalty Collection YTD</div>
+        <div style="font-size:12px;color:var(--sub);margin-top:2px">Verified on-chain · All 9 operators · ZKP proofs submitted</div>
+      </div>
+      <div class="rp-vals">$70M collected &nbsp;/&nbsp; $100M sovereign fund threshold</div>
+    </div>
+    <div class="rp-bar-outer">
+      <div class="rp-bar-inner" style="width:70%"></div>
+    </div>
+    <div class="rp-threshold">
+      <i class="fa-solid fa-arrow-right" style="color:var(--gold);font-size:10px"></i>
+      <span><strong style="color:var(--gold)">$30M</strong> remaining to sovereign fund trigger · Smart contract will auto-execute at $100M · No human intervention required</span>
+    </div>
+  </div>
+
+  <div class="g3 fade">
+    <div class="card">
+      <div class="card-hd"><h3><i class="fa-solid fa-gem" style="color:var(--copper)"></i> By Operator</h3></div>
+      <div id="royalty-breakdown"></div>
+    </div>
+    <div class="card" style="grid-column: span 2">
+      <div class="card-hd">
+        <h3><i class="fa-solid fa-shield-halved" style="color:var(--blue)"></i> ZKP Proof Status — Q1 2026</h3>
+        <span class="badge b-blue">6 / 9 Submitted</span>
+      </div>
+      <div style="font-size:12px;color:var(--sub);margin-bottom:12px;line-height:1.6">
+        Each ZKP proof mathematically confirms a mine's royalty obligation without revealing any production data to the government node. The mine's raw numbers stay on their servers.
+        Government receives only: <strong style="color:var(--text)">the verified amount owed.</strong>
+      </div>
+      <div id="zkp-status"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: ENERGY DEMAND MONITOR -->
+<section class="section fade" style="animation-delay:.35s">
+  <div class="sec-label"><i class="fa-solid fa-bolt"></i> Energy Intelligence</div>
+  <div class="sec-title">Mine Energy Demand vs ZESCO Supply Allocation</div>
+  <div class="sec-desc" style="margin-bottom:20px">
+    With ZESCO operating at 40% below demand, every megawatt matters. This view shows declared energy consumption per mine versus current ZESCO allocation. Critical for priority decisions during load-shedding.
+  </div>
+
+  <div class="card">
+    <div class="card-hd">
+      <h3><i class="fa-solid fa-plug-circle-bolt" style="color:var(--gold)"></i> Real-Time Power Allocation — All Mine Sites</h3>
+      <div style="display:flex;gap:12px;font-size:11px;color:var(--muted)">
+        <span style="color:var(--green)">■ Receiving Full Load</span>
+        <span style="color:var(--gold)">■ Reduced</span>
+        <span style="color:var(--red)">■ Critical Cut</span>
+      </div>
+    </div>
+    <div id="energy-monitor"></div>
+  </div>
+</section>
+
+<!-- SECTION: REGULATORS -->
+<section class="section fade" style="animation-delay:.4s">
+  <div class="sec-label"><i class="fa-solid fa-building-columns"></i> Regulatory Integration</div>
+  <div class="sec-title">Five Regulators. One Submission. Zero Duplication.</div>
+  <div class="sec-desc" style="margin-bottom:24px">
+    Before this platform, every mine filed separately to each regulator, manually, on paper. Non-standardised formats, delayed verification, systemic opacity. Now a single on-platform submission routes to all five simultaneously — and each regulator sees only what they are mandated to see.
+  </div>
+  <div class="g3 fade">
+    <div class="card" style="border-color:rgba(45,212,191,.25)">
+      <div style="font-size:22px;margin-bottom:10px">🏛️</div>
+      <div style="font-size:13px;font-weight:800;color:var(--blue);margin-bottom:4px">MRC</div>
+      <div style="font-size:11px;color:var(--sub);line-height:1.6">Minerals Regulation Commission · Production data, licence compliance, SAR cross-check results</div>
+      <div style="margin-top:10px"><span class="badge b-green">9/9 Operators Reporting</span></div>
+    </div>
+    <div class="card" style="border-color:rgba(16,185,129,.25)">
+      <div style="font-size:22px;margin-bottom:10px">🌿</div>
+      <div style="font-size:13px;font-weight:800;color:var(--green);margin-bottom:4px">ZEMA</div>
+      <div style="font-size:11px;color:var(--sub);line-height:1.6">Zambia Environmental Management Agency · Environmental compliance, tailings, water discharge data</div>
+      <div style="margin-top:10px"><span class="badge b-green">All Clear Except KCM</span></div>
+    </div>
+    <div class="card" style="border-color:rgba(245,158,11,.25)">
+      <div style="font-size:22px;margin-bottom:10px">💰</div>
+      <div style="font-size:13px;font-weight:800;color:var(--gold);margin-bottom:4px">ZRA</div>
+      <div style="font-size:11px;color:var(--sub);line-height:1.6">Zambia Revenue Authority · Royalty payments, corporate tax compliance, transfer pricing flags</div>
+      <div style="margin-top:10px"><span class="badge b-gold">1 Royalty Audit Active</span></div>
+    </div>
+    <div class="card" style="border-color:rgba(56,189,248,.25)">
+      <div style="font-size:22px;margin-bottom:10px">⚡</div>
+      <div style="font-size:13px;font-weight:800;color:var(--blue2);margin-bottom:4px">ERB</div>
+      <div style="font-size:11px;color:var(--sub);line-height:1.6">Energy Regulation Board · Energy consumption declarations, generator compliance, solar capacity reporting</div>
+      <div style="margin-top:10px"><span class="badge b-blue">Live Feed Active</span></div>
+    </div>
+    <div class="card" style="border-color:rgba(168,85,247,.25)">
+      <div style="font-size:22px;margin-bottom:10px">🏦</div>
+      <div style="font-size:13px;font-weight:800;color:var(--purple);margin-bottom:4px">ZCCM-IH</div>
+      <div style="font-size:11px;color:var(--sub);line-height:1.6">Investment Holdings · State equity monitoring, dividend compliance, shareholding position data</div>
+      <div style="margin-top:10px"><span class="badge b-muted">Quarterly Sync</span></div>
+    </div>
+    <div class="card" style="border-color:rgba(239,68,68,.2);background:rgba(239,68,68,.03)">
+      <div style="font-size:22px;margin-bottom:10px">📡</div>
+      <div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:4px">AGO</div>
+      <div style="font-size:11px;color:var(--sub);line-height:1.6">Auditor General's Office · Runs the third blockchain node. Independent consensus validator — no single party controls the chain.</div>
+      <div style="margin-top:10px"><span class="badge b-blue">Node: Online &amp; Syncing</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="position:relative;z-index:1;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--border)">
+  <div style="font-size:11px;color:var(--muted);line-height:1.6">
+    Data sourced from ZESCO, MRC, ERB, ZEMA, ZRA, ZCCM-IH, and satellite SAR imagery (ESA Sentinel-1) · 2024–2026.<br>
+    All compliance data blockchain-verified. Not self-reported.
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <span style="font-size:10px;font-weight:600;color:var(--muted);padding:3px 9px;border-radius:5px;border:1px solid var(--border)">SAR Satellite</span>
+    <span style="font-size:10px;font-weight:600;color:var(--muted);padding:3px 9px;border-radius:5px;border:1px solid var(--border)">ZK Proofs</span>
+    <span style="font-size:10px;font-weight:600;color:var(--muted);padding:3px 9px;border-radius:5px;border:1px solid var(--border)">3-Node Blockchain</span>
+    <span style="font-size:10px;font-weight:600;color:var(--muted);padding:3px 9px;border-radius:5px;border:1px solid var(--border)">Role-Based Access</span>
+    <span style="font-size:10px;font-weight:600;color:var(--muted);padding:3px 9px;border-radius:5px;border:1px solid var(--border)">MRCA 2024 Compliant</span>
+  </div>
+</footer>
+
+<script>
+const hex = (n=8) => Array.from({length:n}, () => Math.floor(Math.random()*16).toString(16)).join('');
+
+// ── DATA ─────────────────────────────────────────────────────────────
+const OPERATORS = [
+  {name:'First Quantum Minerals', mine:'Kansanshi', province:'NW Province', score:94, royalty:'Current', zema:'A', sar:'Verified', zkp:true,  energy:320, energyAlloc:90, status:'compliant'},
+  {name:'Barrick Gold',           mine:'Lumwana',   province:'NW Province', score:91, royalty:'Current', zema:'A', sar:'Verified', zkp:true,  energy:280, energyAlloc:85, status:'compliant'},
+  {name:'CNMC / NFC',             mine:'Muliashi',  province:'Copperbelt',  score:88, royalty:'Current', zema:'B', sar:'Verified', zkp:true,  energy:180, energyAlloc:75, status:'compliant'},
+  {name:'Mopani Copper Mines',    mine:'Mopani',    province:'Copperbelt',  score:78, royalty:'Current', zema:'C', sar:'Verified', zkp:true,  energy:210, energyAlloc:60, status:'watch'},
+  {name:'IRH Mining',             mine:'Kasempa',   province:'NW Province', score:85, royalty:'Current', zema:'B', sar:'Verified', zkp:false, energy:42,  energyAlloc:80, status:'compliant'},
+  {name:'Lubambe Copper Mine',    mine:'Lubambe',   province:'Copperbelt',  score:82, royalty:'Current', zema:'B', sar:'Verified', zkp:false, energy:95,  energyAlloc:70, status:'compliant'},
+  {name:'Vedanta / KCM',          mine:'Nchanga',   province:'Copperbelt',  score:64, royalty:'Current', zema:'D', sar:'⚠ FLAGGED', zkp:true,  energy:350, energyAlloc:55, status:'breach'},
+  {name:'Blackthorn Resources',   mine:'Mumbwa',    province:'Central',     score:80, royalty:'Current', zema:'B', sar:'Verified', zkp:false, energy:28,  energyAlloc:100,status:'compliant'},
+  {name:'Consolidated Milling',   mine:'Solwezi',   province:'NW Province', score:77, royalty:'Current', zema:'B', sar:'Verified', zkp:false, energy:36,  energyAlloc:78, status:'watch'},
+];
+
+const SAR_DATA = [
+  {mine:'FQM Kansanshi',       declared:'142,000',  measured:'144,820',  variance:'+2.0%', flag:false},
+  {mine:'Barrick Lumwana',     declared:'96,500',   measured:'97,200',   variance:'+0.7%', flag:false},
+  {mine:'CNMC Muliashi',       declared:'58,000',   measured:'57,140',   variance:'–1.5%', flag:false},
+  {mine:'Mopani Copper',       declared:'71,200',   measured:'73,400',   variance:'+3.1%', flag:false},
+  {mine:'Nchanga / KCM',       declared:'95,000',   measured:'108,200',  variance:'+13.9%',flag:true},
+  {mine:'Lubambe',             declared:'32,800',   measured:'33,500',   variance:'+2.1%', flag:false},
+  {mine:'IRH Kasempa',         declared:'12,400',   measured:'12,100',   variance:'–2.4%', flag:false},
+  {mine:'Blackthorn Mumbwa',   declared:'8,200',    measured:'8,350',    variance:'+1.8%', flag:false},
+  {mine:'Consolidated Solwezi',declared:'14,600',   measured:'14,900',   variance:'+2.1%', flag:false},
+];
+
+const ROYALTY_OPS = [
+  {name:'FQM Kansanshi',   amt:18.4, color:'var(--blue)'},
+  {name:'Barrick Lumwana', amt:14.2, color:'var(--blue2)'},
+  {name:'Vedanta KCM',     amt:11.8, color:'var(--copper)'},
+  {name:'Mopani',          amt:10.1, color:'var(--gold)'},
+  {name:'Others (5)',      amt:15.5, color:'var(--green)'},
+];
+
+// ── RENDER COMPLIANCE TABLE ──────────────────────────────────────────
+function renderTable() {
+  const tbody = document.getElementById('compliance-tbody');
+  OPERATORS.forEach(op => {
+    const sc = op.score >= 85 ? 'var(--green)' : op.score >= 75 ? 'var(--gold)' : 'var(--red)';
+    const statBadge = op.status === 'compliant' ? 'b-green' : op.status === 'watch' ? 'b-warning' : 'b-red';
+    const statText = op.status === 'compliant' ? 'Compliant' : op.status === 'watch' ? '⚠ Watch' : '🔴 Breach';
+    const allocColor = op.energyAlloc >= 80 ? 'var(--green)' : op.energyAlloc >= 60 ? 'var(--gold)' : 'var(--red)';
+    tbody.innerHTML += `<tr>
+      <td style="font-weight:700">${op.name}<br><span style="font-size:10px;color:var(--muted);font-weight:400">${op.mine}</span></td>
+      <td style="color:var(--sub);font-size:11px">${op.province}</td>
+      <td>
+        <span style="font-weight:800;color:${sc};font-family:'JetBrains Mono',monospace">${op.score}/100</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:${op.score}%;background:${sc}"></div></div>
+      </td>
+      <td><span class="badge b-green">${op.royalty}</span></td>
+      <td><span class="badge ${op.zema==='A'?'b-green':op.zema==='B'?'b-blue':op.zema==='C'?'b-warning':'b-red'}">${op.zema}</span></td>
+      <td style="color:${op.sar.includes('FLAG') ? 'var(--red)' : 'var(--green)'}; font-weight:700; font-size:11px">${op.sar}</td>
+      <td>${op.zkp ? `<span class="badge b-green">✓ Verified</span>` : `<span class="badge b-muted">Pending Q1</span>`}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px"><span style="color:${allocColor}">${op.energyAlloc}%</span> <span style="color:var(--muted)">${op.energy}MW</span></td>
+      <td><span class="badge ${statBadge}">${statText}</span></td>
+    </tr>`;
+  });
+}
+
+// ── RENDER SAR ───────────────────────────────────────────────────────
+function renderSAR() {
+  const el = document.getElementById('sar-list');
+  SAR_DATA.forEach(s => {
+    const fc = s.flag ? 'var(--red)' : Math.abs(parseFloat(s.variance)) > 3 ? 'var(--gold)' : 'var(--green)';
+    el.innerHTML += `<div class="sar-row ${s.flag ? 'flagged' : 'verified'}">
+      <div class="sar-mine">${s.mine}</div>
+      <div class="sar-declared" style="font-family:'JetBrains Mono',monospace">${s.declared}t</div>
+      <div class="sar-measured" style="font-family:'JetBrains Mono',monospace;color:${fc}">${s.measured}t</div>
+      <div class="sar-variance" style="color:${fc}">
+        ${s.variance}
+        ${s.flag ? `<span class="badge b-red" style="margin-left:8px"><i class="fa-solid fa-triangle-exclamation"></i> AUDIT</span>` : `<span class="badge b-green" style="margin-left:8px">✓</span>`}
+      </div>
+    </div>`;
+  });
+}
+
+// ── RENDER ROYALTY BREAKDOWN ─────────────────────────────────────────
+function renderRoyalty() {
+  const el = document.getElementById('royalty-breakdown');
+  const total = ROYALTY_OPS.reduce((a, r) => a + r.amt, 0);
+  ROYALTY_OPS.forEach(r => {
+    const pct = (r.amt / 70 * 100).toFixed(0);
+    el.innerHTML += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px">
+      <div style="width:8px;height:8px;border-radius:2px;background:${r.color};flex-shrink:0"></div>
+      <div style="flex:1">${r.name}</div>
+      <div style="font-weight:700;font-family:'JetBrains Mono',monospace;color:${r.color}">$${r.amt}M</div>
+    </div>
+    <div style="height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;margin-bottom:12px">
+      <div style="height:100%;border-radius:2px;background:${r.color};width:${pct}%;transition:width 1s ease"></div>
+    </div>`;
+  });
+  el.innerHTML += `<div style="font-size:11px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border)">Total YTD: <strong style="color:var(--gold)">$70M</strong> · All verified on-chain</div>`;
+}
+
+// ── RENDER ZKP STATUS ────────────────────────────────────────────────
+function renderZKP() {
+  const el = document.getElementById('zkp-status');
+  const submitted = OPERATORS.filter(o => o.zkp);
+  const pending = OPERATORS.filter(o => !o.zkp);
+  submitted.forEach(op => {
+    el.innerHTML += `<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px">
+      <i class="fa-solid fa-circle-check" style="color:var(--green);width:16px"></i>
+      <span style="flex:1;font-weight:600">${op.name}</span>
+      <span style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--blue)">0x${hex(8)}...${hex(4)}</span>
+      <span class="badge b-green">Verified</span>
+    </div>`;
+  });
+  pending.forEach(op => {
+    el.innerHTML += `<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px">
+      <i class="fa-solid fa-clock" style="color:var(--gold);width:16px"></i>
+      <span style="flex:1;font-weight:600">${op.name}</span>
+      <span style="font-size:10px;color:var(--muted)">Q1 2026 deadline Apr 30</span>
+      <span class="badge b-warning">Pending</span>
+    </div>`;
+  });
+}
+
+// ── RENDER ENERGY MONITOR ────────────────────────────────────────────
+function renderEnergy() {
+  const el = document.getElementById('energy-monitor');
+  const sorted = [...OPERATORS].sort((a,b) => b.energy - a.energy);
+  sorted.forEach(op => {
+    const maxMW = 350;
+    const barPct = (op.energyAlloc / 100 * op.energy / maxMW * 100);
+    const c = op.energyAlloc >= 80 ? 'var(--green)' : op.energyAlloc >= 60 ? 'var(--gold)' : 'var(--red)';
+    const statusLabel = op.energyAlloc >= 80 ? 'Full Load' : op.energyAlloc >= 60 ? 'Reduced' : 'Critical Cut';
+    el.innerHTML += `<div class="energy-row">
+      <div class="energy-mine">${op.mine}<br><span style="font-size:10px;color:var(--muted);font-weight:400">${op.name}</span></div>
+      <div class="energy-bar-wrap">
+        <div class="energy-bar" style="width:${barPct}%;background:${c}"></div>
+      </div>
+      <div class="energy-mw" style="color:${c}">${Math.round(op.energy*op.energyAlloc/100)}MW</div>
+      <div class="energy-status"><span class="badge" style="background:${c.replace('var(--','rgba(').replace(')',', .1)')};color:${c};border:1px solid ${c.replace('var(--','rgba(').replace(')',', .25)')};font-size:9px">${statusLabel}</span></div>
+    </div>`;
+  });
+}
+
+// ── EXPORT ───────────────────────────────────────────────────────────
+function exportTable() {
+  const rows = [['Mine','Province','Score','Royalty','ZEMA','SAR','ZKP','Energy(MW)','Status'],
+    ...OPERATORS.map(o => [o.mine, o.province, o.score+'/100', o.royalty, o.zema, o.sar, o.zkp?'Verified':'Pending', o.energy, o.status])];
+  const csv = rows.map(r => r.join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'rc_government_compliance.csv';
+  a.click();
+}
+
+// ── LIVE HASH TICKER ─────────────────────────────────────────────────
+function updateHash() {
+  document.getElementById('main-hash').textContent =
+    `Verified: 0x${hex(10)}...${hex(6)} · Block #${(4821 + Math.floor(Math.random()*10)).toLocaleString()} · SHA-256 chain intact · AGO independent node in consensus`;
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────
+renderTable();
+renderSAR();
+renderRoyalty();
+renderZKP();
+renderEnergy();
+setInterval(updateHash, 4000);
+</script>
+
+</body>
+</html>

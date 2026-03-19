@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Command — Live System Feed | Zambia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --bg: #020810;
+  --bg1: #030C17;
+  --bg2: #050F1E;
+  --blue: #2DD4BF;
+  --blue2: #38BDF8;
+  --green: #10B981;
+  --gold: #F59E0B;
+  --copper: #E07B39;
+  --red: #EF4444;
+  --purple: #A855F7;
+  --text: #ECF4FF;
+  --sub: #8FA9C4;
+  --muted: #3D5A75;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.12);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ── GRID BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(45,212,191,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,191,.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none; z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  height: 56px; padding: 0 28px;
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(2,8,16,.95); backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(239,68,68,.2);
+}
+.nav-back {
+  padding: 6px 13px; border-radius: 8px;
+  background: rgba(45,212,191,.06); border: 1px solid rgba(45,212,191,.18);
+  color: var(--blue); font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+  transition: background .2s; cursor: pointer;
+}
+.nav-back:hover { background: rgba(45,212,191,.12); }
+.nav-center { display: flex; align-items: center; gap: 10px; margin: 0 auto; }
+.war-room-badge {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 800; letter-spacing: -0.2px;
+}
+.war-indicator {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--red);
+  animation: warblink 0.8s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(239,68,68,.8);
+}
+@keyframes warblink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.tick-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--muted); padding: 4px 10px;
+  border: 1px solid var(--border); border-radius: 6px;
+}
+.tick-count span { color: var(--blue); font-weight: 700; }
+
+/* ── MAIN LAYOUT ── */
+.layout {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  grid-template-rows: auto 1fr;
+  gap: 0;
+  height: calc(100vh - 56px);
+}
+
+/* ── CRISIS HEADER ── */
+.crisis-header {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(239,68,68,.12), rgba(245,158,11,.06));
+  border-bottom: 1px solid rgba(239,68,68,.2);
+  padding: 14px 28px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.crisis-title {
+  font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--red);
+  display: flex; align-items: center; gap: 7px;
+}
+.crisis-meters { display: flex; gap: 20px; flex-wrap: wrap; flex: 1; }
+.crisis-meter { display: flex; align-items: center; gap: 10px; }
+.meter-label { font-size: 11px; color: var(--sub); white-space: nowrap; }
+.meter-bar-wrap { width: 100px; height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
+.meter-bar { height: 100%; border-radius: 3px; transition: width 2s ease; }
+.meter-val { font-size: 11px; font-weight: 800; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+.crisis-btns { display: flex; gap: 8px; }
+.btn-sim {
+  padding: 7px 14px; border-radius: 8px; font-size: 11px; font-weight: 700;
+  border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;
+  transition: all .2s;
+}
+.btn-sim-red { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: var(--red); }
+.btn-sim-red:hover { background: rgba(239,68,68,.25); box-shadow: 0 0 20px rgba(239,68,68,.3); }
+.btn-sim-gold { background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.25); color: var(--gold); }
+.btn-sim-gold:hover { background: rgba(245,158,11,.22); }
+.btn-sim-green { background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.22); color: var(--green); }
+.btn-sim-green:hover { background: rgba(16,185,129,.2); }
+
+/* ── MAIN LEFT: DATA FLOW + PORTALS ── */
+.main-left {
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── DATA FLOW VISUALIZER ── */
+.flow-viz {
+  padding: 20px 24px 0;
+  flex-shrink: 0;
+}
+.flow-viz-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 7px;
+}
+.flow-diagram {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 20px; position: relative;
+}
+.flow-node {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex: 1;
+}
+.flow-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; position: relative;
+}
+.flow-icon .pulse-ring {
+  position: absolute; inset: -4px; border-radius: 14px;
+  border: 2px solid;
+  animation: pulsering 2s ease-in-out infinite;
+}
+@keyframes pulsering { 0%,100%{opacity:.6;transform:scale(1)} 50%{opacity:0;transform:scale(1.15)} }
+.fn-mine { background: rgba(224,123,57,.12); color: var(--copper); border: 1px solid rgba(224,123,57,.25); }
+.fn-mine .pulse-ring { border-color: var(--copper); }
+.fn-zk { background: rgba(168,85,247,.12); color: var(--purple); border: 1px solid rgba(168,85,247,.25); }
+.fn-zk .pulse-ring { border-color: var(--purple); }
+.fn-chain { background: rgba(45,212,191,.12); color: var(--blue); border: 1px solid rgba(45,212,191,.25); }
+.fn-chain .pulse-ring { border-color: var(--blue); }
+.fn-gov { background: rgba(45,212,191,.12); color: var(--blue2); border: 1px solid rgba(45,212,191,.25); }
+.fn-gov .pulse-ring { border-color: var(--blue2); }
+.fn-bank { background: rgba(245,158,11,.12); color: var(--gold); border: 1px solid rgba(245,158,11,.25); }
+.fn-bank .pulse-ring { border-color: var(--gold); }
+.flow-label { font-size: 9px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); text-align: center; line-height: 1.3; }
+
+.flow-connector {
+  flex: 0 0 40px; display: flex; align-items: center; justify-content: center;
+  position: relative; height: 48px;
+}
+.conn-line {
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--from), var(--to));
+  position: relative; overflow: hidden;
+}
+.conn-line::after {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);
+  animation: dataflow 1.5s linear infinite;
+}
+@keyframes dataflow { 0%{left:-100%} 100%{left:100%} }
+
+/* ── PORTAL STATS ROW ── */
+.portal-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; padding: 0 24px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.pstat {
+  border-radius: 10px; padding: 12px 14px;
+  border: 1px solid var(--border2); background: rgba(255,255,255,.02);
+}
+.pstat-header { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.pstat-dot { width: 7px; height: 7px; border-radius: 50%; }
+.pstat-name { font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+.pstat-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.pstat-key { font-size: 10px; color: var(--muted); }
+.pstat-val { font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+/* ── LIVE BLOCKCHAIN LOG ── */
+.chain-log { padding: 16px 24px; flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+.chain-log-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.chain-log-title span { display: flex; align-items: center; gap: 6px; }
+.log-counter { font-size: 10px; color: var(--sub); font-family: 'JetBrains Mono', monospace; }
+.chain-entries { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+.chain-entries::-webkit-scrollbar { width: 3px; }
+.chain-entries::-webkit-scrollbar-track { background: transparent; }
+.chain-entries::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+.chain-entry {
+  padding: 9px 12px; border-radius: 8px;
+  background: rgba(255,255,255,.02); border: 1px solid var(--border);
+  display: grid; grid-template-columns: 28px 1fr auto;
+  gap: 8px; align-items: start;
+  animation: slideIn .4s ease both;
+}
+@keyframes slideIn { from{opacity:0;transform:translateX(-12px)} to{opacity:1;transform:translateX(0)} }
+.chain-entry.new { border-color: rgba(45,212,191,.3); background: rgba(45,212,191,.04); }
+.chain-entry.alert { border-color: rgba(239,68,68,.3); background: rgba(239,68,68,.04); }
+.chain-entry.warn { border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.04); }
+.entry-icon {
+  width: 28px; height: 28px; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;
+}
+.entry-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.entry-title { font-size: 11px; font-weight: 600; line-height: 1.3; }
+.entry-hash { font-size: 9px; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+.entry-portal { display: flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; margin-top: 2px; }
+.entry-time { font-size: 9px; color: var(--muted); font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+
+/* ── RIGHT: EVENTS PANEL + PORTALS ── */
+.main-right {
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── LIVE EVENT FEED ── */
+.event-feed { padding: 16px 18px; flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+.ef-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+}
+.ef-title { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.ef-entries { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.ef-entries::-webkit-scrollbar { width: 3px; }
+.ef-entries::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+
+.ef-entry {
+  border-radius: 10px; padding: 12px 14px; border: 1px solid var(--border);
+  transition: border-color .3s;
+  animation: efIn .5s ease both;
+}
+@keyframes efIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+.ef-entry-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; gap: 8px; }
+.ef-source { display: flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; }
+.ef-source-dot { width: 6px; height: 6px; border-radius: 50%; }
+.ef-time { font-size: 9px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.ef-msg { font-size: 11px; line-height: 1.5; color: var(--sub); }
+.ef-msg strong { color: var(--text); }
+.ef-impact {
+  margin-top: 7px; font-size: 10px; font-weight: 600;
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 9px; border-radius: 6px;
+}
+
+/* ── PORTAL QUICK-ACCESS ── */
+.portal-quick {
+  padding: 12px 18px 16px;
+  border-top: 1px solid var(--border); flex-shrink: 0;
+}
+.portal-quick-title { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.portal-links { display: flex; flex-direction: column; gap: 6px; }
+.portal-link {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border2);
+  background: rgba(255,255,255,.02); transition: all .2s; cursor: pointer;
+}
+.portal-link:hover { background: rgba(255,255,255,.05); transform: translateX(3px); }
+.pl-left { display: flex; align-items: center; gap: 10px; }
+.pl-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+.pl-name { font-size: 12px; font-weight: 700; }
+.pl-sub { font-size: 10px; color: var(--muted); }
+.pl-arrow { font-size: 10px; color: var(--muted); }
+.pl-stat { font-size: 10px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-align: right; }
+.pl-stat-lbl { font-size: 9px; color: var(--muted); }
+
+/* ── SCENARIO NOTIFICATION ── */
+.scenario-toast {
+  position: fixed; bottom: 20px; right: 20px; z-index: 999;
+  max-width: 360px; border-radius: 14px; padding: 16px 18px;
+  background: rgba(5,15,30,.96); backdrop-filter: blur(20px);
+  border: 1px solid rgba(239,68,68,.4);
+  box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 40px rgba(239,68,68,.2);
+  display: none;
+  animation: toastIn .4s cubic-bezier(.175,.885,.32,1.275) both;
+}
+@keyframes toastIn { from{opacity:0;transform:translateY(20px) scale(.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+.toast-header { font-size: 11px; font-weight: 800; color: var(--red); display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.toast-msg { font-size: 12px; color: var(--sub); line-height: 1.6; }
+.toast-close { position: absolute; top: 10px; right: 12px; font-size: 12px; color: var(--muted); cursor: pointer; background: none; border: none; }
+.toast-close:hover { color: var(--text); }
+.toast-chain { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--blue); margin-top: 8px; word-break: break-all; line-height: 1.5; }
+
+/* ── SCROLLBAR ── */
+* { scrollbar-width: thin; scrollbar-color: var(--muted) transparent; }
+
+@media(max-width: 900px) {
+  .layout { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; height: auto; }
+  .main-right { min-height: 400px; }
+  .crisis-meters { gap: 12px; }
+  .meter-bar-wrap { width: 60px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Home</a>
+  <div class="nav-center">
+    <div class="war-indicator"></div>
+    <div class="war-room-badge">Resource Command — Live System</div>
+  </div>
+  <div class="nav-right">
+    <div class="tick-count">Blocks recorded: <span id="block-count">0</span></div>
+    <div class="tick-count" style="color:var(--green);">System: <span style="color:var(--green);font-weight:700">ONLINE</span></div>
+  </div>
+</nav>
+
+<!-- CRISIS HEADER -->
+<div class="crisis-header">
+  <div class="crisis-title"><i class="fa-solid fa-circle-exclamation"></i>ACTIVE ENERGY CRISIS</div>
+  <div class="crisis-meters">
+    <div class="crisis-meter">
+      <span class="meter-label">Kariba</span>
+      <div class="meter-bar-wrap"><div class="meter-bar" style="width:6%;background:var(--red)" id="kariba-bar"></div></div>
+      <span class="meter-val" style="color:var(--red)" id="kariba-pct">6%</span>
+    </div>
+    <div class="crisis-meter">
+      <span class="meter-label">Kafue</span>
+      <div class="meter-bar-wrap"><div class="meter-bar" style="width:17%;background:var(--copper)" id="kafue-bar"></div></div>
+      <span class="meter-val" style="color:var(--copper)" id="kafue-pct">17%</span>
+    </div>
+    <div class="crisis-meter">
+      <span class="meter-label">Grid Output</span>
+      <div class="meter-bar-wrap"><div class="meter-bar" style="width:40%;background:var(--gold)" id="grid-bar"></div></div>
+      <span class="meter-val" style="color:var(--gold)" id="grid-mw">1,520 MW</span>
+    </div>
+    <div class="crisis-meter">
+      <span class="meter-label">Mine Power Cut</span>
+      <div class="meter-bar-wrap"><div class="meter-bar" style="width:40%;background:var(--red)" id="cut-bar"></div></div>
+      <span class="meter-val" style="color:var(--red)" id="cut-pct">-40%</span>
+    </div>
+    <div class="crisis-meter">
+      <span class="meter-label">Compliance Feed</span>
+      <div class="meter-bar-wrap"><div class="meter-bar" style="width:87%;background:var(--green)" id="comp-bar"></div></div>
+      <span class="meter-val" style="color:var(--green)" id="comp-pct">87%</span>
+    </div>
+  </div>
+  <div class="crisis-btns">
+    <button class="btn-sim btn-sim-red" onclick="triggerScenario('drought')"><i class="fa-solid fa-droplet-slash"></i> Drought Crisis</button>
+    <button class="btn-sim btn-sim-gold" onclick="triggerScenario('compliance')"><i class="fa-solid fa-triangle-exclamation"></i> Compliance Breach</button>
+    <button class="btn-sim btn-sim-green" onclick="triggerScenario('recovery')"><i class="fa-solid fa-arrow-trend-up"></i> Grid Recovery</button>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- LEFT PANEL -->
+  <div class="main-left">
+
+    <!-- DATA FLOW VISUALIZER -->
+    <div class="flow-viz">
+      <div class="flow-viz-title"><i class="fa-solid fa-network-wired"></i> Live Data Flow Architecture</div>
+      <div class="flow-diagram">
+        <div class="flow-node">
+          <div class="flow-icon fn-mine"><div class="pulse-ring"></div><i class="fa-solid fa-gem"></i></div>
+          <div class="flow-label">Mine<br>Servers</div>
+        </div>
+        <div class="flow-connector">
+          <div class="conn-line" style="--from:var(--copper);--to:var(--purple)"></div>
+        </div>
+        <div class="flow-node">
+          <div class="flow-icon fn-zk"><div class="pulse-ring"></div><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="flow-label">ZK Proof<br>Engine</div>
+        </div>
+        <div class="flow-connector">
+          <div class="conn-line" style="--from:var(--purple);--to:var(--blue)"></div>
+        </div>
+        <div class="flow-node">
+          <div class="flow-icon fn-chain"><div class="pulse-ring"></div><i class="fa-solid fa-link"></i></div>
+          <div class="flow-label">Blockchain<br>Node</div>
+        </div>
+        <div class="flow-connector">
+          <div class="conn-line" style="--from:var(--blue);--to:var(--blue2)"></div>
+        </div>
+        <div class="flow-node">
+          <div class="flow-icon fn-gov"><div class="pulse-ring"></div><i class="fa-solid fa-landmark"></i></div>
+          <div class="flow-label">Gov<br>Portal</div>
+        </div>
+        <div class="flow-connector">
+          <div class="conn-line" style="--from:var(--blue2);--to:var(--gold)"></div>
+        </div>
+        <div class="flow-node">
+          <div class="flow-icon fn-bank"><div class="pulse-ring"></div><i class="fa-solid fa-building-columns"></i></div>
+          <div class="flow-label">Finance<br>Portal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTAL STATS -->
+    <div class="portal-stats">
+      <div class="pstat">
+        <div class="pstat-header">
+          <div class="pstat-dot" style="background:var(--blue)"></div>
+          <div class="pstat-name" style="color:var(--blue)">Government</div>
+        </div>
+        <div class="pstat-row"><span class="pstat-key">Compliance avg</span><span class="pstat-val" style="color:var(--green)">87%</span></div>
+        <div class="pstat-row"><span class="pstat-key">Royalties YTD</span><span class="pstat-val" style="color:var(--gold)">$70M</span></div>
+        <div class="pstat-row"><span class="pstat-key">Audit flags</span><span class="pstat-val" style="color:var(--red)">1 active</span></div>
+        <div class="pstat-row"><span class="pstat-key">Blocks written</span><span class="pstat-val" id="gs-blocks">4,821</span></div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-header">
+          <div class="pstat-dot" style="background:var(--gold)"></div>
+          <div class="pstat-name" style="color:var(--gold)">Finance</div>
+        </div>
+        <div class="pstat-row"><span class="pstat-key">Portfolio active</span><span class="pstat-val" style="color:var(--gold)">$6.6B</span></div>
+        <div class="pstat-row"><span class="pstat-key">Covenant alerts</span><span class="pstat-val" style="color:var(--red)">2</span></div>
+        <div class="pstat-row"><span class="pstat-key">Green bonds</span><span class="pstat-val" style="color:var(--green)">$550M</span></div>
+        <div class="pstat-row"><span class="pstat-key">Risk scores live</span><span class="pstat-val" style="color:var(--blue)">8 positions</span></div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-header">
+          <div class="pstat-dot" style="background:var(--copper)"></div>
+          <div class="pstat-name" style="color:var(--copper)">Industry</div>
+        </div>
+        <div class="pstat-row"><span class="pstat-key">Active mines</span><span class="pstat-val" style="color:var(--copper)">9</span></div>
+        <div class="pstat-row"><span class="pstat-key">Filings pending</span><span class="pstat-val" style="color:var(--gold)">Q1 '26</span></div>
+        <div class="pstat-row"><span class="pstat-key">ZKP verified</span><span class="pstat-val" style="color:var(--green)">6/9</span></div>
+        <div class="pstat-row"><span class="pstat-key">SAR variance</span><span class="pstat-val" style="color:var(--red)">1 flagged</span></div>
+      </div>
+    </div>
+
+    <!-- BLOCKCHAIN LOG -->
+    <div class="chain-log">
+      <div class="chain-log-title">
+        <span><i class="fa-solid fa-cubes"></i> Live Blockchain Entries</span>
+        <span class="log-counter" id="log-counter">0 events</span>
+      </div>
+      <div class="chain-entries" id="chain-entries"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="main-right">
+    <!-- EVENT FEED -->
+    <div class="event-feed">
+      <div class="ef-header">
+        <div class="ef-title"><i class="fa-solid fa-rss"></i> Cross-Portal Event Feed</div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--red);animation:warblink 0.8s infinite"></div>
+          <span style="font-size:9px;color:var(--muted);font-weight:700">LIVE</span>
+        </div>
+      </div>
+      <div class="ef-entries" id="ef-entries"></div>
+    </div>
+
+    <!-- PORTAL QUICK ACCESS -->
+    <div class="portal-quick">
+      <div class="portal-quick-title">Portal Access</div>
+      <div class="portal-links">
+        <a href="gov.html" class="portal-link">
+          <div class="pl-left">
+            <div class="pl-icon" style="background:rgba(45,212,191,.1);color:var(--blue)"><i class="fa-solid fa-landmark"></i></div>
+            <div>
+              <div class="pl-name">Government Portal</div>
+              <div class="pl-sub">National Command Center</div>
+            </div>
+          </div>
+          <div>
+            <div class="pl-stat" style="color:var(--blue)">87%</div>
+            <div class="pl-stat-lbl">Compliance</div>
+          </div>
+          <div class="pl-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+        <a href="bank.html" class="portal-link">
+          <div class="pl-left">
+            <div class="pl-icon" style="background:rgba(245,158,11,.1);color:var(--gold)"><i class="fa-solid fa-building-columns"></i></div>
+            <div>
+              <div class="pl-name">Finance Portal</div>
+              <div class="pl-sub">AfDB · Zanaco · IFC · Stanbic</div>
+            </div>
+          </div>
+          <div>
+            <div class="pl-stat" style="color:var(--red)">2 alerts</div>
+            <div class="pl-stat-lbl">Covenants</div>
+          </div>
+          <div class="pl-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+        <a href="client.html" class="portal-link">
+          <div class="pl-left">
+            <div class="pl-icon" style="background:rgba(224,123,57,.1);color:var(--copper)"><i class="fa-solid fa-gem"></i></div>
+            <div>
+              <div class="pl-name">Industry Portal</div>
+              <div class="pl-sub">FQM · Barrick · Vedanta · Mopani</div>
+            </div>
+          </div>
+          <div>
+            <div class="pl-stat" style="color:var(--copper)">94/100</div>
+            <div class="pl-stat-lbl">FQM Score</div>
+          </div>
+          <div class="pl-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENARIO TOAST -->
+<div class="scenario-toast" id="scenario-toast">
+  <button class="toast-close" onclick="dismissToast()"><i class="fa-solid fa-xmark"></i></button>
+  <div class="toast-header"><i class="fa-solid fa-circle-exclamation"></i> <span id="toast-title">Scenario Triggered</span></div>
+  <div class="toast-msg" id="toast-msg"></div>
+  <div class="toast-chain" id="toast-chain"></div>
+</div>
+
+<script>
+// ── HELPERS ──────────────────────────────────────────────────────────
+const rand = (a,b) => Math.floor(Math.random()*(b-a+1))+a;
+const hex = (n=8) => Array.from({length:n},()=>Math.floor(Math.random()*16).toString(16)).join('');
+function now() {
+  const d = new Date();
+  return d.toTimeString().slice(0,8);
+}
+
+// ── BLOCKCHAIN ENTRIES DATA ───────────────────────────────────────────
+const ENTRY_TYPES = [
+  { type:'new', icon:'fa-cube', iconBg:'rgba(45,212,191,.1)', iconColor:'var(--blue)',
+    portal:'Government', portalColor:'var(--blue)',
+    templates: [
+      () => `Block #${(4820+rand(1,99)).toLocaleString()} — Royalty ZK proof verified: FQM Kansanshi Q${rand(1,4)} 2025`,
+      () => `Block #${(4820+rand(1,99)).toLocaleString()} — License compliance score updated: Barrick Lumwana → ${rand(88,96)}/100`,
+      () => `Block #${(4820+rand(1,99)).toLocaleString()} — SAR satellite cross-check: Kansanshi variance ${rand(1,3)}.${rand(0,9)}% ✓`,
+    ]
+  },
+  { type:'alert', icon:'fa-triangle-exclamation', iconBg:'rgba(239,68,68,.12)', iconColor:'var(--red)',
+    portal:'Government', portalColor:'var(--blue)',
+    templates: [
+      () => `AUDIT FLAG — Nchanga (Vedanta) SAR variance +${rand(11,16)}.${rand(0,9)}% exceeds 5% threshold. MRC + ZRA notified.`,
+      () => `ZEMA ALERT — Tailings discharge reading above permitted level at KCM. Inspector dispatch initiated.`,
+    ]
+  },
+  { type:'warn', icon:'fa-bolt', iconBg:'rgba(245,158,11,.1)', iconColor:'var(--gold)',
+    portal:'Finance', portalColor:'var(--gold)',
+    templates: [
+      () => `Covenant watch: Vedanta KCM score fell to ${rand(64,70)}/100 — approaching Stanbic breach threshold of 80.`,
+      () => `Mopani energy risk recalculated: ZESCO cut impacts projected cashflow by $${rand(12,28)}M this quarter.`,
+      () => `Green bond KPI check: FQM solar at ${rand(38,48)}MW vs 50MW target. Step-down coupon at risk if Q3 missed.`,
+    ]
+  },
+  { type:'new', icon:'fa-shield-halved', iconBg:'rgba(168,85,247,.1)', iconColor:'var(--purple)',
+    portal:'Industry', portalColor:'var(--copper)',
+    templates: [
+      () => `ZKP proof generated: FQM royalty obligation $${rand(17,22)}.${rand(1,9)}M Q${rand(1,4)} — 0 bytes of production data transmitted.`,
+      () => `One-click filing submitted to all 5 regulators: MRC, ZEMA, ERB, ZRA, ZCCM-IH — batch hash 0x${hex(16)}`,
+      () => `PUF attestation: ${rand(1844,1850)} sensors heartbeat confirmed. 0 tamper events in last 24 hours.`,
+      () => `Energy AI recommendation applied: SAG mill shifted to 22:00–02:00. Projected saving $${rand(140,190)}K this week.`,
+    ]
+  },
+  { type:'new', icon:'fa-link', iconBg:'rgba(16,185,129,.1)', iconColor:'var(--green)',
+    portal:'Blockchain', portalColor:'var(--green)',
+    templates: [
+      () => `Node sync: Ministry node, AGO node, ERB node — all 3 in consensus. BFT threshold maintained.`,
+      () => `Smart contract trigger: royalty run-rate $${rand(68,74)}M/yr. Approaching $100M sovereign fund threshold.`,
+      () => `Block finality: ${rand(4800,4830)} entries immutable. Chain integrity verified by AGO independent node.`,
+    ]
+  }
+];
+
+const EVENT_FEED = [
+  { source:'Government', color:'var(--blue)', dot:'var(--blue)',
+    msg: '<strong>Compliance alert cascade:</strong> Vedanta KCM score drop (<strong>67→64</strong>) triggers automatic bank notification to Stanbic Zambia relationship manager.',
+    impact: { text: 'Finance portal risk score updated in real-time', color:'var(--gold)', bg:'rgba(245,158,11,.06)' }
+  },
+  { source:'Blockchain', color:'var(--green)', dot:'var(--green)',
+    msg: '<strong>ZK proof batch verified:</strong> 6 mine operators submitted Q1 2026 royalty proofs simultaneously. Total obligation confirmed: <strong>$18.4M</strong>.',
+    impact: { text: 'Zero production data exposed to government nodes', color:'var(--green)', bg:'rgba(16,185,129,.06)' }
+  },
+  { source:'Finance', color:'var(--gold)', dot:'var(--gold)',
+    msg: '<strong>Kafue at 17%</strong> — AfDB risk model auto-updated: Lumwana loan risk score revised from <strong>9 → 22</strong>. Energy exposure covenant triggered.',
+    impact: { text: 'Covenant breach warning sent to Barrick CFO desk', color:'var(--red)', bg:'rgba(239,68,68,.06)' }
+  },
+  { source:'Industry', color:'var(--copper)', dot:'var(--copper)',
+    msg: '<strong>FQM one-click Q1 filing complete:</strong> Submitted to all 5 regulators simultaneously. 72 hours of paper handling replaced by <strong>4.3 seconds</strong>.',
+    impact: { text: 'Blockchain hash: 0x' + hex(12) + ' — tamper-proof record', color:'var(--blue)', bg:'rgba(45,212,191,.06)' }
+  },
+  { source:'Government', color:'var(--blue)', dot:'var(--blue)',
+    msg: '<strong>SAR cross-check complete:</strong> Nchanga (Vedanta) declared 95,000t vs satellite-measured <strong>108,200t (+13.9%)</strong>. Mandatory audit initiated under MRCA S.47(2).',
+    impact: { text: 'MRC + ZRA auto-notified — no human trigger needed', color:'var(--red)', bg:'rgba(239,68,68,.06)' }
+  },
+  { source:'Blockchain', color:'var(--green)', dot:'var(--green)',
+    msg: '<strong>Sovereign wealth trigger approaching:</strong> Royalty run-rate at $70M/yr. Smart contract will auto-route 20% → ZM Sovereign Fund at $100M threshold.',
+    impact: { text: 'No ministerial order required — code executes automatically', color:'var(--green)', bg:'rgba(16,185,129,.06)' }
+  },
+];
+
+// ── STATE ────────────────────────────────────────────────────────────
+let blockCount = 4821;
+let logEntries = 0;
+let efIndex = 0;
+
+// ── RENDER CHAIN ENTRY ───────────────────────────────────────────────
+function addChainEntry() {
+  const def = ENTRY_TYPES[rand(0, ENTRY_TYPES.length-1)];
+  const tmpl = def.templates[rand(0, def.templates.length-1)];
+  const text = tmpl();
+  blockCount++;
+
+  const container = document.getElementById('chain-entries');
+  const el = document.createElement('div');
+  el.className = `chain-entry ${def.type}`;
+  el.innerHTML = `
+    <div class="entry-icon" style="background:${def.iconBg};color:${def.iconColor}">
+      <i class="fa-solid ${def.icon}"></i>
+    </div>
+    <div class="entry-body">
+      <div class="entry-title">${text}</div>
+      <div class="entry-hash">0x${hex(10)}...${hex(6)} · ${now()}</div>
+      <div class="entry-portal" style="color:${def.portalColor}">
+        <i class="fa-solid fa-circle" style="font-size:5px"></i> ${def.portal} Portal
+      </div>
+    </div>
+    <div class="entry-time">${now()}</div>
+  `;
+
+  // Insert at top
+  if (container.firstChild) {
+    container.insertBefore(el, container.firstChild);
+  } else {
+    container.appendChild(el);
+  }
+
+  // Limit entries
+  while (container.children.length > 20) {
+    container.removeChild(container.lastChild);
+  }
+
+  logEntries++;
+  document.getElementById('block-count').textContent = blockCount.toLocaleString();
+  document.getElementById('log-counter').textContent = logEntries + ' events';
+  document.getElementById('gs-blocks').textContent = blockCount.toLocaleString();
+}
+
+// ── RENDER EVENT FEED ────────────────────────────────────────────────
+function addEventFeed() {
+  const ev = EVENT_FEED[efIndex % EVENT_FEED.length];
+  efIndex++;
+
+  const container = document.getElementById('ef-entries');
+  const el = document.createElement('div');
+  el.className = 'ef-entry';
+  el.style.borderColor = ev.color.replace('var(--', 'rgba(').replace(')', ', .2)');
+  el.innerHTML = `
+    <div class="ef-entry-header">
+      <div class="ef-source" style="color:${ev.color}">
+        <div class="ef-source-dot" style="background:${ev.dot}"></div>
+        ${ev.source} Portal
+      </div>
+      <div class="ef-time">${now()}</div>
+    </div>
+    <div class="ef-msg">${ev.msg}</div>
+    <div class="ef-impact" style="background:${ev.impact.bg};color:${ev.impact.color}">
+      <i class="fa-solid fa-arrow-right" style="font-size:9px"></i>
+      ${ev.impact.text}
+    </div>
+  `;
+
+  if (container.firstChild) {
+    container.insertBefore(el, container.firstChild);
+  } else {
+    container.appendChild(el);
+  }
+
+  while (container.children.length > 10) {
+    container.removeChild(container.lastChild);
+  }
+}
+
+// ── SCENARIO TRIGGERS ────────────────────────────────────────────────
+const SCENARIOS = {
+  drought: {
+    title: '🔴 Drought Crisis Simulation Triggered',
+    msg: 'Kafue reservoir drops to <strong>4%</strong>. ZESCO issues emergency 60% power cut to all mines. Projected copper output shortfall: <strong>220,000t/yr</strong>. Royalty impact: <strong>-$18M</strong>. Bank risk scores updating now across 6 active positions.',
+    kariba: 4, kafue: 4, grid: 900, cut: 60, comp: 72,
+    chain: `SCENARIO_BLOCK: drought_state_update\nKariba: 4% | Kafue: 4% | Grid: 900MW\nMine cuts: -60% | Crisis: NATIONAL_EMERGENCY\nHash: 0x${hex(20)}`
+  },
+  compliance: {
+    title: '🟠 Compliance Breach Simulation Triggered',
+    msg: 'Vedanta KCM compliance score drops to <strong>52/100</strong> triggering immediate Stanbic covenant breach. <strong>$300M</strong> loan put on legal hold. ZRA royalty audit initiated. ZEMA penalty flag raised. Cross-portal cascade active.',
+    kariba: 8, kafue: 17, grid: 1520, cut: 40, comp: 64,
+    chain: `SCENARIO_BLOCK: compliance_breach\nCompany: Vedanta/KCM | Score: 52→BREACH\nBank: Stanbic loan $300M → LEGAL_HOLD\nHash: 0x${hex(20)}`
+  },
+  recovery: {
+    title: '🟢 Grid Recovery Scenario — Kariba Rehabilitation',
+    msg: 'Kariba rehabilitation complete. Reservoir at <strong>42%</strong>. ZESCO restores full power to all mines. Copper output recovers to <strong>890,000t/yr</strong>. GDP contribution up to <strong>12.4%</strong>. Royalty projection: <strong>+$31M/yr</strong>.',
+    kariba: 42, kafue: 55, grid: 3200, cut: 0, comp: 94,
+    chain: `SCENARIO_BLOCK: grid_recovery\nKariba: 42% | Kafue: 55% | Grid: 3200MW\nCopper output: 890,000t/yr | Crisis: STABLE\nHash: 0x${hex(20)}`
+  }
+};
+
+function triggerScenario(type) {
+  const s = SCENARIOS[type];
+  // Update meters
+  document.getElementById('kariba-bar').style.width = s.kariba + '%';
+  document.getElementById('kafue-bar').style.width = s.kafue + '%';
+  document.getElementById('grid-bar').style.width = (s.grid/3800*100) + '%';
+  document.getElementById('cut-bar').style.width = s.cut + '%';
+  document.getElementById('comp-bar').style.width = s.comp + '%';
+  document.getElementById('kariba-pct').textContent = s.kariba + '%';
+  document.getElementById('kafue-pct').textContent = s.kafue + '%';
+  document.getElementById('grid-mw').textContent = s.grid.toLocaleString() + ' MW';
+  document.getElementById('cut-pct').textContent = '-' + s.cut + '%';
+  document.getElementById('comp-pct').textContent = s.comp + '%';
+
+  // Color updates
+  const karibaPct = document.getElementById('kariba-pct');
+  const kafiPct = document.getElementById('kafue-pct');
+  karibaPct.style.color = s.kariba < 10 ? 'var(--red)' : s.kariba < 30 ? 'var(--gold)' : 'var(--green)';
+  document.getElementById('kariba-bar').style.background = s.kariba < 10 ? 'var(--red)' : s.kariba < 30 ? 'var(--gold)' : 'var(--green)';
+
+  // Show toast
+  document.getElementById('toast-title').innerHTML = s.title;
+  document.getElementById('toast-msg').innerHTML = s.msg;
+  document.getElementById('toast-chain').textContent = s.chain;
+  const toast = document.getElementById('scenario-toast');
+  toast.style.display = 'block';
+
+  // Add rapid-fire chain entries
+  for (let i = 0; i < 3; i++) {
+    setTimeout(() => addChainEntry(), i * 200);
+  }
+
+  // Add event feed entry
+  const container = document.getElementById('ef-entries');
+  const el = document.createElement('div');
+  el.className = 'ef-entry';
+  el.style.borderColor = type === 'recovery' ? 'rgba(16,185,129,.4)' : 'rgba(239,68,68,.4)';
+  el.style.background = type === 'recovery' ? 'rgba(16,185,129,.06)' : 'rgba(239,68,68,.05)';
+  el.innerHTML = `
+    <div class="ef-entry-header">
+      <div class="ef-source" style="color:${type==='recovery'?'var(--green)':'var(--red)'}">
+        <div class="ef-source-dot" style="background:${type==='recovery'?'var(--green)':'var(--red)'}"></div>
+        SCENARIO SIMULATION
+      </div>
+      <div class="ef-time">${now()}</div>
+    </div>
+    <div class="ef-msg">${s.msg}</div>
+    <div class="ef-impact" style="background:rgba(45,212,191,.06);color:var(--blue)">
+      <i class="fa-solid fa-link" style="font-size:9px"></i>
+      All portal dashboards updated simultaneously
+    </div>
+  `;
+  if (container.firstChild) container.insertBefore(el, container.firstChild);
+  else container.appendChild(el);
+}
+
+function dismissToast() {
+  document.getElementById('scenario-toast').style.display = 'none';
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────
+// Pre-populate chain log from top
+const INIT_ENTRIES_COUNT = 8;
+for (let i = 0; i < INIT_ENTRIES_COUNT; i++) {
+  addChainEntry();
+}
+
+// Pre-populate event feed
+EVENT_FEED.slice(0, 5).forEach(() => addEventFeed());
+
+// Live tick intervals
+setInterval(addChainEntry, rand(1800, 3200));
+setInterval(addEventFeed, rand(6000, 10000));
+
+// Jitter the intervals so they feel organic
+function jitterChain() {
+  addChainEntry();
+  setTimeout(jitterChain, rand(1400, 4000));
+}
+setTimeout(jitterChain, rand(3000, 5000));
+</script>
+</body>
+</html>

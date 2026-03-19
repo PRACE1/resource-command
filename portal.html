@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Command — Zambia</title>
+<meta name="description" content="Zambia's resource intelligence platform. One system for government, banks, and mining companies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #03080F;
+  --bg1: #060E1A;
+  --bg2: #091525;
+  --blue: #2DD4BF;
+  --blue2: #38BDF8;
+  --green: #10B981;
+  --gold: #F59E0B;
+  --copper: #EA8C4E;
+  --red: #EF4444;
+  --purple: #8B5CF6;
+  --text: #ECF4FF;
+  --sub: #8FA9C4;
+  --muted: #3D5A75;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ═══ ANIMATED BACKGROUND ════════════════════════════════════════════ */
+.bg {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+}
+.bg-noise {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+.bg-mesh {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(45,212,191,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 90%, rgba(234,140,78,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(16,185,129,0.04) 0%, transparent 70%);
+}
+.bg-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(45,212,191,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,191,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ═══ NAV ═════════════════════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 64px; padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(3,8,15,0.85);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; }
+.nav-logo-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #03080F; font-weight: 900;
+}
+.nav-name { font-size: 15px; font-weight: 800; letter-spacing: -0.3px; }
+.nav-country { font-size: 11px; color: var(--muted); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-live {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 600; color: var(--green);
+  padding: 5px 12px; border-radius: 20px;
+  background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2);
+}
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  animation: blink 1.4s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.nav-conf { font-size: 11px; color: var(--sub); }
+
+/* ═══ HERO ════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 100px 24px 60px;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--blue); padding: 7px 16px; border-radius: 24px;
+  background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.2);
+  margin-bottom: 32px;
+  animation: fadeUp 0.7s ease both;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 900; letter-spacing: -2px; line-height: 1.05;
+  margin-bottom: 24px;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--green) 50%, var(--blue2) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-size: 17px; color: var(--sub); max-width: 580px; line-height: 1.75;
+  margin-bottom: 16px;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+.hero-problem {
+  font-size: 14px; color: var(--sub); max-width: 520px; line-height: 1.7;
+  padding: 16px 20px; border-radius: 10px;
+  background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15);
+  margin-bottom: 52px;
+  animation: fadeUp 0.7s ease 0.25s both;
+}
+.hero-problem strong { color: var(--text); }
+
+/* ═══ PORTAL CARDS ════════════════════════════════════════════════════ */
+.portals {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; max-width: 1100px; margin: 0 auto;
+  padding: 0 24px 100px; width: 100%;
+  animation: fadeUp 0.7s ease 0.35s both;
+}
+.p-card {
+  position: relative; border-radius: 20px;
+  padding: 2px; /* gradient border trick */
+  text-decoration: none; color: inherit;
+  transition: transform 0.25s ease;
+  display: block;
+}
+.p-card:hover { transform: translateY(-6px); }
+.p-card-inner {
+  background: var(--bg1); border-radius: 18px;
+  padding: 32px 28px; height: 100%;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.p-card-inner::before {
+  content: ''; position: absolute; inset: 0;
+  opacity: 0; border-radius: 18px;
+  transition: opacity 0.3s ease;
+}
+
+/* Government */
+.p-gov { background: linear-gradient(135deg, rgba(45,212,191,0.3), rgba(45,212,191,0.05) 50%, rgba(56,189,248,0.2)); }
+.p-gov .p-card-inner::before { background: linear-gradient(145deg, rgba(45,212,191,0.06), transparent); }
+.p-gov:hover .p-card-inner::before { opacity: 1; }
+
+/* Bank */
+.p-bank { background: linear-gradient(135deg, rgba(245,158,11,0.3), rgba(245,158,11,0.05) 50%, rgba(234,140,78,0.2)); }
+.p-bank .p-card-inner::before { background: linear-gradient(145deg, rgba(245,158,11,0.07), transparent); }
+.p-bank:hover .p-card-inner::before { opacity: 1; }
+
+/* Client */
+.p-client { background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(16,185,129,0.05) 50%, rgba(45,212,191,0.2)); }
+.p-client .p-card-inner::before { background: linear-gradient(145deg, rgba(16,185,129,0.07), transparent); }
+.p-client:hover .p-card-inner::before { opacity: 1; }
+
+.p-glow {
+  position: absolute; border-radius: 50%; filter: blur(80px);
+  pointer-events: none; opacity: 0; transition: opacity 0.4s;
+}
+.p-card:hover .p-glow { opacity: 1; }
+.p-gov .p-glow { width: 200px; height: 200px; background: var(--blue); top: -60px; right: -60px; }
+.p-bank .p-glow { width: 200px; height: 200px; background: var(--gold); top: -60px; right: -60px; }
+.p-client .p-glow { width: 200px; height: 200px; background: var(--green); top: -60px; right: -60px; }
+
+.p-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 20px; position: relative; z-index: 1;
+}
+.icon-gov { background: rgba(45,212,191,0.12); color: var(--blue); }
+.icon-bank { background: rgba(245,158,11,0.12); color: var(--gold); }
+.icon-client { background: rgba(16,185,129,0.12); color: var(--green); }
+
+.p-role {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 6px; position: relative; z-index: 1;
+}
+.c-gov { color: var(--blue); }
+.c-bank { color: var(--gold); }
+.c-client { color: var(--green); }
+
+.p-title {
+  font-size: 20px; font-weight: 800; letter-spacing: -0.4px;
+  margin-bottom: 12px; line-height: 1.2; position: relative; z-index: 1;
+}
+.p-desc {
+  font-size: 13px; color: var(--sub); line-height: 1.7;
+  margin-bottom: 20px; flex: 1; position: relative; z-index: 1;
+}
+.p-reason {
+  font-size: 12px; line-height: 1.65; padding: 12px 14px; border-radius: 9px;
+  margin-bottom: 24px; position: relative; z-index: 1;
+}
+.reason-gov { background: rgba(45,212,191,0.07); border-left: 2px solid var(--blue); color: var(--sub); }
+.reason-bank { background: rgba(245,158,11,0.07); border-left: 2px solid var(--gold); color: var(--sub); }
+.reason-client { background: rgba(16,185,129,0.07); border-left: 2px solid var(--green); color: var(--sub); }
+.p-reason strong { color: var(--text); }
+
+.p-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 20px; border-radius: 11px; font-size: 13px; font-weight: 700;
+  border: none; cursor: pointer; width: 100%; transition: all 0.2s;
+  position: relative; z-index: 1; letter-spacing: 0.1px;
+}
+.cta-gov {
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #03080F;
+}
+.cta-gov:hover { box-shadow: 0 0 32px rgba(45,212,191,0.5); }
+.cta-bank {
+  background: linear-gradient(135deg, var(--gold), var(--copper));
+  color: #03080F;
+}
+.cta-bank:hover { box-shadow: 0 0 32px rgba(245,158,11,0.5); }
+.cta-client {
+  background: linear-gradient(135deg, var(--green), #0EA472);
+  color: #03080F;
+}
+.cta-client:hover { box-shadow: 0 0 32px rgba(16,185,129,0.5); }
+
+/* ═══ CRISIS BAND ════════════════════════════════════════════════════ */
+.crisis-band {
+  position: relative; z-index: 1;
+  background: rgba(239,68,68,0.07);
+  border-top: 1px solid rgba(239,68,68,0.15);
+  border-bottom: 1px solid rgba(239,68,68,0.15);
+  padding: 14px 48px;
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap; justify-content: center;
+  overflow: hidden;
+}
+.crisis-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--red); white-space: nowrap;
+  display: flex; align-items: center; gap: 7px;
+}
+.crisis-facts {
+  display: flex; gap: 28px; flex-wrap: wrap;
+}
+.crisis-fact { font-size: 12px; color: var(--sub); }
+.crisis-fact strong { color: var(--text); font-weight: 700; }
+
+/* ═══ NUMBERS ════════════════════════════════════════════════════════ */
+.numbers {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+.num-item {
+  padding: 40px 24px; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.num-item:last-child { border-right: none; }
+.num-val {
+  font-size: 2.2rem; font-weight: 900;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -1px; margin-bottom: 4px;
+  display: block;
+}
+.num-lbl { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+/* ═══ FOOTER ════════════════════════════════════════════════════════ */
+footer {
+  position: relative; z-index: 1;
+  padding: 32px 48px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  border-top: 1px solid var(--border);
+}
+.footer-copy { font-size: 11px; color: var(--muted); line-height: 1.6; }
+.footer-tech {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.tech-tag {
+  font-size: 10px; font-weight: 600; color: var(--muted);
+  padding: 3px 9px; border-radius: 5px; border: 1px solid var(--border);
+}
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .hero{padding:90px 20px 40px}
+  .portals{grid-template-columns:1fr;padding:0 20px 60px}
+  .p-card{max-width:480px;margin:0 auto;width:100%}
+  .numbers{grid-template-columns:repeat(2,1fr)}
+  .num-item:nth-child(2){border-right:none}
+  .num-item{border-bottom:1px solid var(--border)}
+  .numbers{border-bottom:none}
+  .crisis-band{padding:14px 20px}
+  footer{padding:24px 20px;flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2rem;letter-spacing:-1px}
+  .nav-conf{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="bg-mesh"></div>
+  <div class="bg-lines"></div>
+  <div class="bg-noise"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">RC</div>
+    <div>
+      <div class="nav-name">Resource Command</div>
+      <div class="nav-country">🇿🇲 Republic of Zambia</div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-live"><span class="live-dot"></span>Live Demo</div>
+    <span class="nav-conf">Conference Edition · Oct 16–17 2026</span>
+  </div>
+</nav>
+
+<!-- CRISIS BAND -->
+<div class="crisis-band">
+  <div class="crisis-label"><i class="fa-solid fa-circle-exclamation"></i>Active Energy Crisis</div>
+  <div class="crisis-facts">
+    <div class="crisis-fact">Kariba at <strong>6% capacity</strong></div>
+    <div class="crisis-fact">Kafue at <strong>17% capacity</strong></div>
+    <div class="crisis-fact"><strong>17 hrs/day</strong> load shedding at peak</div>
+    <div class="crisis-fact">ZESCO cut mine power by <strong>40%</strong></div>
+    <div class="crisis-fact"><strong>$20B+</strong> in copper investments at risk</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <i class="fa-solid fa-gem"></i>
+    Zambia Copper–Energy Intelligence
+  </div>
+  <h1>One system.<br><em>Government, banks,<br>and mines — connected.</em></h1>
+  <p class="hero-sub">
+    Zambia has 5 regulatory bodies, 9 major mine operators, and a 1,600 MW energy deficit. 
+    Nobody has the full picture. This platform gives each stakeholder exactly what they need — securely separated.
+  </p>
+  <p class="hero-problem">
+    <strong>The problem isn't data. It's that nobody trusts anyone else's data.</strong><br>
+    Government doesn't trust company self-reporting. Banks don't have live compliance feeds to back their loans.
+    Companies file the same report to four regulators manually. This platform solves all three — from one integration.
+  </p>
+</section>
+
+<!-- PORTALS -->
+<div class="portals">
+
+  <!-- Government -->
+  <a href="gov.html" class="p-card p-gov">
+    <div class="p-card-inner">
+      <div class="p-glow"></div>
+      <div class="p-icon icon-gov"><i class="fa-solid fa-landmark"></i></div>
+      <div class="p-role c-gov">Government · Ministry of Mines</div>
+      <div class="p-title">National Command Center</div>
+      <p class="p-desc">Real-time view of every mine's compliance status, royalty position, and energy demand — verified independently, not self-reported.</p>
+      <div class="p-reason reason-gov">
+        <strong>The hard question every PS asks:</strong> "How do I know the production data isn't fabricated?" 
+        Go in and see how we answer it — with actual proof, not promises.
+      </div>
+      <button class="p-cta cta-gov">
+        <i class="fa-solid fa-landmark"></i>
+        Enter Government Portal
+      </button>
+    </div>
+  </a>
+
+  <!-- Bank -->
+  <a href="bank.html" class="p-card p-bank">
+    <div class="p-card-inner">
+      <div class="p-glow"></div>
+      <div class="p-icon icon-bank"><i class="fa-solid fa-building-columns"></i></div>
+      <div class="p-role c-bank">Finance · AfDB · Zanaco · IFC · Stanbic</div>
+      <div class="p-title">Finance Intelligence Center</div>
+      <p class="p-desc">Live compliance-linked risk scores on $6.6B in active mining loans. If a mine's compliance drops, you know before the next quarterly report.</p>
+      <div class="p-reason reason-bank">
+        <strong>Your current problem:</strong> You modelled loan risk assuming steady power and compliance. 
+        Kafue is at 17%. Which of your positions just changed? This portal tells you — in real time.
+      </div>
+      <button class="p-cta cta-bank">
+        <i class="fa-solid fa-building-columns"></i>
+        Enter Finance Portal
+      </button>
+    </div>
+  </a>
+
+  <!-- Client -->
+  <a href="client.html" class="p-card p-client">
+    <div class="p-card-inner">
+      <div class="p-glow"></div>
+      <div class="p-icon icon-client"><i class="fa-solid fa-gem"></i></div>
+      <div class="p-role c-client">Industry · FQM · Barrick · Vedanta · Mopani</div>
+      <div class="p-title">Industry Operations Portal</div>
+      <p class="p-desc">Replace 5 separate regulatory submissions with one. Control exactly what each regulator sees — your raw operational data stays on your servers.</p>
+      <div class="p-reason reason-client">
+        <strong>MRCA 2024 is live:</strong> Digital compliance is mandatory. 
+        44% of operators are still filing on paper. Non-compliance penalties begin January 2027. 
+        This replaces the whole process — automatically.
+      </div>
+      <button class="p-cta cta-client">
+        <i class="fa-solid fa-gem"></i>
+        Enter Industry Portal
+      </button>
+    </div>
+  </a>
+
+</div>
+
+<!-- NUMBERS -->
+<div class="numbers">
+  <div class="num-item">
+    <span class="num-val" style="color:var(--copper)">$6.6B</span>
+    <div class="num-lbl">Active mining investment<br>currently tracked</div>
+  </div>
+  <div class="num-item">
+    <span class="num-val" style="color:var(--red)">1,600 MW</span>
+    <div class="num-lbl">Current energy deficit<br>being monitored</div>
+  </div>
+  <div class="num-item">
+    <span class="num-val" style="color:var(--green)">5</span>
+    <div class="num-lbl">Regulatory bodies<br>integrated in one system</div>
+  </div>
+  <div class="num-item">
+    <span class="num-val" style="color:var(--gold)">$70M</span>
+    <div class="num-lbl">Royalties collected YTD<br>and verified on-chain</div>
+  </div>
+  <div class="num-item">
+    <span class="num-val" style="color:var(--blue)">44%</span>
+    <div class="num-lbl">Mine operators still<br>filing on paper (2025)</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">
+    Data sourced from ZESCO, MRC, ERB, ZEMA, ZRA, ZCCM-IH, World Bank, and public filings (2024–2025).<br>
+    Conference demonstration. Not a production system. Version 1 — built for the October 2026 conference.
+  </div>
+  <div class="footer-tech">
+    <span class="tech-tag">Blockchain audit trail</span>
+    <span class="tech-tag">Role-based access</span>
+    <span class="tech-tag">SHA-256 verification</span>
+    <span class="tech-tag">GIS mine mapping</span>
+    <span class="tech-tag">Live compliance feed</span>
+  </div>
+</footer>
+
+</body>
+</html>

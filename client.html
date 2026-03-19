@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Command — Industry Portal | Zambia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#040B14;--copper:#E07B39;--primary:#38BDF8;--gold:#F59E0B;--success:#10B981;--danger:#EF4444;--purple:#A855F7;--text:#F0F6FF;--text-sub:#94A3B8;--text-muted:#4B6178;--border:rgba(255,255,255,0.06);--border-s:rgba(255,255,255,0.12);--glass:rgba(255,255,255,0.03)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(224,123,57,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(224,123,57,.025) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
+a{color:inherit;text-decoration:none}
+nav{position:sticky;top:0;z-index:100;background:rgba(4,11,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(224,123,57,.15);padding:0 32px;display:flex;align-items:center;gap:16px;height:60px}
+.nav-back{padding:7px 14px;border-radius:8px;background:rgba(224,123,57,.08);border:1px solid rgba(224,123,57,.2);color:var(--copper);font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
+.nav-back:hover{background:rgba(224,123,57,.14)}
+.nav-brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.nav-logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--copper),var(--gold));display:flex;align-items:center;justify-content:center;font-size:14px}
+.nav-title{font-size:14px;font-weight:800}
+.nav-sub{font-size:10px;color:var(--text-muted)}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.b-copper{background:rgba(224,123,57,.1);color:var(--copper);border:1px solid rgba(224,123,57,.2)}
+.b-success{background:rgba(16,185,129,.1);color:var(--success);border:1px solid rgba(16,185,129,.2)}
+.b-danger{background:rgba(239,68,68,.1);color:var(--danger);border:1px solid rgba(239,68,68,.2)}
+.b-warning{background:rgba(245,158,11,.1);color:var(--gold);border:1px solid rgba(245,158,11,.2)}
+.b-info{background:rgba(56,189,248,.1);color:var(--primary);border:1px solid rgba(56,189,248,.2)}
+.b-purple{background:rgba(168,85,247,.1);color:var(--purple);border:1px solid rgba(168,85,247,.2)}
+main{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:40px 32px 80px}
+.section{margin-bottom:52px}
+.sec-label{font-size:11px;font-weight:700;color:var(--copper);letter-spacing:1.5px;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px;margin-bottom:10px}
+.sec-title{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;letter-spacing:-.5px;margin-bottom:10px;line-height:1.2}
+.sec-desc{font-size:14px;color:var(--text-sub);line-height:1.75;max-width:680px}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--border-s);border-radius:16px;padding:24px;backdrop-filter:blur(12px)}
+.card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.card-hd h3{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:18px 16px}
+.kpi-val{font-size:1.8rem;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:2px}
+.kpi-lbl{font-size:11px;color:var(--text-muted)}
+.kpi-note{font-size:10px;color:var(--text-muted);margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:9px;font-size:12px;font-weight:700;border:none;cursor:pointer;transition:all .2s}
+.btn-copper{background:linear-gradient(135deg,var(--copper),rgba(224,123,57,.7));color:#040B14}
+.btn-copper:hover{box-shadow:0 0 24px rgba(224,123,57,.4);transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--border-s);color:var(--text-sub)}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-sm{padding:6px 12px;font-size:11px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:10px 14px;color:var(--text-muted);font-weight:600;font-size:11px;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px}
+td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+/* Privacy cockpit */
+.priv-layout{display:grid;grid-template-columns:1fr 40px 1fr;gap:0;align-items:center}
+.priv-col{background:var(--glass);border:1px solid var(--border-s);border-radius:14px;padding:20px}
+.priv-channel{display:flex;flex-direction:column;align-items:center;gap:4px}
+.priv-channel-line{width:2px;flex:1;min-height:30px}
+.priv-channel-badge{font-size:9px;font-weight:700;padding:4px 8px;border-radius:6px;text-align:center;white-space:nowrap}
+.priv-item{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;line-height:1.5}
+.priv-item:last-child{border-bottom:none}
+.priv-item i{margin-top:2px;flex-shrink:0}
+/* Filing */
+.filing-row{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:16px;padding:14px 16px;border-radius:10px;border:1px solid var(--border);margin-bottom:8px}
+.filing-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.filing-name{font-size:13px;font-weight:700}
+.filing-sub{font-size:11px;color:var(--text-muted)}
+/* Digital twin */
+.twin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.twin-metric{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.twin-val{font-size:1.5rem;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:2px}
+.twin-lbl{font-size:10px;color:var(--text-muted)}
+/* Royalty calc */
+.royalty-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+label{font-size:11px;font-weight:600;color:var(--text-muted)}
+select,input{background:#060D18;border:1px solid var(--border-s);color:var(--text);border-radius:8px;padding:9px 12px;font-size:12px;font-family:inherit}
+select:focus,input:focus{outline:none;border-color:var(--copper)}
+/* Energy AI */
+.energy-hour{display:flex;align-items:end;gap:3px;height:80px;padding:8px 0}
+.e-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.e-bar{width:100%;border-radius:4px 4px 0 0;transition:height .5s ease;min-width:6px}
+.e-lbl{font-size:8px;color:var(--text-muted);margin-top:3px}
+/* Score builder */
+.score-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:9px;border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:border-color .2s}
+.score-item:hover{border-color:var(--border-s)}
+.score-item.done{border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.04)}
+.score-pts{font-size:12px;font-weight:700;color:var(--success)}
+.score-pts.pending{color:var(--text-muted)}
+@media(max-width:768px){.g2,.g3,.g4,.royalty-inputs,.twin-grid,.priv-layout{grid-template-columns:1fr}main{padding:24px 16px 60px}.priv-channel{display:none}.filing-row{grid-template-columns:auto 1fr auto}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade{animation:fadeUp .6s ease both}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="portal.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i>All Portals</a>
+  <div class="nav-brand">
+    <div class="nav-logo"><i class="fa-solid fa-gem"></i></div>
+    <div>
+      <div class="nav-title">Industry Operations Portal</div>
+      <div class="nav-sub">FQM · Barrick · Vedanta · Mopani · CEC · IRH</div>
+    </div>
+  </div>
+  <span class="badge b-success" style="padding:5px 12px"><i class="fa-solid fa-shield-check"></i>&nbsp;Privacy Mode Active</span>
+  <span class="badge b-copper">⛏️ Industry Access</span>
+</nav>
+
+<main>
+
+<!-- PRIVACY BANNER -->
+<div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);border-radius:12px;padding:16px 20px;margin-bottom:40px;display:flex;align-items:center;gap:14px" class="fade">
+  <i class="fa-solid fa-shield-halved" style="color:var(--success);font-size:22px;flex-shrink:0"></i>
+  <div>
+    <div style="font-size:13px;font-weight:800;color:var(--success);margin-bottom:3px">Your data stays yours. Regulators see what you approve, nothing more.</div>
+    <div style="font-size:12px;color:var(--text-sub)">Everything on this portal is encrypted with your company key. Government and bank nodes receive only the verified aggregate signals you authorise. Our servers cannot read your raw operational data.</div>
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="g4 fade" style="margin-bottom:48px" id="company-select-bar">
+  <div class="kpi"><div class="kpi-val" style="color:var(--copper)">94/100</div><div class="kpi-lbl">Your Compliance Score</div><div class="kpi-note">FQM Kansanshi · Top decile</div></div>
+  <div class="kpi"><div class="kpi-val" style="color:var(--success)">5.4%</div><div class="kpi-lbl">Your Current Loan Rate</div><div class="kpi-note">$22M/yr below market</div></div>
+  <div class="kpi"><div class="kpi-val" style="color:var(--gold)">$18.4M</div><div class="kpi-lbl">Royalty Due This Quarter</div><div class="kpi-note">Payment in 23 days</div></div>
+  <div class="kpi"><div class="kpi-val" style="color:var(--primary)">0</div><div class="kpi-lbl">Pending Compliance Flags</div><div class="kpi-note">All regulators clear ✓</div></div>
+</div>
+
+<!-- ONE-CLICK FILING -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-paper-plane"></i> One-Click Filing</div>
+  <div class="sec-title">Replace 5 separate submissions with one click</div>
+  <div class="sec-desc" style="margin-bottom:20px">Under MRCA 2024, you're required to report to MRC, ZEMA, ERB, ZRA, and ZCCM-IH separately. Resource Command files all five simultaneously from one verified data submission. No duplicate entry. No paper.</div>
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Q1 2026 Compliance Package</div>
+        <div style="font-size:12px;color:var(--text-muted)">Period: Jan 1 – Mar 31, 2026 · Status: Ready for submission</div>
+      </div>
+      <button class="btn btn-copper" id="file-btn" onclick="runFiling()"><i class="fa-solid fa-paper-plane"></i> Submit to All Regulators</button>
+    </div>
+    <div id="filing-rows"></div>
+    <div id="filing-success" style="display:none;margin-top:16px;padding:14px 18px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:10px">
+      <div style="font-size:13px;font-weight:700;color:var(--success)"><i class="fa-solid fa-circle-check"></i>&nbsp; All 5 regulators notified successfully.</div>
+      <div style="font-size:12px;color:var(--text-sub);margin-top:4px">Blockchain confirmation hash: <span style="font-family:'JetBrains Mono',monospace;color:var(--success)" id="submit-hash"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY COCKPIT -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-eye-slash"></i> Privacy Cockpit</div>
+  <div class="sec-title">What can regulators actually see?</div>
+  <div class="sec-desc" style="margin-bottom:20px">Live audit of your data permissions. The platform enforces these boundaries cryptographically — no policy override possible without your keyshare.</div>
+  <div class="priv-layout">
+    <!-- Your data -->
+    <div class="priv-col">
+      <div style="font-size:12px;font-weight:700;color:var(--copper);margin-bottom:14px;display:flex;align-items:center;gap:7px"><i class="fa-solid fa-lock"></i>Your Internal Data (YOU ONLY)</div>
+      <div class="priv-item"><i class="fa-solid fa-lock" style="color:var(--danger)"></i><span>Raw ore grade per deposit (commercially sensitive)</span></div>
+      <div class="priv-item"><i class="fa-solid fa-lock" style="color:var(--danger)"></i><span>Daily production tonne-by-tonne logs</span></div>
+      <div class="priv-item"><i class="fa-solid fa-lock" style="color:var(--danger)"></i><span>Cost of production per tonne breakdown</span></div>
+      <div class="priv-item"><i class="fa-solid fa-lock" style="color:var(--danger)"></i><span>Equipment maintenance schedules</span></div>
+      <div class="priv-item"><i class="fa-solid fa-lock" style="color:var(--danger)"></i><span>Exploration geological survey data</span></div>
+      <div class="priv-item"><i class="fa-solid fa-lock" style="color:var(--danger)"></i><span>Off-take contracts &amp; pricing arrangements</span></div>
+      <div class="priv-item"><i class="fa-solid fa-lock" style="color:var(--danger)"></i><span>Employee headcount and salary data</span></div>
+    </div>
+    <!-- Channel -->
+    <div class="priv-channel">
+      <div class="priv-channel-line" style="background:linear-gradient(to bottom,transparent,var(--success))"></div>
+      <div class="priv-channel-badge" style="background:rgba(16,185,129,.1);color:var(--success);border:1px solid rgba(16,185,129,.2)">🔒<br>ZK<br>Filter</div>
+      <div class="priv-channel-line" style="background:linear-gradient(to bottom,var(--success),transparent)"></div>
+    </div>
+    <!-- What regulators see -->
+    <div class="priv-col" style="border-color:rgba(56,189,248,.2)">
+      <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:7px"><i class="fa-solid fa-check"></i>Regulators &amp; Banks Receive</div>
+      <div class="priv-item"><i class="fa-solid fa-check" style="color:var(--success)"></i><span>Royalty paid — amount, date, ZK-verified ✓</span></div>
+      <div class="priv-item"><i class="fa-solid fa-check" style="color:var(--success)"></i><span>Quarterly aggregate production (tonnes)</span></div>
+      <div class="priv-item"><i class="fa-solid fa-check" style="color:var(--success)"></i><span>Energy consumed from ZESCO grid (kWh)</span></div>
+      <div class="priv-item"><i class="fa-solid fa-check" style="color:var(--success)"></i><span>ZEMA environmental status (clear / flagged)</span></div>
+      <div class="priv-item"><i class="fa-solid fa-check" style="color:var(--success)"></i><span>License compliance score (composite index)</span></div>
+      <div class="priv-item"><i class="fa-solid fa-check" style="color:var(--success)"></i><span>Safety incident count + severity tier</span></div>
+      <div class="priv-item"><i class="fa-solid fa-ban" style="color:var(--text-muted)"></i><span style="color:var(--text-muted)">Nothing else — enforced by MPC protocol</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIGITAL TWIN -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-cube"></i> Digital Twin</div>
+  <div class="sec-title">Your Mine — Real-Time Operational Heartbeat</div>
+  <div class="sec-desc" style="margin-bottom:20px">A physics-based digital twin of Kansanshi mine. Sensor data streams through PUF-attested IoT devices every 60 seconds. SCADA-connected. <span class="badge b-purple" style="vertical-align:middle">Internal View Only</span></div>
+  <div class="card">
+    <div class="twin-grid">
+      <div class="twin-metric"><div class="twin-val" style="color:var(--copper)">2,847t</div><div class="twin-lbl">Ore Extracted Today</div></div>
+      <div class="twin-metric"><div class="twin-val" style="color:var(--gold)">34.2%</div><div class="twin-lbl">Recovery Rate</div></div>
+      <div class="twin-metric"><div class="twin-val" style="color:var(--primary)">148 MW</div><div class="twin-lbl">Energy Draw (Grid)</div></div>
+      <div class="twin-metric"><div class="twin-val" style="color:var(--success)">64 MW</div><div class="twin-lbl">Onsite Solar Output</div></div>
+      <div class="twin-metric"><div class="twin-val" style="color:var(--success)">94</div><div class="twin-lbl">Compliance Score</div></div>
+      <div class="twin-metric"><div class="twin-val" style="color:var(--gold)">$9,240</div><div class="twin-lbl">Revenue/Hour (est.)</div></div>
+      <div class="twin-metric"><div class="twin-val" style="color:var(--primary)">12</div><div class="twin-lbl">Active Haul Trucks</div></div>
+      <div class="twin-metric"><div class="twin-val" style="color:var(--success)">0</div><div class="twin-lbl">Safety Incidents (30d)</div></div>
+    </div>
+    <div class="g2" style="margin-top:4px">
+      <div>
+        <div class="card-hd"><h3><i class="fa-solid fa-chart-line" style="color:var(--copper)"></i> Hourly Production Rate (t/hr)</h3></div>
+        <canvas id="production-chart" height="140"></canvas>
+      </div>
+      <div>
+        <div class="card-hd"><h3><i class="fa-solid fa-bolt" style="color:var(--gold)"></i> Energy Mix Live</h3></div>
+        <canvas id="energy-mix-chart" height="140"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENERGY AI -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-bolt"></i> Energy AI</div>
+  <div class="sec-title">Load Shift Recommendations — Cut Energy Costs 18–30%</div>
+  <div class="sec-desc" style="margin-bottom:20px">AI analyses ZESCO's hourly tariff schedule and your operational flexibility. Heavy loads (mills, pumps) are scheduled for off-peak hours. Shows forecast vs actual energy cost.</div>
+  <div class="card">
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px">
+      <div style="flex:1;min-width:160px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.5rem;font-weight:900;font-family:'JetBrains Mono',monospace;color:var(--danger)">$618K</div>
+        <div style="font-size:11px;color:var(--text-muted)">Estimated cost (unoptimised)</div>
+      </div>
+      <div style="display:flex;align-items:center;font-size:1.4rem;color:var(--success)"><i class="fa-solid fa-arrow-right"></i></div>
+      <div style="flex:1;min-width:160px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.5rem;font-weight:900;font-family:'JetBrains Mono',monospace;color:var(--success)">$451K</div>
+        <div style="font-size:11px;color:var(--text-muted)">AI-optimised cost (this week)</div>
+      </div>
+      <div style="flex:1;min-width:160px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:1.5rem;font-weight:900;font-family:'JetBrains Mono',monospace;color:var(--gold)">-27%</div>
+        <div style="font-size:11px;color:var(--text-muted)">Cost reduction achieved</div>
+      </div>
+    </div>
+    <div style="font-size:12px;font-weight:600;margin-bottom:8px;color:var(--text-muted)">Hourly ZESCO Tariff (peak = red, off-peak = green) — Your load schedule shown as overlay</div>
+    <canvas id="energy-ai-chart" height="120"></canvas>
+    <div style="margin-top:16px;font-size:12px;color:var(--text-sub);background:rgba(56,189,248,.04);border:1px solid rgba(56,189,248,.12);border-radius:8px;padding:12px;line-height:1.7">
+      <i class="fa-solid fa-lightbulb" style="color:var(--primary)"></i>&nbsp;<strong>AI Recommendation:</strong> Shift SAG mill run from 08:00-12:00 to 22:00-02:00. Shift primary pump from 16:00 to 01:00. Combined saving on this week's schedule: <strong style="color:var(--success)">$167K</strong>. Estimated annual impact: <strong style="color:var(--success)">$8.7M</strong>.
+    </div>
+  </div>
+</section>
+
+<!-- ROYALTY CALCULATOR -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-calculator"></i> Royalty Pre-Calculator</div>
+  <div class="sec-title">Know your royalty obligation before it's due</div>
+  <div class="sec-desc" style="margin-bottom:20px">Real Zambia royalty formula: base rate 5% for copper &lt;$4,500/t, 6% $4,501-$6,000, 7.5% above $6,000 (MRCA 2024 Schedule II). Input your quarter — see what you owe.</div>
+  <div class="card">
+    <div class="royalty-inputs">
+      <div class="form-group"><label>Mineral</label><select id="r-mineral" onchange="calcRoyalty()"><option value="copper">Copper (Cu)</option><option value="cobalt">Cobalt (Co)</option><option value="gold">Gold (Au)</option><option value="emerald">Emerald</option></select></div>
+      <div class="form-group"><label>Tonnes Produced This Quarter</label><input id="r-tonnes" type="number" value="80000" oninput="calcRoyalty()"></div>
+      <div class="form-group"><label>Current Market Price (USD/t)</label><input id="r-price" type="number" value="9200" oninput="calcRoyalty()"></div>
+    </div>
+    <div style="background:rgba(224,123,57,.05);border:1px solid rgba(224,123,57,.2);border-radius:12px;padding:20px" id="royalty-result">
+      <div class="g3" id="royalty-breakdown"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE SCORE BUILDER -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-chart-line"></i> Compliance Score Builder</div>
+  <div class="sec-title">Actions that raise your score — and lower your bank rate</div>
+  <div class="sec-desc" style="margin-bottom:20px">Every point on your compliance score translates to ~0.046% lower interest rate. Here's exactly what you need to do to improve. Click any item to mark as complete.</div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+      <div style="font-size:2.5rem;font-weight:900;font-family:'JetBrains Mono',monospace;color:var(--copper)" id="score-disp">94</div>
+      <div>
+        <div style="font-size:13px;font-weight:700">Current Score: 94 / 100</div>
+        <div style="font-size:12px;color:var(--text-muted)">Unlocked rate: 5.40% · At 100: 5.14% · Saving: +$1.3M/yr</div>
+      </div>
+    </div>
+    <div id="score-builder"></div>
+  </div>
+</section>
+
+</main>
+
+<script>
+const REGULATORS = [
+  {icon:'fa-scale-balanced',color:'var(--primary)',name:'Mines Regulatory Commission (MRC)',sub:'Production + License compliance report',pass:false},
+  {icon:'fa-leaf',color:'var(--success)',name:'ZEMA — Environmental Management Agency',sub:'Environmental impact + waste water discharge',pass:false},
+  {icon:'fa-bolt',color:'var(--gold)',name:'Energy Regulation Board (ERB)',sub:'Energy consumption + grid draw declaration',pass:false},
+  {icon:'fa-coins',color:'var(--copper)',name:'Zambia Revenue Authority (ZRA)',sub:'Royalty payment + tax compliance certificate',pass:false},
+  {icon:'fa-gem',color:'var(--purple)',name:'ZCCM-IH — State Equity Notification',sub:'Equity holder production report (17.5% stake)',pass:false},
+];
+
+const SCORE_ITEMS = [
+  {text:'File all 4 quarterly regulatory returns on time',pts:'+3pts',done:true},
+  {text:'Complete ZEMA annual environmental audit — submit by Q2',pts:'+2pts',done:false},
+  {text:'Install ERB-approved smart metering on all substations',pts:'+2pts',done:false},
+  {text:'Achieve zero MHSA safety violations for 90 days',pts:'+1pt',done:true},
+  {text:'Activate ZKP royalty verification (automated, quarterly)',pts:'+1pt',done:true},
+  {text:'Deploy PUF-attested weigh-bridge sensors at all entry points',pts:'+1pt',done:false},
+];
+
+function renderFiling() {
+  const el = document.getElementById('filing-rows');
+  REGULATORS.forEach((r, i) => {
+    el.innerHTML += `<div class="filing-row" id="fr-${i}">
+      <div class="filing-icon" style="background:rgba(56,189,248,.08);color:${r.color}"><i class="fa-solid ${r.icon}"></i></div>
+      <div><div class="filing-name">${r.name}</div><div class="filing-sub">${r.sub}</div></div>
+      <div class="badge b-info" id="fs-${i}"><i class="fa-solid fa-clock"></i>&nbsp;Pending</div>
+    </div>`;
+  });
+}
+
+function runFiling() {
+  const btn = document.getElementById('file-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting…';
+  let i = 0;
+  const t = setInterval(() => {
+    if (i >= REGULATORS.length) {
+      clearInterval(t);
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> All Submitted';
+      const fs = document.getElementById('filing-success');
+      fs.style.display = 'block';
+      const h = () => Math.random().toString(16).substr(2,8);
+      document.getElementById('submit-hash').textContent = `0x${h()}${h()}${h()}${h()}`;
+      return;
+    }
+    const badge = document.getElementById('fs-' + i);
+    const row = document.getElementById('fr-' + i);
+    badge.className = 'badge b-success';
+    badge.innerHTML = '<i class="fa-solid fa-circle-check"></i>&nbsp;Submitted';
+    row.style.borderColor = 'rgba(16,185,129,.3)';
+    i++;
+  }, 400);
+}
+
+function renderCharts() {
+  const c = {plugins:{legend:{labels:{color:'#94A3B8',font:{size:11}}}},scales:{x:{ticks:{color:'#4B6178'},grid:{color:'rgba(255,255,255,.04)'}},y:{ticks:{color:'#4B6178'},grid:{color:'rgba(255,255,255,.04)'}}}};
+  const hrs = Array.from({length:24},(_,i)=>`${i}:00`);
+  const prod = [88,85,92,94,96,91,90,95,98,97,96,92,89,93,97,98,94,90,88,86,89,91,90,87];
+  new Chart(document.getElementById('production-chart'),{type:'line',data:{labels:hrs,datasets:[{label:'t/hr',data:prod,borderColor:'var(--copper)',backgroundColor:'rgba(224,123,57,.08)',tension:.4,fill:true,pointRadius:0}]},options:c});
+  new Chart(document.getElementById('energy-mix-chart'),{type:'doughnut',data:{labels:['ZESCO Grid','Onsite Solar','Diesel Backup'],datasets:[{data:[148,64,12],backgroundColor:['rgba(56,189,248,.6)','rgba(245,158,11,.6)','rgba(239,68,68,.5)'],borderColor:['var(--primary)','var(--gold)','var(--danger)'],borderWidth:1.5}]},options:{plugins:{legend:{labels:{color:'#94A3B8',font:{size:11}}}}}});
+  // Energy AI chart
+  const tariff = [8,8,7,7,7,8,10,14,16,16,15,13,12,13,16,18,18,16,14,12,10,9,8,7];
+  const load = [40,40,60,80,80,60,30,20,20,20,20,60,80,80,30,20,20,30,60,80,80,60,40,40];
+  new Chart(document.getElementById('energy-ai-chart'),{type:'bar',data:{labels:hrs,datasets:[{label:'Tariff (c/kWh)',data:tariff,backgroundColor:tariff.map(v=>v>=15?'rgba(239,68,68,.5)':v>=12?'rgba(245,158,11,.4)':'rgba(16,185,129,.4)'),borderRadius:3,yAxisID:'y'},{label:'Load %',data:load,type:'line',borderColor:'var(--primary)',backgroundColor:'rgba(56,189,248,.08)',tension:.4,fill:true,yAxisID:'y1',pointRadius:0}]},options:{...c,scales:{x:{ticks:{color:'#4B6178'},grid:{color:'rgba(255,255,255,.03)'}},y:{ticks:{color:'#4B6178'},grid:{color:'rgba(255,255,255,.03)'},title:{display:true,text:'Tariff (c/kWh)',color:'#4B6178',font:{size:10}}},y1:{position:'right',ticks:{color:'#4B6178'},grid:{display:false},title:{display:true,text:'Load %',color:'#4B6178',font:{size:10}}}}}});
+}
+
+function calcRoyalty() {
+  const mineral = document.getElementById('r-mineral').value;
+  const tonnes = +document.getElementById('r-tonnes').value || 0;
+  const price = +document.getElementById('r-price').value || 0;
+  const grossRev = tonnes * price;
+  let rate;
+  if (mineral === 'copper') rate = price < 4500 ? 0.05 : price <= 6000 ? 0.06 : 0.075;
+  else if (mineral === 'cobalt') rate = 0.08;
+  else if (mineral === 'gold') rate = 0.06;
+  else rate = 0.15;
+  const royalty = grossRev * rate;
+  const el = document.getElementById('royalty-breakdown');
+  el.innerHTML = `
+    <div style="text-align:center;padding:14px;background:var(--glass);border-radius:10px;border:1px solid var(--border)">
+      <div style="font-size:1.6rem;font-weight:900;font-family:'JetBrains Mono',monospace;color:var(--copper)">$${(grossRev/1e6).toFixed(1)}M</div>
+      <div style="font-size:11px;color:var(--text-muted)">Gross Revenue</div>
+    </div>
+    <div style="text-align:center;padding:14px;background:var(--glass);border-radius:10px;border:1px solid var(--border)">
+      <div style="font-size:1.6rem;font-weight:900;font-family:'JetBrains Mono',monospace;color:var(--gold)">${(rate*100).toFixed(1)}%</div>
+      <div style="font-size:11px;color:var(--text-muted)">MRCA Rate at $${price}/t</div>
+    </div>
+    <div style="text-align:center;padding:14px;background:rgba(224,123,57,.08);border-radius:10px;border:1px solid rgba(224,123,57,.2)">
+      <div style="font-size:1.6rem;font-weight:900;font-family:'JetBrains Mono',monospace;color:var(--copper)">$${(royalty/1e6).toFixed(2)}M</div>
+      <div style="font-size:11px;color:var(--text-muted)">Royalty Due</div>
+    </div>`;
+}
+
+function renderScoreBuilder() {
+  const el = document.getElementById('score-builder');
+  let score = 94;
+  SCORE_ITEMS.forEach((item, i) => {
+    const pts = parseInt(item.pts);
+    el.innerHTML += `<div class="score-item ${item.done?'done':''}" id="si-${i}" onclick="toggleScore(${i},${pts})">
+      <div>
+        <div style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:7px">
+          <i class="fa-solid fa-${item.done?'circle-check':'circle'}" style="color:${item.done?'var(--success)':'var(--text-muted)'}"></i>
+          ${item.text}
+        </div>
+      </div>
+      <div class="score-pts ${item.done?'':'pending'}">${item.pts}</div>
+    </div>`;
+  });
+}
+
+function toggleScore(i, pts) {
+  const el = document.getElementById('si-' + i);
+  el.classList.toggle('done');
+  const icon = el.querySelector('i');
+  const isDone = el.classList.contains('done');
+  icon.className = `fa-solid fa-${isDone?'circle-check':'circle'}`;
+  icon.style.color = isDone ? 'var(--success)' : 'var(--text-muted)';
+  el.querySelector('.score-pts').className = `score-pts ${isDone?'':'pending'}`;
+}
+
+renderFiling(); renderCharts(); calcRoyalty(); renderScoreBuilder();
+</script>
+</body>
+</html>
