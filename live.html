@@ -332,6 +332,17 @@ nav {
 </head>
 <body>
 
+<!-- SYSTEM STATUS BANNER -->
+<div style="background:rgba(239,68,68,.04);border-bottom:1px solid rgba(239,68,68,.1);padding:5px 28px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:10px;color:var(--sub)">
+  <span style="color:var(--red);font-weight:700">Production Architecture</span>
+  <span style="color:var(--muted)">&middot;</span>
+  <span>Illustrative Data</span>
+  <span style="color:var(--muted)">&middot;</span>
+  <span>Integration-Ready</span>
+  <span style="color:var(--muted)">&middot;</span>
+  <span style="color:var(--sub)">Scenario buttons simulate stress conditions for system testing</span>
+</div>
+
 <nav>
   <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Home</a>
   <div class="nav-center">
@@ -375,9 +386,10 @@ nav {
     </div>
   </div>
   <div class="crisis-btns">
-    <button class="btn-sim btn-sim-red" onclick="triggerScenario('drought')"><i class="fa-solid fa-droplet-slash"></i> Drought Crisis</button>
-    <button class="btn-sim btn-sim-gold" onclick="triggerScenario('compliance')"><i class="fa-solid fa-triangle-exclamation"></i> Compliance Breach</button>
-    <button class="btn-sim btn-sim-green" onclick="triggerScenario('recovery')"><i class="fa-solid fa-arrow-trend-up"></i> Grid Recovery</button>
+    <span style="font-size:9px;color:var(--muted);font-weight:600;display:flex;align-items:center;margin-right:4px">STRESS TEST:</span>
+    <button class="btn-sim btn-sim-red" onclick="triggerScenario('drought')"><i class="fa-solid fa-droplet-slash"></i> Drought Scenario</button>
+    <button class="btn-sim btn-sim-gold" onclick="triggerScenario('compliance')"><i class="fa-solid fa-triangle-exclamation"></i> Breach Scenario</button>
+    <button class="btn-sim btn-sim-green" onclick="triggerScenario('recovery')"><i class="fa-solid fa-arrow-trend-up"></i> Recovery Scenario</button>
   </div>
 </div>
 
@@ -708,19 +720,19 @@ function addEventFeed() {
 // ── SCENARIO TRIGGERS ────────────────────────────────────────────────
 const SCENARIOS = {
   drought: {
-    title: '🔴 Drought Crisis Simulation Triggered',
+    title: 'Stress Test: Drought Crisis Simulation',
     msg: 'Kafue reservoir drops to <strong>4%</strong>. ZESCO issues emergency 60% power cut to all mines. Projected copper output shortfall: <strong>220,000t/yr</strong>. Royalty impact: <strong>-$18M</strong>. Bank risk scores updating now across 6 active positions.',
     kariba: 4, kafue: 4, grid: 900, cut: 60, comp: 72,
     chain: `SCENARIO_BLOCK: drought_state_update\nKariba: 4% | Kafue: 4% | Grid: 900MW\nMine cuts: -60% | Crisis: NATIONAL_EMERGENCY\nHash: 0x${hex(20)}`
   },
   compliance: {
-    title: '🟠 Compliance Breach Simulation Triggered',
+    title: 'Stress Test: Compliance Breach Simulation',
     msg: 'Vedanta KCM compliance score drops to <strong>52/100</strong> triggering immediate Stanbic covenant breach. <strong>$300M</strong> loan put on legal hold. ZRA royalty audit initiated. ZEMA penalty flag raised. Cross-portal cascade active.',
     kariba: 8, kafue: 17, grid: 1520, cut: 40, comp: 64,
     chain: `SCENARIO_BLOCK: compliance_breach\nCompany: Vedanta/KCM | Score: 52→BREACH\nBank: Stanbic loan $300M → LEGAL_HOLD\nHash: 0x${hex(20)}`
   },
   recovery: {
-    title: '🟢 Grid Recovery Scenario — Kariba Rehabilitation',
+    title: 'Stress Test: Grid Recovery Simulation',
     msg: 'Kariba rehabilitation complete. Reservoir at <strong>42%</strong>. ZESCO restores full power to all mines. Copper output recovers to <strong>890,000t/yr</strong>. GDP contribution up to <strong>12.4%</strong>. Royalty projection: <strong>+$31M/yr</strong>.',
     kariba: 42, kafue: 55, grid: 3200, cut: 0, comp: 94,
     chain: `SCENARIO_BLOCK: grid_recovery\nKariba: 42% | Kafue: 55% | Grid: 3200MW\nCopper output: 890,000t/yr | Crisis: STABLE\nHash: 0x${hex(20)}`

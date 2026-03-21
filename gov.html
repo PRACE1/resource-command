@@ -492,6 +492,15 @@ tr:hover td { background: rgba(45,212,191,.02); }
 </head>
 <body>
 
+<!-- SYSTEM STATUS BANNER -->
+<div style="background:rgba(45,212,191,.04);border-bottom:1px solid rgba(45,212,191,.1);padding:5px 36px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:10px;color:var(--sub)">
+  <span style="color:var(--blue);font-weight:700">Production Architecture</span>
+  <span style="color:var(--muted)">&middot;</span>
+  <span>Illustrative Data</span>
+  <span style="color:var(--muted)">&middot;</span>
+  <span>Integration-Ready</span>
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Home</a>
@@ -837,7 +846,7 @@ tr:hover td { background: rgba(45,212,191,.02); }
     <div class="card" style="border-color:rgba(239,68,68,.2);background:rgba(239,68,68,.03)">
       <div style="font-size:22px;margin-bottom:10px">📡</div>
       <div style="font-size:13px;font-weight:800;color:var(--red);margin-bottom:4px">AGO</div>
-      <div style="font-size:11px;color:var(--sub);line-height:1.6">Auditor General's Office · Runs the third blockchain node. Independent consensus validator — no single party controls the chain.</div>
+      <div style="font-size:11px;color:var(--sub);line-height:1.6">Auditor General's Office · Designated to run the third blockchain node. Independent consensus validator — no single party controls the chain.</div>
       <div style="margin-top:10px"><span class="badge b-blue">Node: Online &amp; Syncing</span></div>
     </div>
   </div>
@@ -848,23 +857,23 @@ tr:hover td { background: rgba(45,212,191,.02); }
   <div class="sec-label"><i class="fa-solid fa-link"></i> Platform Integrity</div>
   <div class="sec-title">Blockchain Architecture — Technical Specification</div>
   <div class="sec-desc" style="margin-bottom:20px">
-    Every compliance event, audit trigger, and royalty verification is immutably recorded on a permissioned three-node SHA-256 blockchain. The platform vendor holds no node — custody is distributed across government institutions.
+    Every compliance event, audit trigger, and royalty verification is immutably recorded on a permissioned three-node SHA-256 blockchain. The platform vendor holds no node — custody is designed for distribution across government institutions.
   </div>
 
   <div class="g3" style="margin-bottom:20px">
     <div class="card" style="border-color:rgba(45,212,191,.25)">
-      <div style="font-size:11px;font-weight:800;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 1 — MRC</div>
-      <div style="font-size:12px;color:var(--sub);line-height:1.6">Minerals Regulation Commission. Primary regulatory node. Receives all production and compliance data first.</div>
+      <div style="font-size:11px;font-weight:800;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 1 — MRC (Designated)</div>
+      <div style="font-size:12px;color:var(--sub);line-height:1.6">Minerals Regulation Commission. Designed as the primary regulatory node. Receives all production and compliance data first.</div>
       <div style="margin-top:8px"><span class="badge b-green"><span class="pulse-dot" style="background:var(--green)"></span> Online</span></div>
     </div>
     <div class="card" style="border-color:rgba(56,189,248,.25)">
-      <div style="font-size:11px;font-weight:800;color:var(--blue2);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 2 — ZESCO</div>
-      <div style="font-size:12px;color:var(--sub);line-height:1.6">Zambia Electricity Supply Corporation. Energy data correlation node. Cross-validates mine energy consumption against declared output.</div>
+      <div style="font-size:11px;font-weight:800;color:var(--blue2);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 2 — ZESCO (Designated)</div>
+      <div style="font-size:12px;color:var(--sub);line-height:1.6">Zambia Electricity Supply Corporation. Designed as the energy data correlation node. Cross-validates mine energy consumption against declared output.</div>
       <div style="margin-top:8px"><span class="badge b-green"><span class="pulse-dot" style="background:var(--green)"></span> Online</span></div>
     </div>
     <div class="card" style="border-color:rgba(239,68,68,.2)">
-      <div style="font-size:11px;font-weight:800;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 3 — Auditor General</div>
-      <div style="font-size:12px;color:var(--sub);line-height:1.6">Independent oversight. The AGO node ensures no single institution can alter the record. Required for BFT consensus.</div>
+      <div style="font-size:11px;font-weight:800;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 3 — Auditor General (Designated)</div>
+      <div style="font-size:12px;color:var(--sub);line-height:1.6">Independent oversight. Designed so the AGO node ensures no single institution can alter the record. Required for BFT consensus.</div>
       <div style="margin-top:8px"><span class="badge b-green"><span class="pulse-dot" style="background:var(--green)"></span> Online</span></div>
     </div>
   </div>
@@ -877,10 +886,30 @@ tr:hover td { background: rgba(45,212,191,.02); }
 
 </main>
 
+<!-- CROSS-PORTAL NAVIGATION -->
+<div style="position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 36px 40px">
+  <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Continue the Story</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+    <a href="client.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,.02);text-decoration:none;color:inherit;transition:all .2s" onmouseover="this.style.borderColor='rgba(16,185,129,.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+      <div style="width:36px;height:36px;border-radius:9px;background:rgba(16,185,129,.1);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0"><i class="fa-solid fa-gem"></i></div>
+      <div><div style="font-size:12px;font-weight:700">Industry Portal</div><div style="font-size:10px;color:var(--muted)">See how mines file and control privacy</div></div>
+    </a>
+    <a href="bank.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,.02);text-decoration:none;color:inherit;transition:all .2s" onmouseover="this.style.borderColor='rgba(245,158,11,.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+      <div style="width:36px;height:36px;border-radius:9px;background:rgba(245,158,11,.1);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0"><i class="fa-solid fa-building-columns"></i></div>
+      <div><div style="font-size:12px;font-weight:700">Finance Portal</div><div style="font-size:10px;color:var(--muted)">See compliance-linked bank rates</div></div>
+    </a>
+    <a href="live.html" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,.02);text-decoration:none;color:inherit;transition:all .2s" onmouseover="this.style.borderColor='rgba(239,68,68,.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+      <div style="width:36px;height:36px;border-radius:9px;background:rgba(239,68,68,.08);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0"><i class="fa-solid fa-rss"></i></div>
+      <div><div style="font-size:12px;font-weight:700">War Room</div><div style="font-size:10px;color:var(--muted)">Watch the full system live</div></div>
+    </a>
+  </div>
+</div>
+
 <footer style="position:relative;z-index:1;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--border)">
   <div style="font-size:11px;color:var(--muted);line-height:1.6">
-    Data sourced from ZESCO, MRC, ERB, ZEMA, ZRA, ZCCM-IH, and satellite SAR imagery (ESA Sentinel-1) · 2024–2026.<br>
-    All compliance data blockchain-verified. Not self-reported.
+    <div style="margin-bottom:4px">A Resource Command platform, licensed to the Republic of Zambia.</div>
+    Data sourced from ZESCO, MRC, ERB, ZEMA, ZRA, ZCCM-IH, and satellite SAR imagery (ESA Sentinel-1) &middot; 2024&ndash;2026.<br>
+    Production architecture &middot; Illustrative data &middot; Integration-ready.
   </div>
   <div style="display:flex;gap:12px;flex-wrap:wrap">
     <span style="font-size:10px;font-weight:600;color:var(--muted);padding:3px 9px;border-radius:5px;border:1px solid var(--border)">SAR Satellite</span>

@@ -391,6 +391,7 @@ footer {
   .numbers{border-bottom:none}
   .crisis-band{padding:14px 20px}
   .tf-grid{grid-template-columns:1fr}
+  .tech-foundation div[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr}
   footer{padding:24px 20px;flex-direction:column;text-align:center}
 }
 @media(max-width:480px){
@@ -405,6 +406,17 @@ footer {
   <div class="bg-mesh"></div>
   <div class="bg-lines"></div>
   <div class="bg-noise"></div>
+</div>
+
+<!-- SYSTEM STATUS BANNER -->
+<div style="position:relative;z-index:201;background:rgba(45,212,191,.06);border-bottom:1px solid rgba(45,212,191,.12);padding:6px 48px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:11px;color:var(--sub)">
+  <span style="color:var(--blue);font-weight:700;letter-spacing:.5px">Production Architecture</span>
+  <span style="color:var(--muted)">&middot;</span>
+  <span>Illustrative Data</span>
+  <span style="color:var(--muted)">&middot;</span>
+  <span>Integration-Ready</span>
+  <span style="color:var(--muted)">&middot;</span>
+  <span style="color:var(--green);font-weight:600">Proven model &mdash; same architecture deployed as eMC+ in Nigeria</span>
 </div>
 
 <!-- NAV -->
@@ -561,7 +573,7 @@ footer {
       <div class="p-title">Crisis War Room</div>
       <p class="p-desc">Watch the entire system operating in real-time. Live blockchain entries streaming, cross-portal event cascade, animated data flow from mine servers to government and banks.</p>
       <div class="p-reason reason-war">
-        <strong>Stress test the system:</strong> Trigger a Drought, Compliance Breach, or Grid Recovery scenario — and watch every portal's data update simultaneously, on-chain, in seconds.
+        <strong>Stress test the system:</strong> Run a Drought, Compliance Breach, or Grid Recovery stress-test scenario — and watch every portal's data update simultaneously, on-chain, in seconds. These are simulation scenarios to demonstrate system resilience.
       </div>
       <button class="p-cta cta-war">
         <span class="war-pulse" style="width:6px;height:6px"></span>
@@ -611,7 +623,7 @@ footer {
     <div class="tf-card">
       <div class="tf-card-icon" style="background:rgba(45,212,191,0.1);color:var(--blue)"><i class="fa-solid fa-link"></i></div>
       <h4>Permissioned Blockchain</h4>
-      <p>Three-node SHA-256 chain. Nodes held by MRC, ZESCO, and the Auditor General's Office. The platform vendor holds no node and cannot write to the chain. Two of three must agree before any block is confirmed. Tampering with any historical record breaks every subsequent hash immediately &mdash; making silent alteration mathematically impossible.</p>
+      <p>Three-node SHA-256 chain. Nodes designated for MRC, ZESCO, and the Auditor General&rsquo;s Office. The platform vendor holds no node and cannot write to the chain. Two of three must agree before any block is confirmed. Tampering with any historical record breaks every subsequent hash immediately &mdash; making silent alteration mathematically impossible.</p>
       <div class="tf-spec">Architecture: Permissioned BFT consensus &middot; No cryptocurrency &middot; No token &middot; No mining</div>
     </div>
 
@@ -632,10 +644,48 @@ footer {
   </div>
 </div>
 
+<!-- DEPLOYMENT ROADMAP -->
+<div class="tech-foundation" style="padding-top:0">
+  <div class="tf-title"><i class="fa-solid fa-calendar-check" style="margin-right:6px"></i> Deployment Roadmap</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="tf-card" style="border-color:rgba(56,189,248,.2)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue2);margin-bottom:8px">Phase 1 &mdash; Q3 2026</div>
+      <h4 style="font-size:14px;margin-bottom:6px">Pilot Deployment</h4>
+      <p style="font-size:12px;color:var(--sub);line-height:1.65">Onboard 3 mine operators (FQM, Barrick, one mid-tier). Integrate with MRC and ZRA systems. Satellite cross-check validation with ESA Copernicus.</p>
+    </div>
+    <div class="tf-card" style="border-color:rgba(245,158,11,.2)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Phase 2 &mdash; Q4 2026</div>
+      <h4 style="font-size:14px;margin-bottom:6px">Full Integration</h4>
+      <p style="font-size:12px;color:var(--sub);line-height:1.65">Full integration with all 5 regulators (MRC, ZEMA, ZRA, ERB, ZCCM-IH). Bank API feeds live to AfDB, Stanbic, Zanaco. Blockchain nodes operational.</p>
+    </div>
+    <div class="tf-card" style="border-color:rgba(16,185,129,.2)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px">Phase 3 &mdash; January 2027</div>
+      <h4 style="font-size:14px;margin-bottom:6px">Mandatory Adoption</h4>
+      <p style="font-size:12px;color:var(--sub);line-height:1.65">MRCA 2024 digital compliance deadline. All 9 major operators onboarded. Full satellite monitoring coverage. Smart contract triggers live.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:24px;font-size:12px;color:var(--sub);background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.12);border-radius:10px;padding:14px 20px;line-height:1.7">
+    <i class="fa-solid fa-check-circle" style="color:var(--green)"></i>&nbsp;
+    <strong style="color:var(--text)">Proven architecture:</strong> This same platform model is deployed in Nigeria as eMC+ for minerals compliance. Resource Command adapts it for Zambia&rsquo;s MRCA 2024 regulatory framework with satellite verification and blockchain audit trail.
+  </div>
+</div>
+
+<!-- REQUEST A BRIEFING -->
+<div style="position:relative;z-index:1;text-align:center;padding:48px 24px 20px">
+  <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:12px"><i class="fa-solid fa-handshake" style="margin-right:6px"></i>Next Steps</div>
+  <div style="font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;letter-spacing:-.5px;margin-bottom:12px">Ready to see how this works for Zambia?</div>
+  <div style="font-size:14px;color:var(--sub);max-width:520px;margin:0 auto 24px;line-height:1.7">Request a technical briefing with the team. Includes live walkthrough, architecture deep-dive, and deployment planning for your regulatory environment.</div>
+  <a href="mailto:info@resourcecommand.io" style="display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--green));color:#03080F;text-decoration:none;transition:all 0.25s;letter-spacing:-0.2px" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 40px rgba(45,212,191,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+    <i class="fa-solid fa-envelope"></i> Request a Briefing
+  </a>
+  <div style="font-size:11px;color:var(--muted);margin-top:12px">Or explore the portals above to see each stakeholder&rsquo;s experience</div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-copy">
-    Data sourced from ZESCO, MRC, ERB, ZEMA, ZRA, ZCCM-IH, World Bank, and public filings (2024–2025).
+    <div style="margin-bottom:6px">A Resource Command platform, licensed to the Republic of Zambia.</div>
+    Data sourced from ZESCO, MRC, ERB, ZEMA, ZRA, ZCCM-IH, World Bank, and public filings (2024&ndash;2025).
   </div>
   <div class="footer-tech">
     <span class="tech-tag">Blockchain audit trail</span>
