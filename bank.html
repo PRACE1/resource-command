@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resource Command — Finance Portal | Zambia</title>
+<meta name="description" content="Finance intelligence center for AfDB, Zanaco, IFC, and Stanbic. Real-time mining portfolio risk, covenant monitoring, and ESG compliance.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="Resource Command — Finance Portal">
+<meta property="og:description" content="Mining finance intelligence. Portfolio risk, covenant monitoring, and ESG compliance — verified by blockchain, not self-reported.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -77,13 +83,39 @@ select:focus,input:focus{outline:none;border-color:var(--gold)}
 .cov-name{font-size:12px;font-weight:600}
 .cov-sub{font-size:11px;color:var(--text-muted)}
 .cov-status{font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px}
+.fin-guide{background:linear-gradient(145deg,rgba(56,189,248,.08),rgba(245,158,11,.05));border:1px solid rgba(56,189,248,.22);border-radius:16px;padding:24px}
+.fin-guide-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.fin-guide-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.fin-step{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:10px;font-size:11px;color:var(--text-sub);font-weight:600}
+.fin-step.active{border-color:rgba(56,189,248,.45);color:var(--primary);background:rgba(56,189,248,.08)}
+.fin-step.done{border-color:rgba(16,185,129,.35);color:var(--success)}
+.fin-guide-purpose{font-size:13px;line-height:1.7;color:var(--text-sub);margin-bottom:10px}
+.fin-guide-checklist{list-style:none;padding:0;margin:0 0 10px 0}
+.fin-guide-checklist li{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-sub)}
+.fin-guide-checklist li:last-child{border-bottom:none}
+.fin-guide-rec{font-size:12px;color:var(--gold);line-height:1.6;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:10px}
+.fin-guide-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.fin-guide-status{margin-top:10px;font-size:12px;color:var(--text-sub)}
+.fin-dept-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.fin-dept-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:10px}
+.fin-dept-name{font-size:11px;color:var(--text-muted);margin-bottom:4px}
+.fin-dept-state{font-size:11px;font-weight:700}
+.fin-state-pending{color:var(--text-muted)}
+.fin-state-sent{color:var(--gold)}
+.fin-state-confirmed{color:var(--success)}
+.fin-feed{max-height:240px;overflow:auto;border:1px solid var(--border);border-radius:10px;background:rgba(0,0,0,.15)}
+.fin-feed-item{padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;color:var(--text-sub);line-height:1.5}
+.fin-feed-item:last-child{border-bottom:none}
 @media(max-width:768px){.g2{grid-template-columns:1fr}}
+@media(max-width:1024px){.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.g4,.fin-guide-steps,.fin-guide-layout,.fin-dept-grid{grid-template-columns:1fr}.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.g4{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="portal.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i>All Portals</a>
+  <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Home</a>
   <div class="nav-brand">
     <div class="nav-logo"><i class="fa-solid fa-building-columns"></i></div>
     <div>
@@ -103,6 +135,49 @@ select:focus,input:focus{outline:none;border-color:var(--gold)}
   <div class="kpi"><div class="kpi-val" style="color:var(--danger)">2</div><div class="kpi-lbl">Covenant Alerts Active</div><div class="kpi-note">Vedanta + Mopani</div></div>
   <div class="kpi"><div class="kpi-val" style="color:var(--primary)">$840M</div><div class="kpi-lbl">Available for Deployment</div><div class="kpi-note">Green bond tranche ready</div></div>
 </div>
+
+<!-- FINANCE WALKTHROUGH -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-route"></i> Guided Walkthrough</div>
+  <div class="sec-title">Workflow: Covenant Alert to Cross-Department Action</div>
+  <div class="sec-desc" style="margin-bottom:20px">Follow the finance-side workflow in four steps: from a compliance breach being detected, through verification and escalation, to a board-ready recommendation — all driven by verified data.</div>
+  <div class="fin-guide">
+    <div class="fin-guide-steps" id="fin-guide-steps"></div>
+    <div class="fin-guide-layout">
+      <div>
+        <div class="fin-guide-purpose" id="fin-guide-purpose">Press start to run a four-step finance walkthrough.</div>
+        <ul class="fin-guide-checklist" id="fin-guide-checklist">
+          <li><i class="fa-solid fa-circle-info" style="color:var(--primary)"></i><span>The guide will cover detection, verification, escalation, and recommendation.</span></li>
+        </ul>
+        <div class="fin-guide-rec" id="fin-guide-rec">
+        </div>
+        <div class="fin-guide-controls">
+          <button class="btn btn-gold" id="fin-guide-start"><i class="fa-solid fa-play"></i> Run Walkthrough</button>
+          <button class="btn btn-ghost" id="fin-guide-next" disabled><i class="fa-solid fa-forward-step"></i> Next Step</button>
+          <button class="btn btn-ghost" id="fin-guide-reset"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+        </div>
+        <div class="fin-guide-status" id="fin-guide-status">Status: Waiting for walkthrough start.</div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;margin-bottom:8px">Department Notification Board</div>
+        <div class="fin-dept-grid">
+          <div class="fin-dept-card"><div class="fin-dept-name">Credit Risk Desk</div><div class="fin-dept-state fin-state-pending" id="fin-dept-risk">Pending</div></div>
+          <div class="fin-dept-card"><div class="fin-dept-name">Relationship Manager</div><div class="fin-dept-state fin-state-pending" id="fin-dept-rm">Pending</div></div>
+          <div class="fin-dept-card"><div class="fin-dept-name">Legal &amp; Recovery</div><div class="fin-dept-state fin-state-pending" id="fin-dept-legal">Pending</div></div>
+          <div class="fin-dept-card"><div class="fin-dept-name">Gov Liaison Team</div><div class="fin-dept-state fin-state-pending" id="fin-dept-gov">Pending</div></div>
+        </div>
+        <div class="fin-feed" id="fin-feed">
+          <div class="fin-feed-item">No notifications sent yet.</div>
+        </div>
+      </div>
+    </div>
+    <div id="fin-guide-handoff" style="display:none;margin-top:16px;border:1px solid rgba(168,85,247,.25);background:rgba(168,85,247,.08);border-radius:10px;padding:12px;font-size:12px;color:var(--text-sub)">
+      <strong style="color:var(--text)">Walkthrough complete.</strong> The bank has acted on verified data originating from the client and regulator workflows.
+      Now, enter the War Room to see this entire ecosystem updating in real time.
+      <div style="margin-top:10px"><a href="live.html" class="btn btn-ghost"><i class="fa-solid fa-arrow-right"></i> Enter the Live War Room</a></div>
+    </div>
+  </div>
+</section>
 
 <!-- RATE ENGINE -->
 <section class="section fade">
@@ -342,6 +417,164 @@ function exportPF() {
   const csv = rows.map(r=>r.join(',')).join('\n');
   const a = document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv); a.download='rc_portfolio.csv'; a.click();
 }
+
+const FIN_GUIDE_STEPS = [
+  {
+    title: '1. Detect',
+    purpose: 'Purpose: start with a clear signal that a covenant threshold was breached so every attendee understands why the workflow was triggered.',
+    checklist: [
+      'Platform flags Vedanta covenant score below agreed threshold.',
+      'Breach event is timestamped and tied to the latest compliance feed.',
+      'Presenter can point to one source of truth before escalation.'
+    ],
+    recommendation: 'Recommendation: show the exact covenant and threshold first to remove ambiguity.',
+    status: 'Step 1 active: covenant breach detected and staged for verification.',
+    events: [
+      'Alert created: Vedanta / KCM covenant score 67 is below threshold 80.',
+      'Finance workflow opened for cross-team triage.'
+    ],
+    departments: { risk: 'sent', rm: 'pending', legal: 'pending', gov: 'pending' }
+  },
+  {
+    title: '2. Verify',
+    purpose: 'Purpose: validate the breach against the blockchain-backed government feed before notifying all downstream teams.',
+    checklist: [
+      'Hash-linked compliance payload is checked against latest block record.',
+      'Risk exposure is recalculated using verified inputs.',
+      'Escalation packet is prepared with evidence summary.'
+    ],
+    recommendation: 'Recommendation: explain that verification prevents manual disputes between departments.',
+    status: 'Step 2 active: breach verified and risk desk confirms the signal is valid.',
+    events: [
+      'Verification passed: compliance packet hash matched ledger record.',
+      'Credit Risk Desk received verified breach packet.'
+    ],
+    departments: { risk: 'confirmed', rm: 'sent', legal: 'pending', gov: 'pending' }
+  },
+  {
+    title: '3. Escalate',
+    purpose: 'Purpose: notify the operating departments in parallel so relationship, legal, and public-sector channels act on the same data.',
+    checklist: [
+      'Relationship Manager receives client engagement brief.',
+      'Legal receives covenant remedy timeline and hold instructions.',
+      'Government Liaison receives aligned talking points for agencies.'
+    ],
+    recommendation: 'Recommendation: call out that all departments receive one synchronized event, not separate emails.',
+    status: 'Step 3 active: multi-department notification sent and acknowledgements are arriving.',
+    events: [
+      'Relationship Manager notified with remediation call script.',
+      'Legal & Recovery notified with covenant hold template.',
+      'Government Liaison notified for regulator coordination.'
+    ],
+    departments: { risk: 'confirmed', rm: 'confirmed', legal: 'sent', gov: 'sent' }
+  },
+  {
+    title: '4. Recommend',
+    purpose: 'Purpose: conclude with a practical recommendation that non-technical stakeholders can approve quickly.',
+    checklist: [
+      'Issue a 14-day remediation notice to client.',
+      'Temporarily freeze new disbursements pending proof of correction.',
+      'Schedule joint review with government and client compliance leads.'
+    ],
+    recommendation: 'Recommendation: present the action list as a board-ready decision memo.',
+    status: 'Step 4 active: recommendation approved and departments aligned on next actions.',
+    events: [
+      'Cross-department consensus reached on remediation plan.',
+      'Decision memo queued for investment committee sign-off.'
+    ],
+    departments: { risk: 'confirmed', rm: 'confirmed', legal: 'confirmed', gov: 'confirmed' }
+  }
+];
+
+let finGuideStep = -1;
+
+function finSetDepartmentState(dept, state) {
+  const el = document.getElementById(`fin-dept-${dept}`);
+  if (!el) return;
+  const label = state === 'confirmed' ? 'Confirmed' : state === 'sent' ? 'Notified' : 'Pending';
+  el.textContent = label;
+  el.className = `fin-dept-state ${state === 'confirmed' ? 'fin-state-confirmed' : state === 'sent' ? 'fin-state-sent' : 'fin-state-pending'}`;
+}
+
+function finPushEvent(text) {
+  const feed = document.getElementById('fin-feed');
+  if (feed.children.length === 1 && feed.textContent.includes('No notifications sent yet.')) {
+    feed.innerHTML = '';
+  }
+  const item = document.createElement('div');
+  item.className = 'fin-feed-item';
+  item.textContent = text;
+  feed.appendChild(item);
+  feed.scrollTop = feed.scrollHeight;
+}
+
+function finRenderStepChips() {
+  const wrap = document.getElementById('fin-guide-steps');
+  wrap.innerHTML = FIN_GUIDE_STEPS.map((step, idx) => {
+    let cls = 'fin-step';
+    if (idx < finGuideStep) cls += ' done';
+    if (idx === finGuideStep) cls += ' active';
+    return `<div class="${cls}">${step.title}</div>`;
+  }).join('');
+}
+
+function finRenderCurrentStep() {
+  const nextBtn = document.getElementById('fin-guide-next');
+  const purpose = document.getElementById('fin-guide-purpose');
+  const checklist = document.getElementById('fin-guide-checklist');
+  const rec = document.getElementById('fin-guide-rec');
+  const status = document.getElementById('fin-guide-status');
+  const handoff = document.getElementById('fin-guide-handoff');
+
+  if (finGuideStep < 0) {
+    finRenderStepChips();
+    purpose.textContent = 'Press start to run a four-step finance walkthrough.';
+    checklist.innerHTML = '<li><i class="fa-solid fa-circle-info" style="color:var(--primary)"></i><span>The guide will cover detection, verification, escalation, and recommendation.</span></li>';
+    rec.textContent = '';
+    status.textContent = 'Status: Waiting for walkthrough start.';
+    nextBtn.disabled = true;
+    if (handoff) handoff.style.display = 'none';
+    ['risk', 'rm', 'legal', 'gov'].forEach(d => finSetDepartmentState(d, 'pending'));
+    return;
+  }
+
+  const step = FIN_GUIDE_STEPS[finGuideStep];
+  finRenderStepChips();
+  purpose.textContent = step.purpose;
+  checklist.innerHTML = step.checklist.map(item => `<li><i class="fa-solid fa-check" style="color:var(--success)"></i><span>${item}</span></li>`).join('');
+  rec.textContent = step.recommendation;
+  status.textContent = `Status: ${step.status}`;
+  nextBtn.disabled = finGuideStep >= FIN_GUIDE_STEPS.length - 1;
+  if (handoff) handoff.style.display = finGuideStep >= FIN_GUIDE_STEPS.length - 1 ? 'block' : 'none';
+  finSetDepartmentState('risk', step.departments.risk);
+  finSetDepartmentState('rm', step.departments.rm);
+  finSetDepartmentState('legal', step.departments.legal);
+  finSetDepartmentState('gov', step.departments.gov);
+  step.events.forEach(finPushEvent);
+}
+
+function finSetStep(nextStep) {
+  const bounded = Math.max(-1, Math.min(nextStep, FIN_GUIDE_STEPS.length - 1));
+  if (bounded === finGuideStep) return;
+  finGuideStep = bounded;
+  finRenderCurrentStep();
+}
+
+document.getElementById('fin-guide-start').addEventListener('click', () => {
+  document.getElementById('fin-feed').innerHTML = '';
+  finSetStep(0);
+});
+
+document.getElementById('fin-guide-next').addEventListener('click', () => {
+  finSetStep(finGuideStep + 1);
+});
+
+document.getElementById('fin-guide-reset').addEventListener('click', () => {
+  document.getElementById('fin-feed').innerHTML = '<div class="fin-feed-item">No notifications sent yet.</div>';
+  finSetStep(-1);
+});
+
+finRenderCurrentStep();
 
 
 renderPortfolio(); renderCharts(); renderClimate(); renderCovenants(); updateRate();

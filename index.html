@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resource Command — Zambia</title>
 <meta name="description" content="Zambia's resource intelligence platform. One system for government, banks, and mining companies.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="Resource Command — Zambia">
+<meta property="og:description" content="Mineral resource governance and compliance intelligence. One verified data source connecting government, banks, and mining companies.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -127,7 +132,7 @@ nav {
   font-size: 14px; color: var(--sub); max-width: 520px; line-height: 1.7;
   padding: 16px 20px; border-radius: 10px;
   background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15);
-  margin-bottom: 52px;
+  margin-bottom: 32px;
   animation: fadeUp 0.7s ease 0.25s both;
 }
 .hero-problem strong { color: var(--text); }
@@ -280,6 +285,35 @@ nav {
 }
 .num-lbl { font-size: 11px; color: var(--muted); line-height: 1.4; }
 
+/* ═══ TECHNICAL FOUNDATION ═══════════════════════════════════════════ */
+.tech-foundation {
+  position: relative; z-index: 1;
+  max-width: 1100px; margin: 0 auto;
+  padding: 60px 32px 40px;
+}
+.tf-title {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 32px; text-align: center;
+}
+.tf-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+}
+.tf-card {
+  background: rgba(255,255,255,0.025); border: 1px solid var(--border2);
+  border-radius: 14px; padding: 24px;
+}
+.tf-card-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; margin-bottom: 12px;
+}
+.tf-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+.tf-card p { font-size: 12px; color: var(--sub); line-height: 1.65; }
+.tf-card .tf-spec {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  color: var(--muted); margin-top: 10px; line-height: 1.6;
+}
+
 /* ═══ FOOTER ════════════════════════════════════════════════════════ */
 footer {
   position: relative; z-index: 1;
@@ -356,6 +390,7 @@ footer {
   .num-item{border-bottom:1px solid var(--border)}
   .numbers{border-bottom:none}
   .crisis-band{padding:14px 20px}
+  .tf-grid{grid-template-columns:1fr}
   footer{padding:24px 20px;flex-direction:column;text-align:center}
 }
 @media(max-width:480px){
@@ -382,7 +417,11 @@ footer {
     </div>
   </div>
   <div class="nav-right">
-    <div class="nav-live"><span class="live-dot"></span>Live Demo</div>
+    <a href="demo.html" style="display:flex;align-items:center;gap:7px;padding:5px 14px;border-radius:20px;background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.25);color:#2DD4BF;font-size:11px;font-weight:700;text-decoration:none;transition:all .2s" onmouseover="this.style.background='rgba(45,212,191,.2)'" onmouseout="this.style.background='rgba(45,212,191,.1)'">
+      <i class="fa-solid fa-play" style="font-size:9px"></i>
+      How It Works
+    </a>
+    <div class="nav-live"><span class="live-dot"></span>System Active</div>
     <a href="live.html" style="display:flex;align-items:center;gap:7px;padding:5px 12px;border-radius:20px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);color:#EF4444;font-size:11px;font-weight:700;text-decoration:none;transition:all .2s" onmouseover="this.style.background='rgba(239,68,68,.18)'" onmouseout="this.style.background='rgba(239,68,68,.08)'">
       <span style="width:6px;height:6px;border-radius:50%;background:#EF4444;animation:blink .8s infinite;box-shadow:0 0 8px rgba(239,68,68,.8);display:inline-block"></span>
       Watch Live System
@@ -438,7 +477,7 @@ footer {
   </div>
   <h1>One system.<br><em>Government, banks,<br>and mines — connected.</em></h1>
   <p class="hero-sub">
-    Zambia has 5 regulatory bodies, 9 major mine operators, and a 1,600 MW energy deficit. 
+    Zambia has 5 regulatory bodies, 9 major mine operators, and a 1,600 MW energy deficit.
     Nobody has the full picture. This platform gives each stakeholder exactly what they need — securely separated.
   </p>
   <p class="hero-problem">
@@ -446,17 +485,41 @@ footer {
     Government doesn't trust company self-reporting. Banks don't have live compliance feeds to back their loans.
     Companies file the same report to four regulators manually. This platform solves all three — from one integration.
   </p>
+  <a href="demo.html" style="display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--green));color:#03080F;text-decoration:none;transition:all 0.25s;margin-bottom:20px;letter-spacing:-0.2px" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 40px rgba(45,212,191,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+    <i class="fa-solid fa-play"></i> See How It Works — 5 Step Walkthrough
+  </a>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:40px">Click above for a quick interactive walkthrough, or explore each portal below</div>
 </section>
 
 <!-- PORTALS -->
 <div class="portals">
+
+  <!-- Client -->
+  <a href="client.html" class="p-card p-client">
+    <div class="p-card-inner">
+      <div class="p-glow"></div>
+      <div class="p-icon icon-client"><i class="fa-solid fa-gem"></i></div>
+      <div class="p-role c-client">Step 1: The Source · Industry Operations</div>
+      <div class="p-title">Mining Company Portal</div>
+      <p class="p-desc">Replace 5 separate regulatory submissions with one. Control exactly what each regulator sees — your raw operational data stays on your servers.</p>
+      <div class="p-reason reason-client">
+        <strong>MRCA 2024 is live:</strong> Digital compliance is mandatory. 
+        44% of operators are still filing on paper. Non-compliance penalties begin January 2027. 
+        This replaces the whole process — automatically.
+      </div>
+      <button class="p-cta cta-client">
+        <i class="fa-solid fa-gem"></i>
+        Enter Industry Portal
+      </button>
+    </div>
+  </a>
 
   <!-- Government -->
   <a href="gov.html" class="p-card p-gov">
     <div class="p-card-inner">
       <div class="p-glow"></div>
       <div class="p-icon icon-gov"><i class="fa-solid fa-landmark"></i></div>
-      <div class="p-role c-gov">Government · Ministry of Mines</div>
+      <div class="p-role c-gov">Step 2: The Regulator · Government</div>
       <div class="p-title">National Command Center</div>
       <p class="p-desc">Real-time view of every mine's compliance status, royalty position, and energy demand — verified independently, not self-reported.</p>
       <div class="p-reason reason-gov">
@@ -475,7 +538,7 @@ footer {
     <div class="p-card-inner">
       <div class="p-glow"></div>
       <div class="p-icon icon-bank"><i class="fa-solid fa-building-columns"></i></div>
-      <div class="p-role c-bank">Finance · AfDB · Zanaco · IFC · Stanbic</div>
+      <div class="p-role c-bank">Step 3: The Financier · Banks</div>
       <div class="p-title">Finance Intelligence Center</div>
       <p class="p-desc">Live compliance-linked risk scores on $6.6B in active mining loans. If a mine's compliance drops, you know before the next quarterly report.</p>
       <div class="p-reason reason-bank">
@@ -489,36 +552,16 @@ footer {
     </div>
   </a>
 
-  <!-- Client -->
-  <a href="client.html" class="p-card p-client">
-    <div class="p-card-inner">
-      <div class="p-glow"></div>
-      <div class="p-icon icon-client"><i class="fa-solid fa-gem"></i></div>
-      <div class="p-role c-client">Industry · FQM · Barrick · Vedanta · Mopani</div>
-      <div class="p-title">Industry Operations Portal</div>
-      <p class="p-desc">Replace 5 separate regulatory submissions with one. Control exactly what each regulator sees — your raw operational data stays on your servers.</p>
-      <div class="p-reason reason-client">
-        <strong>MRCA 2024 is live:</strong> Digital compliance is mandatory. 
-        44% of operators are still filing on paper. Non-compliance penalties begin January 2027. 
-        This replaces the whole process — automatically.
-      </div>
-      <button class="p-cta cta-client">
-        <i class="fa-solid fa-gem"></i>
-        Enter Industry Portal
-      </button>
-    </div>
-  </a>
-
   <!-- War Room -->
   <a href="live.html" class="p-card p-war">
     <div class="p-card-inner">
       <div class="p-glow"></div>
       <div class="p-icon icon-war"><span class="war-pulse"></span></div>
-      <div class="p-role c-war">System — All Portals Live</div>
+      <div class="p-role c-war">Step 4: The Hub · System Live Feed</div>
       <div class="p-title">Crisis War Room</div>
       <p class="p-desc">Watch the entire system operating in real-time. Live blockchain entries streaming, cross-portal event cascade, animated data flow from mine servers to government and banks.</p>
       <div class="p-reason reason-war">
-        <strong>For the room:</strong> Run the Drought, Compliance Breach, or Grid Recovery simulation — and watch every portal's data update simultaneously, on-chain, in seconds.
+        <strong>Stress test the system:</strong> Trigger a Drought, Compliance Breach, or Grid Recovery scenario — and watch every portal's data update simultaneously, on-chain, in seconds.
       </div>
       <button class="p-cta cta-war">
         <span class="war-pulse" style="width:6px;height:6px"></span>
@@ -550,6 +593,42 @@ footer {
   <div class="num-item">
     <span class="num-val" style="color:var(--blue)">44%</span>
     <div class="num-lbl">Mine operators still<br>filing on paper (2025)</div>
+  </div>
+</div>
+
+<!-- TECHNICAL FOUNDATION -->
+<div class="tech-foundation">
+  <div class="tf-title"><i class="fa-solid fa-shield-halved" style="margin-right:6px"></i> Technical Foundation</div>
+  <div class="tf-grid">
+
+    <div class="tf-card">
+      <div class="tf-card-icon" style="background:rgba(56,189,248,0.1);color:var(--blue2)"><i class="fa-solid fa-satellite"></i></div>
+      <h4>Satellite Verification (SAR)</h4>
+      <p>Sentinel-1 C-band radar from ESA Copernicus. 10m resolution, 12-day revisit cycle. DEM differencing measures tailings pile volume change independently of any company self-reporting. Accuracy &plusmn;8&ndash;12%. The 5% audit threshold is set below this band so only statistically significant variances trigger action. The satellite is the smoke detector &mdash; the MRC/ZRA joint audit is the fire department.</p>
+      <div class="tf-spec">Source: ESA Copernicus Sentinel-1 &middot; Free public data &middot; No proprietary satellite required</div>
+    </div>
+
+    <div class="tf-card">
+      <div class="tf-card-icon" style="background:rgba(45,212,191,0.1);color:var(--blue)"><i class="fa-solid fa-link"></i></div>
+      <h4>Permissioned Blockchain</h4>
+      <p>Three-node SHA-256 chain. Nodes held by MRC, ZESCO, and the Auditor General's Office. The platform vendor holds no node and cannot write to the chain. Two of three must agree before any block is confirmed. Tampering with any historical record breaks every subsequent hash immediately &mdash; making silent alteration mathematically impossible.</p>
+      <div class="tf-spec">Architecture: Permissioned BFT consensus &middot; No cryptocurrency &middot; No token &middot; No mining</div>
+    </div>
+
+    <div class="tf-card">
+      <div class="tf-card-icon" style="background:rgba(139,92,246,0.1);color:var(--purple)"><i class="fa-solid fa-shield-halved"></i></div>
+      <h4>Zero-Knowledge Proofs</h4>
+      <p>Mining companies prove their royalty calculation is mathematically correct without revealing raw production data to government. The proof is verified on-chain. Government sees "correct" or "incorrect" &mdash; never the underlying numbers. This eliminates the political risk of data disputes while maintaining full auditability.</p>
+      <div class="tf-spec">Privacy model: Company data stays on company servers &middot; Only proofs cross the boundary</div>
+    </div>
+
+    <div class="tf-card">
+      <div class="tf-card-icon" style="background:rgba(245,158,11,0.1);color:var(--gold)"><i class="fa-solid fa-scale-balanced"></i></div>
+      <h4>Legal & Regulatory Basis</h4>
+      <p>MRCA 2024 (Minerals Regulation Commission Act) commenced June 2025. Digital compliance mandatory from January 2027. Section 47(2) requires mandatory joint MRC + ZRA audit within 14 working days for any production variance above 5%. One submission routes simultaneously to all five regulators: MRC, ZEMA, ZRA, ERB, ZCCM-IH.</p>
+      <div class="tf-spec">Status: 44% of operators still on paper &middot; Compliance deadline: January 2027</div>
+    </div>
+
   </div>
 </div>
 

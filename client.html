@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resource Command — Industry Portal | Zambia</title>
+<meta name="description" content="Mining company operations portal. One-click regulatory filing, zero-knowledge privacy, and real-time compliance scoring.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="Resource Command — Industry Portal">
+<meta property="og:description" content="Replace 5 regulatory submissions with one. File to MRC, ZEMA, ZRA, ERB, and ZCCM-IH simultaneously — without exposing raw production data.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -90,7 +96,31 @@ select:focus,input:focus{outline:none;border-color:var(--copper)}
 .score-item.done{border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.04)}
 .score-pts{font-size:12px;font-weight:700;color:var(--success)}
 .score-pts.pending{color:var(--text-muted)}
-@media(max-width:768px){.g2,.g3,.g4,.royalty-inputs,.twin-grid,.priv-layout{grid-template-columns:1fr}main{padding:24px 16px 60px}.priv-channel{display:none}.filing-row{grid-template-columns:auto 1fr auto}}
+.client-guide{background:linear-gradient(145deg,rgba(224,123,57,.08),rgba(56,189,248,.05));border:1px solid rgba(224,123,57,.24);border-radius:16px;padding:24px}
+.client-guide-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.client-guide-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.client-step{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:10px;font-size:11px;color:var(--text-sub);font-weight:600}
+.client-step.active{border-color:rgba(224,123,57,.45);color:var(--copper);background:rgba(224,123,57,.08)}
+.client-step.done{border-color:rgba(16,185,129,.35);color:var(--success)}
+.client-guide-purpose{font-size:13px;line-height:1.7;color:var(--text-sub);margin-bottom:10px}
+.client-guide-checklist{list-style:none;padding:0;margin:0 0 10px 0}
+.client-guide-checklist li{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-sub)}
+.client-guide-checklist li:last-child{border-bottom:none}
+.client-guide-rec{font-size:12px;color:var(--gold);line-height:1.6;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:10px}
+.client-guide-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.client-guide-status{margin-top:10px;font-size:12px;color:var(--text-sub)}
+.client-dept-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.client-dept-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:10px}
+.client-dept-name{font-size:11px;color:var(--text-muted);margin-bottom:4px}
+.client-dept-state{font-size:11px;font-weight:700}
+.client-state-pending{color:var(--text-muted)}
+.client-state-sent{color:var(--gold)}
+.client-state-confirmed{color:var(--success)}
+.client-feed{max-height:240px;overflow:auto;border:1px solid var(--border);border-radius:10px;background:rgba(0,0,0,.15)}
+.client-feed-item{padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;color:var(--text-sub);line-height:1.5}
+.client-feed-item:last-child{border-bottom:none}
+@media(max-width:768px){.g2,.g3,.g4,.royalty-inputs,.twin-grid,.priv-layout{grid-template-columns:1fr}main{padding:24px 16px 60px}.priv-channel{flex-direction:row;padding:12px 0;justify-content:center;gap:12px}.priv-channel .ch-line{width:40px;height:2px}.filing-row{grid-template-columns:auto 1fr auto}}
+@media(max-width:900px){.client-guide-steps,.client-guide-layout,.client-dept-grid{grid-template-columns:1fr}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .fade{animation:fadeUp .6s ease both}
 </style>
@@ -98,7 +128,7 @@ select:focus,input:focus{outline:none;border-color:var(--copper)}
 <body>
 
 <nav>
-  <a href="portal.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i>All Portals</a>
+  <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Home</a>
   <div class="nav-brand">
     <div class="nav-logo"><i class="fa-solid fa-gem"></i></div>
     <div>
@@ -120,6 +150,49 @@ select:focus,input:focus{outline:none;border-color:var(--copper)}
     <div style="font-size:12px;color:var(--text-sub)">Everything on this portal is encrypted with your company key. Government and bank nodes receive only the verified aggregate signals you authorise. Our servers cannot read your raw operational data.</div>
   </div>
 </div>
+
+<!-- CLIENT WALKTHROUGH -->
+<section class="section fade">
+  <div class="sec-label"><i class="fa-solid fa-route"></i> Guided Walkthrough</div>
+  <div class="sec-title">Workflow: One-Click Filing to Department Notifications</div>
+  <div class="sec-desc" style="margin-bottom:20px">Follow the industry-side workflow in four steps: from packaging a submission, through privacy filtering and multi-regulator routing, to confirmed receipt — all from a single verified data source.</div>
+  <div class="client-guide">
+    <div class="client-guide-steps" id="client-guide-steps"></div>
+    <div class="client-guide-layout">
+      <div>
+        <div class="client-guide-purpose" id="client-guide-purpose">Press start to run a four-step client walkthrough.</div>
+        <ul class="client-guide-checklist" id="client-guide-checklist">
+          <li><i class="fa-solid fa-circle-info" style="color:var(--copper)"></i><span>The guide will explain filing, privacy filtering, routing, and confirmation.</span></li>
+        </ul>
+        <div class="client-guide-rec" id="client-guide-rec">
+        </div>
+        <div class="client-guide-controls">
+          <button class="btn btn-copper" id="client-guide-start"><i class="fa-solid fa-play"></i> Run Walkthrough</button>
+          <button class="btn btn-ghost" id="client-guide-next" disabled><i class="fa-solid fa-forward-step"></i> Next Step</button>
+          <button class="btn btn-ghost" id="client-guide-reset"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+        </div>
+        <div class="client-guide-status" id="client-guide-status">Status: Waiting for walkthrough start.</div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;margin-bottom:8px">Notification Board</div>
+        <div class="client-dept-grid">
+          <div class="client-dept-card"><div class="client-dept-name">Mine Operations</div><div class="client-dept-state client-state-pending" id="client-dept-ops">Pending</div></div>
+          <div class="client-dept-card"><div class="client-dept-name">Finance &amp; Treasury</div><div class="client-dept-state client-state-pending" id="client-dept-fin">Pending</div></div>
+          <div class="client-dept-card"><div class="client-dept-name">Compliance Office</div><div class="client-dept-state client-state-pending" id="client-dept-comp">Pending</div></div>
+          <div class="client-dept-card"><div class="client-dept-name">Regulators + Lender</div><div class="client-dept-state client-state-pending" id="client-dept-ext">Pending</div></div>
+        </div>
+        <div class="client-feed" id="client-feed">
+          <div class="client-feed-item">No notifications sent yet.</div>
+        </div>
+      </div>
+    </div>
+    <div id="client-guide-handoff" style="display:none;margin-top:16px;border:1px solid rgba(56,189,248,.25);background:rgba(56,189,248,.08);border-radius:10px;padding:12px;font-size:12px;color:var(--text-sub)">
+      <strong style="color:var(--text)">Walkthrough complete.</strong> The industry submission is filed and notifications are sent across all internal teams and external regulators.
+      Follow the data into the government portal to see how regulators verify it.
+      <div style="margin-top:10px"><a href="gov.html" class="btn btn-ghost"><i class="fa-solid fa-arrow-right"></i> Now see what the Government sees</a></div>
+    </div>
+  </div>
+</section>
 
 <!-- KPIs -->
 <div class="g4 fade" style="margin-bottom:48px" id="company-select-bar">
@@ -298,6 +371,164 @@ const SCORE_ITEMS = [
   {text:'Activate ZKP royalty verification (automated, quarterly)',pts:'+1pt',done:true},
   {text:'Deploy PUF-attested weigh-bridge sensors at all entry points',pts:'+1pt',done:false},
 ];
+
+const CLIENT_GUIDE_STEPS = [
+  {
+    title: '1. Package',
+    purpose: 'Purpose: package the quarter into one verified submission so teams do not prepare separate reports for each agency.',
+    checklist: [
+      'Production, royalty, and environmental summaries are bundled once.',
+      'Submission packet is tagged for internal and external recipients.',
+      'Operations receives a pre-send confirmation checkpoint.'
+    ],
+    recommendation: 'Recommendation: explain the old 5-form process first, then show the one-click replacement.',
+    status: 'Step 1 active: filing package assembled and awaiting send.',
+    events: [
+      'Q1 compliance package assembled from approved source systems.',
+      'Mine Operations notified to verify final numbers before send.'
+    ],
+    departments: { ops: 'sent', fin: 'pending', comp: 'pending', ext: 'pending' }
+  },
+  {
+    title: '2. Filter',
+    purpose: 'Purpose: run the privacy filter so only approved aggregate outputs leave the company boundary.',
+    checklist: [
+      'Raw ore-grade and contract-level data remain private.',
+      'Only regulator-approved fields pass through the ZK filter.',
+      'Compliance office receives a policy check result.'
+    ],
+    recommendation: 'Recommendation: call out what is hidden and what is shared to build trust quickly.',
+    status: 'Step 2 active: privacy enforcement passed and disclosure policy confirmed.',
+    events: [
+      'Privacy filter complete: sensitive fields withheld automatically.',
+      'Compliance Office notified with disclosure audit receipt.'
+    ],
+    departments: { ops: 'confirmed', fin: 'sent', comp: 'sent', ext: 'pending' }
+  },
+  {
+    title: '3. Route',
+    purpose: 'Purpose: route the same verified packet to finance and external stakeholders at the same time.',
+    checklist: [
+      'Finance gets royalty cash-planning inputs instantly.',
+      'Regulators receive required declarations from one event.',
+      'Lender-facing channel receives covenant-relevant aggregates.'
+    ],
+    recommendation: 'Recommendation: emphasize that synchronized routing avoids mismatched versions across departments.',
+    status: 'Step 3 active: cross-department notifications sent to internal and external channels.',
+    events: [
+      'Finance & Treasury notified for royalty settlement planning.',
+      'Regulators notified: MRC, ZEMA, ERB, ZRA, and ZCCM-IH.',
+      'Lender channel notified with covenant-safe aggregate signal.'
+    ],
+    departments: { ops: 'confirmed', fin: 'confirmed', comp: 'confirmed', ext: 'sent' }
+  },
+  {
+    title: '4. Confirm',
+    purpose: 'Purpose: close with confirmation so the presenter can show completion, proof hash, and next recommended action.',
+    checklist: [
+      'All recipients acknowledge the same submission event.',
+      'Proof hash is logged for later audits.',
+      'Team schedules follow-up only if a flag appears.'
+    ],
+    recommendation: 'Recommendation: end with the proof hash to anchor the walkthrough in verifiable evidence.',
+    status: 'Step 4 active: notifications confirmed and workflow closed.',
+    events: [
+      'All departments acknowledged receipt and validation.',
+      'Audit-ready proof hash pinned to filing history.'
+    ],
+    departments: { ops: 'confirmed', fin: 'confirmed', comp: 'confirmed', ext: 'confirmed' }
+  }
+];
+
+let clientGuideStep = -1;
+
+function clientSetDepartmentState(dept, state) {
+  const el = document.getElementById(`client-dept-${dept}`);
+  if (!el) return;
+  const label = state === 'confirmed' ? 'Confirmed' : state === 'sent' ? 'Notified' : 'Pending';
+  el.textContent = label;
+  el.className = `client-dept-state ${state === 'confirmed' ? 'client-state-confirmed' : state === 'sent' ? 'client-state-sent' : 'client-state-pending'}`;
+}
+
+function clientPushEvent(text) {
+  const feed = document.getElementById('client-feed');
+  if (feed.children.length === 1 && feed.textContent.includes('No notifications sent yet.')) {
+    feed.innerHTML = '';
+  }
+  const item = document.createElement('div');
+  item.className = 'client-feed-item';
+  item.textContent = text;
+  feed.appendChild(item);
+  feed.scrollTop = feed.scrollHeight;
+}
+
+function clientRenderStepChips() {
+  const wrap = document.getElementById('client-guide-steps');
+  wrap.innerHTML = CLIENT_GUIDE_STEPS.map((step, idx) => {
+    let cls = 'client-step';
+    if (idx < clientGuideStep) cls += ' done';
+    if (idx === clientGuideStep) cls += ' active';
+    return `<div class="${cls}">${step.title}</div>`;
+  }).join('');
+}
+
+function clientRenderCurrentStep() {
+  const nextBtn = document.getElementById('client-guide-next');
+  const purpose = document.getElementById('client-guide-purpose');
+  const checklist = document.getElementById('client-guide-checklist');
+  const rec = document.getElementById('client-guide-rec');
+  const status = document.getElementById('client-guide-status');
+  const handoff = document.getElementById('client-guide-handoff');
+
+  if (clientGuideStep < 0) {
+    clientRenderStepChips();
+    purpose.textContent = 'Press start to run a four-step client walkthrough.';
+    checklist.innerHTML = '<li><i class="fa-solid fa-circle-info" style="color:var(--copper)"></i><span>The guide will explain filing, privacy filtering, routing, and confirmation.</span></li>';
+    rec.textContent = '';
+    status.textContent = 'Status: Waiting for walkthrough start.';
+    nextBtn.disabled = true;
+    if (handoff) handoff.style.display = 'none';
+    ['ops', 'fin', 'comp', 'ext'].forEach(d => clientSetDepartmentState(d, 'pending'));
+    return;
+  }
+
+  const step = CLIENT_GUIDE_STEPS[clientGuideStep];
+  clientRenderStepChips();
+  purpose.textContent = step.purpose;
+  checklist.innerHTML = step.checklist.map(item => `<li><i class="fa-solid fa-check" style="color:var(--success)"></i><span>${item}</span></li>`).join('');
+  rec.textContent = step.recommendation;
+  status.textContent = `Status: ${step.status}`;
+  nextBtn.disabled = clientGuideStep >= CLIENT_GUIDE_STEPS.length - 1;
+  if (handoff) handoff.style.display = clientGuideStep >= CLIENT_GUIDE_STEPS.length - 1 ? 'block' : 'none';
+  clientSetDepartmentState('ops', step.departments.ops);
+  clientSetDepartmentState('fin', step.departments.fin);
+  clientSetDepartmentState('comp', step.departments.comp);
+  clientSetDepartmentState('ext', step.departments.ext);
+  step.events.forEach(clientPushEvent);
+}
+
+function clientSetStep(nextStep) {
+  const bounded = Math.max(-1, Math.min(nextStep, CLIENT_GUIDE_STEPS.length - 1));
+  if (bounded === clientGuideStep) return;
+  clientGuideStep = bounded;
+  clientRenderCurrentStep();
+}
+
+document.getElementById('client-guide-start').addEventListener('click', () => {
+  document.getElementById('client-feed').innerHTML = '';
+  clientSetStep(0);
+});
+
+document.getElementById('client-guide-next').addEventListener('click', () => {
+  clientSetStep(clientGuideStep + 1);
+});
+
+document.getElementById('client-guide-reset').addEventListener('click', () => {
+  document.getElementById('client-feed').innerHTML = '<div class="client-feed-item">No notifications sent yet.</div>';
+  clientSetStep(-1);
+});
+
+clientRenderCurrentStep();
 
 function renderFiling() {
   const el = document.getElementById('filing-rows');

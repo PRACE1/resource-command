@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resource Command — Government Portal | Zambia</title>
 <meta name="description" content="National Command Center — Ministry of Mines, Zambia. Real-time compliance, royalties, and audit intelligence across all mine operators.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="Resource Command — Government Portal">
+<meta property="og:description" content="National Command Center for mineral resource compliance. Real-time operator monitoring, SAR satellite verification, and blockchain-verified enforcement.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -287,6 +292,191 @@ tr:hover td { background: rgba(45,212,191,.02); }
 }
 .btn-ghost:hover { background: rgba(255,255,255,.08); }
 
+/* ── GUIDED WALKTHROUGH ── */
+.walkthrough-shell {
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 20px;
+}
+.walkthrough-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.guide-step {
+  border: 1px solid var(--border2);
+  background: rgba(255,255,255,.02);
+  color: var(--sub);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+}
+.guide-step.active {
+  border-color: rgba(45,212,191,.4);
+  background: rgba(45,212,191,.1);
+  color: var(--blue);
+}
+.guide-step.done {
+  border-color: rgba(16,185,129,.35);
+  background: rgba(16,185,129,.08);
+  color: var(--green);
+}
+.walkthrough-body {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 16px;
+}
+.walkthrough-copy, .walkthrough-sim {
+  background: rgba(0,0,0,.2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.walkthrough-purpose {
+  font-size: 12px;
+  color: var(--sub);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.walkthrough-checklist {
+  list-style: none;
+  margin-bottom: 16px;
+}
+.walkthrough-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text);
+}
+.walkthrough-checklist li:last-child { border-bottom: none; }
+.walkthrough-checklist i {
+  color: var(--blue);
+  font-size: 10px;
+  margin-top: 3px;
+}
+.walkthrough-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.guide-status {
+  font-size: 11px;
+  color: var(--sub);
+  line-height: 1.6;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(45,212,191,.04);
+}
+.map-board {
+  position: relative;
+  height: 180px;
+  border-radius: 12px;
+  border: 1px solid var(--border2);
+  background:
+    linear-gradient(rgba(45,212,191,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,191,.03) 1px, transparent 1px),
+    radial-gradient(circle at 30% 30%, rgba(56,189,248,.15), transparent 55%),
+    radial-gradient(circle at 70% 70%, rgba(245,158,11,.1), transparent 60%);
+  background-size: 34px 34px, 34px 34px, cover, cover;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.map-title {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 10px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.map-pin {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--muted);
+  box-shadow: 0 0 0 0 rgba(45,212,191,.4);
+}
+.map-pin.active {
+  background: var(--blue);
+  box-shadow: 0 0 0 7px rgba(45,212,191,.18);
+}
+.map-pin-label {
+  position: absolute;
+  transform: translate(12px, -3px);
+  font-size: 10px;
+  color: var(--text);
+}
+.map-link {
+  position: absolute;
+  height: 2px;
+  background: rgba(56,189,248,.25);
+  transform-origin: left center;
+  opacity: .3;
+}
+.map-link.active { opacity: 1; background: var(--blue2); }
+.node-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.node-card {
+  border-radius: 10px;
+  border: 1px solid var(--border2);
+  background: rgba(255,255,255,.02);
+  padding: 10px;
+}
+.node-head {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.node-state {
+  font-size: 10px;
+  font-weight: 700;
+}
+.state-pending { color: var(--gold); }
+.state-sent { color: var(--blue); }
+.state-verified { color: var(--green); }
+.notify-feed {
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  background: rgba(255,255,255,.015);
+  max-height: 130px;
+  overflow: auto;
+  padding: 8px;
+}
+.notify-item {
+  font-size: 10px;
+  color: var(--sub);
+  border-bottom: 1px solid var(--border);
+  padding: 7px 0;
+  line-height: 1.6;
+}
+.notify-item:last-child { border-bottom: none; }
+.walkthrough-handoff {
+  margin-top: 14px;
+  border: 1px solid rgba(16,185,129,.25);
+  background: rgba(16,185,129,.08);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 12px;
+  color: var(--sub);
+}
+.walkthrough-handoff strong { color: var(--text); }
+
 @media(max-width: 1024px) { .kpi-row { grid-template-columns: repeat(3, 1fr); } }
 @media(max-width: 768px) {
   nav { padding: 0 16px; }
@@ -294,6 +484,9 @@ tr:hover td { background: rgba(45,212,191,.02); }
   .kpi-row { grid-template-columns: repeat(2, 1fr); }
   .g2 { grid-template-columns: 1fr; }
   .sar-row { grid-template-columns: 1fr 1fr; }
+  .walkthrough-steps { grid-template-columns: 1fr 1fr; }
+  .walkthrough-body { grid-template-columns: 1fr; }
+  .node-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -326,6 +519,64 @@ tr:hover td { background: rgba(45,212,191,.02); }
 </div>
 
 <main>
+
+<!-- SECTION: GUIDED DEMO -->
+<section class="section fade" style="animation-delay:.03s">
+  <div class="sec-label"><i class="fa-solid fa-route"></i> 5-Minute Walkthrough</div>
+  <div class="sec-title">Government Workflow: Intake to Verified Enforcement</div>
+  <div class="sec-desc" style="margin-bottom:20px">
+    Step through the regulatory workflow from data intake, through geospatial verification and blockchain consensus, to automatic enforcement triggers — designed for officials seeing the system for the first time.
+  </div>
+  <div class="walkthrough-shell">
+    <div class="walkthrough-steps" id="guide-steps"></div>
+    <div class="walkthrough-body">
+      <div class="walkthrough-copy">
+        <div class="walkthrough-purpose" id="guide-purpose">
+          Press <strong style="color:var(--text)">Start</strong> to run the government workflow from intake to verified consensus.
+        </div>
+        <ul class="walkthrough-checklist" id="guide-checklist"></ul>
+        <div class="walkthrough-controls">
+          <button class="btn btn-blue" id="guide-start"><i class="fa-solid fa-play"></i> Run Walkthrough</button>
+          <button class="btn btn-ghost" id="guide-next" disabled><i class="fa-solid fa-forward-step"></i> Next Step</button>
+          <button class="btn btn-ghost" id="guide-reset"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+        </div>
+        <div class="guide-status" id="guide-status">Status: Waiting for walkthrough start.</div>
+      </div>
+      <div class="walkthrough-sim">
+        <div class="map-board">
+          <div class="map-title">Zambia Mine-to-Regulator Simulation Map</div>
+          <div class="map-pin" id="pin-nw" style="top:52px;left:66px"><span class="map-pin-label">NW Mine Cluster</span></div>
+          <div class="map-pin" id="pin-cb" style="top:85px;left:155px"><span class="map-pin-label">Copperbelt</span></div>
+          <div class="map-pin" id="pin-lsk" style="top:126px;left:238px"><span class="map-pin-label">Lusaka Regulator Hub</span></div>
+          <div class="map-link" id="link-a" style="top:70px;left:76px;width:90px;transform:rotate(19deg)"></div>
+          <div class="map-link" id="link-b" style="top:102px;left:164px;width:85px;transform:rotate(23deg)"></div>
+        </div>
+        <div class="node-grid">
+          <div class="node-card">
+            <div class="node-head">MRC Node</div>
+            <div class="node-state state-pending" id="node-mrc">Pending</div>
+          </div>
+          <div class="node-card">
+            <div class="node-head">ZRA Node</div>
+            <div class="node-state state-pending" id="node-zra">Pending</div>
+          </div>
+          <div class="node-card">
+            <div class="node-head">AGO Node</div>
+            <div class="node-state state-pending" id="node-ago">Pending</div>
+          </div>
+        </div>
+        <div class="notify-feed" id="notify-feed">
+          <div class="notify-item">No notifications sent yet.</div>
+        </div>
+      </div>
+    </div>
+    <div class="walkthrough-handoff" id="guide-handoff" style="display:none">
+      <strong>Walkthrough complete.</strong> Government consensus is verified and enforcement is logged.
+      Continue the story in the banking portal to see lender-side risk actions.
+      <a href="bank.html" class="btn btn-blue" style="margin-top:10px"><i class="fa-solid fa-arrow-right"></i> Now see what the bank sees</a>
+    </div>
+  </div>
+</section>
 
 <!-- KPI ROW -->
 <div class="kpi-row fade" style="animation-delay:.05s">
@@ -404,7 +655,7 @@ tr:hover td { background: rgba(45,212,191,.02); }
   <div class="sec-label"><i class="fa-solid fa-satellite"></i> Satellite Verification</div>
   <div class="sec-title">SAR Cross-Check — Declared vs Satellite-Measured Output</div>
   <div class="sec-desc" style="margin-bottom:20px">
-    Synthetic Aperture Radar (SAR) satellite imagery is processed every 30 days to measure actual mine output independently. Any variance above 5% triggers a mandatory audit under MRCA Section 47(2). Companies cannot self-report their way out of this.
+    Sentinel-1 SAR (C-band radar, 10m resolution, 12-day revisit cycle) from ESA Copernicus measures tailings pile volume change using DEM differencing. Measurement accuracy is &plusmn;8–12%. The 5% MRCA threshold is deliberately set below this uncertainty band — so only statistically significant variances trigger audits. The satellite does not convict. It triggers. The MRC/ZRA audit is the investigation.
   </div>
 
   <div class="card" style="margin-bottom:12px">
@@ -421,7 +672,7 @@ tr:hover td { background: rgba(45,212,191,.02); }
 
   <div style="font-size:12px;color:var(--sub);padding:12px 16px;background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.15);border-radius:10px;line-height:1.7">
     <i class="fa-solid fa-circle-info" style="color:var(--blue)"></i>&nbsp;
-    <strong>MRCA S.47(2):</strong> A production variance exceeding 5% between declared and satellite-measured output triggers mandatory MRC + ZRA joint audit within 14 working days. Results are immutably recorded on the platform blockchain. Mining licence suspension is available as an enforcement tool after a second breach.
+    <strong>MRCA S.47(2):</strong> A production variance exceeding 5% between declared and satellite-measured output triggers mandatory MRC + ZRA joint audit within 14 working days. The satellite is the smoke detector — the MRC/ZRA audit is the fire department. At 13.9%, Nchanga's variance is well outside the &plusmn;8–12% measurement uncertainty band, making it a statistically significant flag, not measurement noise. Results are immutably recorded on the platform blockchain. Mining licence suspension is available as an enforcement tool after a second breach.
   </div>
 </section>
 
@@ -589,6 +840,38 @@ tr:hover td { background: rgba(45,212,191,.02); }
       <div style="font-size:11px;color:var(--sub);line-height:1.6">Auditor General's Office · Runs the third blockchain node. Independent consensus validator — no single party controls the chain.</div>
       <div style="margin-top:10px"><span class="badge b-blue">Node: Online &amp; Syncing</span></div>
     </div>
+  </div>
+</section>
+
+<!-- SECTION: BLOCKCHAIN ARCHITECTURE -->
+<section class="section fade" style="animation-delay:.35s">
+  <div class="sec-label"><i class="fa-solid fa-link"></i> Platform Integrity</div>
+  <div class="sec-title">Blockchain Architecture — Technical Specification</div>
+  <div class="sec-desc" style="margin-bottom:20px">
+    Every compliance event, audit trigger, and royalty verification is immutably recorded on a permissioned three-node SHA-256 blockchain. The platform vendor holds no node — custody is distributed across government institutions.
+  </div>
+
+  <div class="g3" style="margin-bottom:20px">
+    <div class="card" style="border-color:rgba(45,212,191,.25)">
+      <div style="font-size:11px;font-weight:800;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 1 — MRC</div>
+      <div style="font-size:12px;color:var(--sub);line-height:1.6">Minerals Regulation Commission. Primary regulatory node. Receives all production and compliance data first.</div>
+      <div style="margin-top:8px"><span class="badge b-green"><span class="pulse-dot" style="background:var(--green)"></span> Online</span></div>
+    </div>
+    <div class="card" style="border-color:rgba(56,189,248,.25)">
+      <div style="font-size:11px;font-weight:800;color:var(--blue2);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 2 — ZESCO</div>
+      <div style="font-size:12px;color:var(--sub);line-height:1.6">Zambia Electricity Supply Corporation. Energy data correlation node. Cross-validates mine energy consumption against declared output.</div>
+      <div style="margin-top:8px"><span class="badge b-green"><span class="pulse-dot" style="background:var(--green)"></span> Online</span></div>
+    </div>
+    <div class="card" style="border-color:rgba(239,68,68,.2)">
+      <div style="font-size:11px;font-weight:800;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Node 3 — Auditor General</div>
+      <div style="font-size:12px;color:var(--sub);line-height:1.6">Independent oversight. The AGO node ensures no single institution can alter the record. Required for BFT consensus.</div>
+      <div style="margin-top:8px"><span class="badge b-green"><span class="pulse-dot" style="background:var(--green)"></span> Online</span></div>
+    </div>
+  </div>
+
+  <div style="font-size:12px;color:var(--sub);padding:14px 18px;background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.15);border-radius:10px;line-height:1.7">
+    <i class="fa-solid fa-shield-halved" style="color:var(--blue)"></i>&nbsp;
+    <strong>Consensus rule:</strong> Two of three nodes must agree before any block is confirmed. Tampering with any historical record breaks every subsequent hash in the chain immediately — making silent alteration mathematically impossible. The platform vendor holds no node and cannot write to or alter the chain.
   </div>
 </section>
 
@@ -764,12 +1047,180 @@ function updateHash() {
     `Verified: 0x${hex(10)}...${hex(6)} · Block #${(4821 + Math.floor(Math.random()*10)).toLocaleString()} · SHA-256 chain intact · AGO independent node in consensus`;
 }
 
+// ── GUIDED WALKTHROUGH ──────────────────────────────────────────────
+const GUIDE_STEPS = [
+  {
+    label: 'Step 1 · Intake',
+    purpose: 'Purpose: the government receives one trusted submission instead of fragmented paper reports. The system starts by ingesting mine, royalty, and environmental filings into a single workflow.',
+    checklist: [
+      'Mine filing packet received into command center',
+      'Schema and completeness checks run automatically',
+      'Submission ID assigned for immutable tracking'
+    ],
+    status: 'Step 1 active: intake completed and case packet prepared for verification.',
+    map: { nw: true, cb: false, lsk: false, a: false, b: false },
+    events: [
+      { text: 'Intake accepted: filing packet RC-2026-03-047 queued for verification.' }
+    ],
+    nodes: { mrc: 'pending', zra: 'pending', ago: 'pending' }
+  },
+  {
+    label: 'Step 2 · Map Check',
+    purpose: 'Purpose: satellite + map simulation confirms physical mine activity before regulators make decisions. This prevents false declarations from entering enforcement workflows.',
+    checklist: [
+      'Satellite SAR layer cross-checks declared output',
+      'Mine cluster route to Copperbelt monitoring highlighted',
+      'Variance threshold test prepared for blockchain proof'
+    ],
+    status: 'Step 2 active: geospatial verification completed and route validated.',
+    map: { nw: true, cb: true, lsk: false, a: true, b: false },
+    events: [
+      { text: 'Map simulation: NW cluster and Copperbelt activity matched against SAR signal.' },
+      { text: 'Variance event detected at Nchanga: +13.9% requires consensus logging.' }
+    ],
+    nodes: { mrc: 'sent', zra: 'pending', ago: 'pending' }
+  },
+  {
+    label: 'Step 3 · Node Notify',
+    purpose: 'Purpose: blockchain verification sends the same event to every validating node. No single office can alter the record once consensus is reached.',
+    checklist: [
+      'Notification sent to MRC node',
+      'Notification sent to ZRA node',
+      'Notification sent to AGO independent validator node'
+    ],
+    status: 'Step 3 active: node notifications sent; waiting for final consensus signatures.',
+    map: { nw: true, cb: true, lsk: true, a: true, b: true },
+    events: [
+      { text: `Block proposal broadcast: #${4821 + Math.floor(Math.random()*12)} with hash 0x${hex(9)}...${hex(5)}.` },
+      { text: 'MRC node signature received.' },
+      { text: 'ZRA node signature received.' },
+      { text: 'AGO node signature received.' }
+    ],
+    nodes: { mrc: 'verified', zra: 'verified', ago: 'verified' }
+  },
+  {
+    label: 'Step 4 · Enforcement',
+    purpose: 'Purpose: once consensus is verified, audit and policy actions trigger automatically. This closes the loop from intake to enforceable government action.',
+    checklist: [
+      'Audit flag status upgraded to enforceable action',
+      'Royalty and compliance ledgers locked to immutable record',
+      'Cross-portal handoff ready for bank risk team'
+    ],
+    status: 'Step 4 active: consensus finalized, enforcement triggered, and handoff prepared.',
+    map: { nw: true, cb: true, lsk: true, a: true, b: true },
+    events: [
+      { text: 'Consensus reached: 3/3 nodes verified under BFT threshold.' },
+      { text: 'Automatic audit notice issued to MRC + ZRA with immutable block reference.' }
+    ],
+    nodes: { mrc: 'verified', zra: 'verified', ago: 'verified' }
+  }
+];
+
+let guideStep = -1;
+
+function guideStamp() {
+  return new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+}
+
+function setNodeState(nodeId, state) {
+  const el = document.getElementById(`node-${nodeId}`);
+  if (!el) return;
+  const stateLabel = state === 'verified' ? 'Verified' : state === 'sent' ? 'Notified' : 'Pending';
+  el.textContent = stateLabel;
+  el.className = `node-state ${state === 'verified' ? 'state-verified' : state === 'sent' ? 'state-sent' : 'state-pending'}`;
+}
+
+function addNotification(message) {
+  const feed = document.getElementById('notify-feed');
+  if (!feed) return;
+  if (feed.children.length === 1 && feed.textContent.includes('No notifications sent yet.')) {
+    feed.innerHTML = '';
+  }
+  const item = document.createElement('div');
+  item.className = 'notify-item';
+  item.innerHTML = `<strong style="color:var(--text)">[${guideStamp()}]</strong> ${message}`;
+  feed.prepend(item);
+}
+
+function renderGuideStepPills() {
+  const stepWrap = document.getElementById('guide-steps');
+  stepWrap.innerHTML = GUIDE_STEPS.map((s, idx) => {
+    let cls = 'guide-step';
+    if (idx === guideStep) cls += ' active';
+    if (idx < guideStep) cls += ' done';
+    return `<div class="${cls}">${s.label}</div>`;
+  }).join('');
+}
+
+function renderGuideContent() {
+  const purpose = document.getElementById('guide-purpose');
+  const checklist = document.getElementById('guide-checklist');
+  const status = document.getElementById('guide-status');
+  const handoff = document.getElementById('guide-handoff');
+  const nextBtn = document.getElementById('guide-next');
+
+  if (guideStep < 0) {
+    purpose.innerHTML = 'Press <strong style="color:var(--text)">Start</strong> to run the government workflow from intake to verified consensus.';
+    checklist.innerHTML = '<li><i class="fa-solid fa-circle-info"></i> The walkthrough covers intake, map validation, blockchain consensus, and enforcement.</li>';
+    status.textContent = 'Status: Waiting for walkthrough start.';
+    handoff.style.display = 'none';
+    nextBtn.disabled = true;
+    ['mrc', 'zra', 'ago'].forEach(n => setNodeState(n, 'pending'));
+    toggleGuideMap({ nw: false, cb: false, lsk: false, a: false, b: false });
+    return;
+  }
+
+  const step = GUIDE_STEPS[guideStep];
+  purpose.textContent = step.purpose;
+  checklist.innerHTML = step.checklist.map(i => `<li><i class="fa-solid fa-check"></i> ${i}</li>`).join('');
+  status.textContent = `Status: ${step.status}`;
+  nextBtn.disabled = guideStep >= GUIDE_STEPS.length - 1;
+  handoff.style.display = guideStep >= GUIDE_STEPS.length - 1 ? 'block' : 'none';
+
+  toggleGuideMap(step.map);
+  setNodeState('mrc', step.nodes.mrc);
+  setNodeState('zra', step.nodes.zra);
+  setNodeState('ago', step.nodes.ago);
+
+  step.events.forEach(e => addNotification(e.text));
+}
+
+function toggleGuideMap(state) {
+  document.getElementById('pin-nw').classList.toggle('active', state.nw);
+  document.getElementById('pin-cb').classList.toggle('active', state.cb);
+  document.getElementById('pin-lsk').classList.toggle('active', state.lsk);
+  document.getElementById('link-a').classList.toggle('active', state.a);
+  document.getElementById('link-b').classList.toggle('active', state.b);
+}
+
+function setGuideStep(next) {
+  guideStep = next;
+  renderGuideStepPills();
+  renderGuideContent();
+}
+
+function initGuideWalkthrough() {
+  document.getElementById('guide-start').addEventListener('click', () => {
+    document.getElementById('notify-feed').innerHTML = '';
+    setGuideStep(0);
+  });
+  document.getElementById('guide-next').addEventListener('click', () => {
+    if (guideStep < GUIDE_STEPS.length - 1) setGuideStep(guideStep + 1);
+  });
+  document.getElementById('guide-reset').addEventListener('click', () => {
+    document.getElementById('notify-feed').innerHTML = '<div class="notify-item">No notifications sent yet.</div>';
+    setGuideStep(-1);
+  });
+  setGuideStep(-1);
+}
+
 // ── INIT ─────────────────────────────────────────────────────────────
 renderTable();
 renderSAR();
 renderRoyalty();
 renderZKP();
 renderEnergy();
+initGuideWalkthrough();
 setInterval(updateHash, 4000);
 </script>
 
