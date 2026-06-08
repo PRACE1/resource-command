@@ -110,7 +110,7 @@ We request a **scoping call at your earliest availability** to discuss the engag
 The primary contact for this engagement is:
 
 **Kennedy**  
-Principal, Kgosi Sovereign Holdings Proprietary Limited  
+CEO & Founder, Kgosi Sovereign Holdings Proprietary Limited  
 **kennedythebe0@gmail.com**  
 **+267 78486635**
 
@@ -119,7 +119,7 @@ We look forward to working with your team.
 Yours sincerely,
 
 **Kennedy**  
-Principal  
+CEO & Founder  
 Kgosi Sovereign Holdings Proprietary Limited
 
 ---
