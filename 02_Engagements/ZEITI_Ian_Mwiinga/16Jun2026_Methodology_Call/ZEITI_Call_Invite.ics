@@ -1,0 +1,39 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Kgosi Sovereign Holdings//Resource Command//EN
+METHOD:REQUEST
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Africa/Lusaka
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0200
+TZNAME:CAT
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:rc-zeiti-mwiinga-20260616@kgosi.holdings
+DTSTAMP:20260605T093000Z
+DTSTART;TZID=Africa/Lusaka:20260616T113000
+DTEND;TZID=Africa/Lusaka:20260616T123000
+SUMMARY:Resource Command — Building on the G-Factor (Kennedy Thebe & Ian Mwiinga, ZEITI)
+DESCRIPTION:Call between Kennedy Thebe (Kgosi Sovereign Holdings\, Resource Command) and Ian Mwiinga (Zambia Extractive Industries Transparency Initiative).\n\nAgenda:\n• Methodological alignment between RC's zero-knowledge royalty proof and the ZEITI G-Factor framework\n• Walkthrough of the cryptographic primitive in plain English (audit-envelope metaphor)\n• Discussion of a 90-day Zambia pilot (methodology integration → historical replay → live pilot)\n• ZEITI Secretariat methodology note pathway\n\nOne-page pre-read brief will be delivered 3–4 days ahead of the call.\n\nSoft channel: WhatsApp +260 972 078 085\n\nContact: Kennedy Thebe\, Principal\, Kgosi Sovereign Holdings.
+LOCATION:WhatsApp call: +260 972 078 085
+ORGANIZER;CN=Kennedy Thebe:mailto:kennedy@kgosi.holdings
+ATTENDEE;CN=Ian Mwiinga;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:ian.mwiinga@eiti.org.zm
+STATUS:CONFIRMED
+SEQUENCE:0
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Resource Command — Building on the G-Factor (in 60 minutes)
+TRIGGER:-PT60M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Resource Command — Building on the G-Factor (in 24 hours)
+TRIGGER:-PT24H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,21 @@
+{
+  "name": "resource-command-zk-protocol",
+  "version": "1.4.0",
+  "description": "Sovereign ZK-SNARK Compliance Protocol for Mineral Royalty Verification",
+  "main": "resource_command_zkp.py",
+  "dependencies": {
+    "circomlib": "^2.0.5",
+    "snarkjs": "^0.7.4"
+  },
+  "scripts": {
+    "compile": "circom circuits/compliance.circom --r1cs --wasm --sym",
+    "test": "node test/verify_equivalence.js"
+  },
+  "_dependency_audit": {
+    "circomlib_origin": "https://github.com/iden3/circomlib",
+    "commit_hash": "c374d60f64c679a95574f17918f6f75e01b33346",
+    "ptau_provenance": "hermez_powers_of_tau_254_bn_12.ptau (SHA-256: 6a6277a2f74e1073601b4f9fed6e1e55226917efb0f0db8a07d98ab01df1ccf43eb0e8c3159432acd4960e2f29fe84a4198501fa54c8dad9e43297453efec125)"
+  },
+  "author": "Kgosi Capital Holdings",
+  "license": "UNLICENSED"
+}

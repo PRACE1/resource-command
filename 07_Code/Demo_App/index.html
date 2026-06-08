@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Command — Botswana</title>
+<meta name="description" content="National Operating System for Energy & Extractive Resources — Botswana">
+
+<!-- Resource Command tracking — per-recipient visit + action logging -->
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var k = params.get('k');
+  var base = window.RC_API_BASE || ''; // defaults to same origin
+
+  fetch(base + '/track/visit' + (k ? '?k=' + encodeURIComponent(k) : ''), {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ page: window.location.pathname }),
+  }).catch(function () {});
+
+  window.rcTrack = function (actionType, payload) {
+    fetch(base + '/track/action', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: actionType, payload: payload || null }),
+    }).catch(function () {});
+  };
+
+  window.addEventListener('beforeunload', function () {
+    try {
+      navigator.sendBeacon(
+        base + '/track/action',
+        new Blob([JSON.stringify({ type: 'tab_closed', payload: {} })],
+                 { type: 'application/json' })
+      );
+    } catch (e) {}
+  });
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ LOGIN SCREEN -->
+<div id="login-screen" class="login-screen">
+  <div class="login-bg-grid"></div>
+  <div class="login-container">
+    <div class="login-brand">
+      <div class="brand-icon"><i class="fa-solid fa-gem"></i></div>
+      <h1>Resource Command</h1>
+      <p class="brand-sub">National Operating System · Botswana</p>
+      <div class="brand-tagline">Energy · Mining · Accountability</div>
+    </div>
+    <div class="portal-label">Select your access portal</div>
+    <div class="portal-grid">
+      <div class="portal-card" onclick="RC.auth.login('minister')">
+        <div class="portal-icon" style="background:rgba(56,189,248,0.15);color:#38BDF8"><i class="fa-solid fa-landmark"></i></div>
+        <div class="portal-name">National Command</div>
+        <div class="portal-desc">Ministers, BERA, Auditor General — full system access</div>
+        <div class="portal-badge" style="background:rgba(56,189,248,0.1);color:#38BDF8">Executive</div>
+      </div>
+      <div class="portal-card" onclick="RC.auth.login('investor')">
+        <div class="portal-icon" style="background:rgba(16,185,129,0.15);color:#10B981"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="portal-name">Investor & Company</div>
+        <div class="portal-desc">Mining companies, IPPs, foreign investors — concessions & ROI</div>
+        <div class="portal-badge" style="background:rgba(16,185,129,0.1);color:#10B981">Industry</div>
+      </div>
+      <div class="portal-card" onclick="RC.auth.login('public')">
+        <div class="portal-icon" style="background:rgba(168,85,247,0.15);color:#A855F7"><i class="fa-solid fa-users"></i></div>
+        <div class="portal-name">Public Accountability</div>
+        <div class="portal-desc">Citizens, NGOs, journalists — open transparency data</div>
+        <div class="portal-badge" style="background:rgba(168,85,247,0.1);color:#A855F7">Open Access</div>
+      </div>
+    </div>
+    <div class="login-footer">🇧🇼 Republic of Botswana &nbsp;·&nbsp; Ministry of Minerals & Energy &nbsp;·&nbsp; BERA Act 2016</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ TOAST -->
+<div id="toast" class="toast hidden"></div>
+
+<!-- ═══════════════════════════════════════════ NOTIFICATION PANEL -->
+<div id="notif-panel" class="notif-panel hidden">
+  <div class="notif-header"><span>Alerts</span><button onclick="RC.ui.toggleNotifPanel()"><i class="fa-solid fa-xmark"></i></button></div>
+  <div id="notif-list"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════ MODAL -->
+<div id="modal-overlay" class="modal-overlay hidden">
+  <div id="modal-box" class="modal-box">
+    <div class="modal-header">
+      <h2 id="modal-title"></h2>
+      <button onclick="RC.ui.closeModal()" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="modal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ APP SHELL -->
+<div class="app-container hidden" id="app-shell">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay hidden" id="sidebar-overlay" onclick="RC.ui.closeSidebar()"></div>
+  <nav class="sidebar" id="sidebar">
+    <div class="logo-area">
+      <div class="logo-gem"><i class="fa-solid fa-gem"></i></div>
+      <div>
+        <h2>Resource<span class="text-primary">Command</span></h2>
+        <p class="logo-sub" id="portal-label-text">National Command</p>
+      </div>
+    </div>
+    <ul class="nav-links" id="nav-links"></ul>
+    <div class="sidebar-footer">
+      <div class="sync-badge"><span class="pulse-dot"></span>Live Feed</div>
+      <p class="sync-time" id="sync-time"></p>
+      <button class="btn-logout" onclick="RC.auth.logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburger-btn" onclick="RC.ui.toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+        <div>
+          <h3 id="view-title">Dashboard</h3>
+          <div class="breadcrumb">Republic of Botswana &nbsp;/&nbsp; <span id="breadcrumb-page">Overview</span></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-wrap">
+          <i class="fa-solid fa-search"></i>
+          <input type="text" id="search-input" placeholder="Search resources, grids, concessions...">
+        </div>
+        <div class="icon-btn" id="notif-btn" onclick="RC.ui.toggleNotifPanel()">
+          <i class="fa-solid fa-bell"></i>
+          <span class="notif-dot" id="notif-count">0</span>
+        </div>
+        <div class="user-chip" id="user-chip">
+          <span class="status-dot online"></span>
+          <div class="user-info-wrap">
+            <span id="user-name-display"></span>
+            <span id="user-role-display" class="user-role"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="view-container">
+      <!-- Views injected by JS -->
+      <div class="view active" id="view-dashboard"></div>
+      <div class="view" id="view-nexus"></div>
+      <div class="view" id="view-map"></div>
+      <div class="view" id="view-grids"></div>
+      <div class="view" id="view-mining"></div>
+      <div class="view" id="view-investments"></div>
+      <div class="view" id="view-targets"></div>
+      <div class="view" id="view-compliance"></div>
+      <div class="view" id="view-blockchain"></div>
+      <div class="view" id="view-fieldreports"></div>
+      <div class="view" id="view-reports"></div>
+    </div>
+  </main>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

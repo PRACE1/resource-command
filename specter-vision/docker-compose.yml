@@ -1,0 +1,80 @@
+version: '3.9'
+
+services:
+
+  # ── ComfyUI Engine ────────────────────────────────────────────────────────
+  comfyui:
+    image: ghcr.io/ai-dock/comfyui:latest-cuda
+    container_name: specter-comfyui
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - WEB_ENABLE_AUTH=false
+      - AUTO_UPDATE=false
+      - COMFYUI_FLAGS=--listen 0.0.0.0 --port 8188
+    volumes:
+      - ./volumes/models:/opt/ComfyUI/models
+      - ./volumes/custom_nodes:/opt/ComfyUI/custom_nodes
+      - ./volumes/output:/opt/ComfyUI/output
+      - ./volumes/input:/opt/ComfyUI/input
+    ports:
+      - "8188:8188"
+    networks:
+      - specter-net
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8188/system_stats"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+  # ── FastAPI Bridge ────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: specter-backend
+    environment:
+      - COMFYUI_URL=http://comfyui:8188
+      - OUTPUT_DIR=/app/outputs
+      - UPLOAD_DIR=/app/uploads
+    volumes:
+      - ./volumes/output:/app/outputs
+      - ./volumes/uploads:/app/uploads
+      - ./backend/workflows:/app/workflows:ro
+    ports:
+      - "8000:8000"
+    networks:
+      - specter-net
+    depends_on:
+      comfyui:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── React Terminal ────────────────────────────────────────────────────────
+  frontend:
+    image: node:20-alpine
+    container_name: specter-frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    networks:
+      - specter-net
+    depends_on:
+      - backend
+
+networks:
+  specter-net:
+    driver: bridge

@@ -1,0 +1,31 @@
+# Environment and Credentials
+.env
+.env.example
+.mcp.json
+*.pem
+*.key
+*.pub
+
+# Virtual Environment & Node dependencies
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+
+# Local IDE and tool configuration
+.claude/
+.idea/
+.vscode/
+
+# Large binaries and archives
+*.zip
+*.tar.gz
+*.exe
+_Audit_Pack_Current/*.zip
+
+# Specter-Vision & ComfyUI local environments (contain gigabytes of models/caches)
+specter-vision/volumes/
+specter-vision/models/
+specter-vision/.cache/
+cloudflared*

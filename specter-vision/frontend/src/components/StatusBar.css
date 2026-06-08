@@ -1,0 +1,149 @@
+.sv-statusbar {
+  display: flex;
+  align-items: center;
+  height: var(--header-h);
+  padding: 0 16px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  gap: 12px;
+  user-select: none;
+}
+
+/* Brand */
+.sv-statusbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.sv-statusbar__glyph {
+  font-size: 14px;
+  color: var(--cyan);
+  line-height: 1;
+  animation: sv-pulse 3s ease-in-out infinite;
+}
+.sv-statusbar__name {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-100);
+}
+.sv-statusbar__divider {
+  color: var(--border-default);
+  font-size: 10px;
+}
+.sv-statusbar__sub {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-45);
+  letter-spacing: 0.08em;
+}
+
+/* Center pill */
+.sv-statusbar__center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.sv-statusbar__job-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  animation: sv-fade-up var(--t-base) var(--ease-snappy);
+}
+.sv-statusbar__job-pill--running {
+  background: var(--cyan-07);
+  border: 1px solid var(--border-cyan);
+  color: var(--cyan);
+}
+.sv-statusbar__job-pill--done {
+  background: hsla(152, 76%, 50%, 0.07);
+  border: 1px solid hsla(152, 76%, 50%, 0.30);
+  color: var(--green);
+}
+.sv-statusbar__job-pill--failed {
+  background: hsla(352, 88%, 60%, 0.07);
+  border: 1px solid hsla(352, 88%, 60%, 0.30);
+  color: var(--red);
+}
+.sv-statusbar__job-pill--queued {
+  background: var(--gold-15);
+  border: 1px solid var(--gold-40);
+  color: var(--gold);
+}
+.sv-statusbar__spinner {
+  width: 8px; height: 8px;
+  border: 1.5px solid var(--cyan-30);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: sv-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Stats */
+.sv-statusbar__stats {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+.sv-statusbar__stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.sv-statusbar__dot-status {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: sv-pulse 2.5s ease-in-out infinite;
+}
+.sv-statusbar__dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: sv-dot-blink 1s ease-in-out infinite;
+}
+.sv-statusbar__stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-22);
+}
+.sv-statusbar__stat-val {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--text-70);
+}
+.sv-statusbar__stat-unit {
+  font-size: 8.5px;
+  color: var(--text-45);
+}
+.sv-statusbar__vram-bar {
+  width: 36px; height: 3px;
+  background: var(--bg-raised);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.sv-statusbar__vram-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s var(--ease-snappy);
+}
+.sv-statusbar__clock {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-45);
+  letter-spacing: 0.06em;
+  border-left: 1px solid var(--border-subtle);
+  padding-left: 14px;
+  margin-left: 4px;
+}

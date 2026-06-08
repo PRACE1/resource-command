@@ -1,0 +1,205 @@
+/* ================================================================
+   SPECTER-VISION — DESIGN SYSTEM v1.0
+   Kgosi Capital // Private AI Video Terminal
+   ================================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-void:    #03030b;
+  --bg-base:    #07070f;
+  --bg-surface: #0c0c1c;
+  --bg-raised:  #111128;
+  --bg-overlay: #16162e;
+
+  /* Glass */
+  --glass-bg:        rgba(8, 8, 20, 0.75);
+  --glass-border:    rgba(255, 255, 255, 0.065);
+  --glass-highlight: rgba(255, 255, 255, 0.025);
+  --glass-blur:      18px;
+
+  /* Accent: Cyan (primary) */
+  --cyan:      hsl(193, 100%, 55%);
+  --cyan-60:   hsla(193, 100%, 55%, 0.60);
+  --cyan-30:   hsla(193, 100%, 55%, 0.30);
+  --cyan-15:   hsla(193, 100%, 55%, 0.15);
+  --cyan-07:   hsla(193, 100%, 55%, 0.07);
+
+  /* Accent: Purple (secondary) */
+  --purple:    hsl(268, 100%, 70%);
+  --purple-40: hsla(268, 100%, 70%, 0.40);
+  --purple-15: hsla(268, 100%, 70%, 0.15);
+
+  /* Accent: Gold (investment) */
+  --gold:      hsl(43, 100%, 58%);
+  --gold-40:   hsla(43, 100%, 58%, 0.40);
+  --gold-15:   hsla(43, 100%, 58%, 0.15);
+
+  /* Status */
+  --green:     hsl(152, 76%, 50%);
+  --red:       hsl(352, 88%, 60%);
+  --amber:     hsl(38, 100%, 58%);
+
+  /* Text */
+  --text-100: rgba(236, 236, 255, 0.96);
+  --text-70:  rgba(200, 200, 230, 0.70);
+  --text-45:  rgba(180, 180, 215, 0.45);
+  --text-22:  rgba(160, 160, 200, 0.22);
+
+  /* Borders */
+  --border-faint:   rgba(255, 255, 255, 0.04);
+  --border-subtle:  rgba(255, 255, 255, 0.07);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-hover:   rgba(255, 255, 255, 0.18);
+  --border-cyan:    hsla(193, 100%, 55%, 0.42);
+  --border-gold:    hsla(43, 100%, 58%, 0.42);
+
+  /* Shadows */
+  --shadow-s:       0 2px 8px  rgba(0, 0, 0, 0.50);
+  --shadow-m:       0 4px 24px rgba(0, 0, 0, 0.60);
+  --shadow-l:       0 8px 48px rgba(0, 0, 0, 0.75);
+  --glow-cyan:      0 0 28px hsla(193, 100%, 55%, 0.28);
+  --glow-cyan-s:    0 0 12px hsla(193, 100%, 55%, 0.22);
+  --glow-purple:    0 0 28px hsla(268, 100%, 70%, 0.22);
+  --glow-gold:      0 0 28px hsla(43, 100%, 58%, 0.22);
+
+  /* Typography */
+  --font-ui:   'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  /* Layout */
+  --header-h:    50px;
+  --statusbar-h: 28px;
+  --vault-w:     270px;
+  --controls-w:  310px;
+
+  /* Motion */
+  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --t-fast:      120ms;
+  --t-base:      220ms;
+  --t-slow:      400ms;
+}
+
+/* ── Reset & Base ───────────────────────────────────────────────── */
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg-void);
+  color: var(--text-100);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+::selection { background: var(--cyan-15); }
+
+/* ── Root Layout ────────────────────────────────────────────────── */
+.sv-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-void);
+  overflow: hidden;
+}
+
+.sv-workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.sv-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-left: 1px solid var(--border-faint);
+  border-right: 1px solid var(--border-faint);
+  min-width: 0;
+}
+
+/* ── Reusable Atoms ─────────────────────────────────────────────── */
+.sv-eyebrow {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  opacity: 0.75;
+}
+
+.sv-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-45);
+}
+
+.sv-divider {
+  height: 1px;
+  background: var(--border-faint);
+  flex-shrink: 0;
+}
+
+.sv-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────── */
+@keyframes sv-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1.0; }
+}
+
+@keyframes sv-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sv-fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sv-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes sv-scan {
+  0%   { transform: translateY(-2px); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(calc(100vh - 2px)); opacity: 0; }
+}
+
+@keyframes sv-stripes {
+  from { background-position: 0 0; }
+  to   { background-position: 32px 0; }
+}
+
+@keyframes sv-dot-blink {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1.0; }
+}

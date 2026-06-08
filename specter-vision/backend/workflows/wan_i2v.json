@@ -1,0 +1,119 @@
+{
+  "1": {
+    "inputs": {
+      "model": "wan2.1_i2v_480p_14B_bf16.safetensors",
+      "base_precision": "bf16",
+      "quantization": "fp8_e4m3fn",
+      "load_device": "offload_device"
+    },
+    "class_type": "WanVideoModelLoader",
+    "_meta": { "title": "model_loader" }
+  },
+  "2": {
+    "inputs": {
+      "model_name": "clip_vision_h.safetensors"
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": { "title": "clip_vision_loader" }
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "AutoencoderKLWan",
+    "_meta": { "title": "vae_loader" }
+  },
+  "4": {
+    "inputs": {
+      "image": "input.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": { "title": "load_image" }
+  },
+  "5": {
+    "inputs": {
+      "width": 832,
+      "height": 480,
+      "interpolation": "lanczos",
+      "method": "keep proportion",
+      "condition": "always",
+      "multiple_of": 64,
+      "image": ["4", 0]
+    },
+    "class_type": "ImageResizeKJ",
+    "_meta": { "title": "resize_image" }
+  },
+  "6": {
+    "inputs": {
+      "text": "Anamorphic lens, cinematic industrial reveal, precision engineering",
+      "clip": ["1", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": { "title": "positive_prompt" }
+  },
+  "7": {
+    "inputs": {
+      "text": "blurry, distorted, low quality, watermark, text",
+      "clip": ["1", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": { "title": "negative_prompt" }
+  },
+  "8": {
+    "inputs": {
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "vae": ["3", 0],
+      "clip_vision": ["2", 0],
+      "start_image": ["5", 0],
+      "motion_bucket_id": 110,
+      "augmentation_level": 0.0,
+      "num_frames": 81
+    },
+    "class_type": "WanImageToVideoConditioning",
+    "_meta": { "title": "motion_params" }
+  },
+  "9": {
+    "inputs": {
+      "seed": 0,
+      "steps": 25,
+      "cfg": 6.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0,
+      "model": ["1", 0],
+      "positive": ["8", 0],
+      "negative": ["8", 1],
+      "latent_image": ["8", 2],
+      "num_frames": 81,
+      "context_size": 81
+    },
+    "class_type": "KSampler",
+    "_meta": { "title": "sampler" }
+  },
+  "10": {
+    "inputs": {
+      "samples": ["9", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecodeVideo",
+    "_meta": { "title": "vae_decode" }
+  },
+  "11": {
+    "inputs": {
+      "frame_rate": 24,
+      "loop_count": 0,
+      "filename_prefix": "specter",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 19,
+      "save_metadata": false,
+      "pingpong": false,
+      "save_output": true,
+      "images": ["10", 0]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": { "title": "video_combine" }
+  }
+}

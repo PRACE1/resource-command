@@ -1,0 +1,155 @@
+.sv-prompt {
+  flex-shrink: 0;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Header */
+.sv-prompt__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px 8px;
+}
+.sv-prompt__terminal-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-22);
+  letter-spacing: 0.08em;
+  flex: 1;
+}
+.sv-prompt__header-actions {
+  display: flex;
+  gap: 6px;
+}
+.sv-prompt__neg-toggle,
+.sv-prompt__clear-btn {
+  padding: 3px 9px;
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  cursor: pointer;
+  transition: all var(--t-fast) ease;
+}
+.sv-prompt__neg-toggle {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-45);
+}
+.sv-prompt__neg-toggle:hover {
+  border-color: var(--border-hover);
+  color: var(--text-70);
+}
+.sv-prompt__neg-toggle--active {
+  background: var(--purple-15);
+  border-color: var(--purple-40);
+  color: var(--purple);
+}
+.sv-prompt__clear-btn {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-22);
+}
+.sv-prompt__clear-btn:hover {
+  border-color: hsla(352, 88%, 60%, 0.30);
+  color: var(--red);
+}
+
+/* Template rail */
+.sv-prompt__templates {
+  display: flex;
+  gap: 6px;
+  padding: 8px 14px;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+.sv-prompt__templates::-webkit-scrollbar { height: 2px; }
+
+.sv-prompt__template-btn {
+  flex-shrink: 0;
+  padding: 5px 12px;
+  border-radius: 3px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-45);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  cursor: pointer;
+  transition: all var(--t-fast) ease;
+  white-space: nowrap;
+}
+.sv-prompt__template-btn:hover {
+  border-color: var(--border-cyan);
+  color: var(--cyan);
+  background: var(--cyan-07);
+}
+.sv-prompt__template-btn--active {
+  background: var(--cyan-07);
+  border-color: var(--border-cyan);
+  color: var(--cyan);
+  box-shadow: var(--glow-cyan-s);
+}
+
+/* Textarea */
+.sv-prompt__input-wrap {
+  position: relative;
+  padding: 0 14px 10px;
+}
+.sv-prompt__textarea {
+  width: 100%;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  color: var(--text-100);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 10px 40px 10px 12px;
+  resize: none;
+  outline: none;
+  transition: border-color var(--t-fast) ease, box-shadow var(--t-fast) ease;
+}
+.sv-prompt__textarea::placeholder {
+  color: var(--text-22);
+  font-style: italic;
+}
+.sv-prompt__textarea:focus {
+  border-color: var(--border-cyan);
+  box-shadow: 0 0 0 1px var(--cyan-07), inset 0 0 0 1px transparent;
+}
+.sv-prompt__char-count {
+  position: absolute;
+  bottom: 18px;
+  right: 22px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-22);
+  pointer-events: none;
+}
+
+/* Negative prompt */
+.sv-prompt__neg-wrap {
+  padding: 0 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  animation: sv-fade-up var(--t-fast) var(--ease-snappy);
+}
+.sv-prompt__neg-label {
+  padding-left: 2px;
+}
+.sv-prompt__textarea--neg {
+  background: hsla(268, 40%, 8%, 0.6);
+  border-color: var(--purple-15);
+}
+.sv-prompt__textarea--neg:focus {
+  border-color: var(--purple-40);
+  box-shadow: 0 0 0 1px var(--purple-15);
+}

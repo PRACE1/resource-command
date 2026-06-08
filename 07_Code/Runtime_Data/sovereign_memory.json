@@ -1,0 +1,40 @@
+{
+  "project": "Resource Command",
+  "sessions": [
+    {
+      "domain": "zk_circuits",
+      "decision": "Patched royalty_rate_bps soundness gap. Bounded to 5000 bps statutory cap.",
+      "output": "compliance.circom v1.1 \u2014 SHA-256 fingerprinted and audit-ready.",
+      "blocker": null,
+      "timestamp": "2026-05-11T00:37:36.684109+00:00"
+    },
+    {
+      "domain": "audit_engagement",
+      "decision": "Submitted audit pack v1.9 to Trail of Bits (Akshith). Cover letter with hash table.",
+      "output": "Resource_Command_Audit_Pack_v1.9_SIGNATURE_READY.zip dispatched.",
+      "blocker": "Awaiting Trail of Bits response.",
+      "timestamp": "2026-05-11T00:37:36.684109+00:00"
+    },
+    {
+      "domain": "media_engine",
+      "decision": "Abandoned local ComfyUI/Docker (AMD RX 6600 incompatible). Pivoted to Replicate cloud.",
+      "output": "Specter-Vision MCP server v2.0 \u2014 Wan 2.1 14B, Director presets, H100 compute.",
+      "blocker": "Replicate credit balance at $0. Video render blocked until purchase confirmed.",
+      "timestamp": "2026-05-11T00:37:36.684109+00:00"
+    },
+    {
+      "domain": "mcp_stack",
+      "decision": "Hard-registered specter-vision in .claude.json with absolute Windows paths.",
+      "output": "Token forensics confirmed: prace1 account active. Bridge logic validated.",
+      "blocker": "Claude Desktop GUI MCP connection not yet confirmed via /mcp command.",
+      "timestamp": "2026-05-11T00:37:36.684109+00:00"
+    },
+    {
+      "domain": "memory_architecture",
+      "decision": "Implementing JIT-RL pattern \u2014 structured experience logs, no fine-tuning required.",
+      "output": "session_memory.py deployed. sovereign_memory.json as the accumulator.",
+      "blocker": null,
+      "timestamp": "2026-05-11T00:37:36.684109+00:00"
+    }
+  ]
+}

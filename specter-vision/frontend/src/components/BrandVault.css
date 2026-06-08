@@ -1,0 +1,160 @@
+.sv-vault {
+  width: var(--vault-w);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  overflow: hidden;
+}
+
+/* Header */
+.sv-vault__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 10px;
+  flex-shrink: 0;
+}
+.sv-vault__asset-count {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-22);
+  letter-spacing: 0.10em;
+}
+
+/* Asset Grid */
+.sv-vault__grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-content: start;
+}
+
+/* Card */
+.sv-vault__card {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition:
+    border-color var(--t-fast) ease,
+    box-shadow   var(--t-fast) ease,
+    transform    var(--t-fast) ease;
+  text-align: left;
+}
+.sv-vault__card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-s);
+}
+.sv-vault__card--selected {
+  border-color: var(--border-cyan) !important;
+  box-shadow: var(--glow-cyan-s), inset 0 0 0 1px var(--cyan-15);
+}
+
+/* Thumbnail */
+.sv-vault__thumb {
+  position: relative;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  background: var(--bg-raised);
+}
+.sv-vault__placeholder-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.sv-vault__thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sv-vault__selected-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cyan-07);
+  color: var(--cyan);
+  font-size: 18px;
+  animation: sv-fade-up var(--t-fast) ease;
+}
+
+/* Card label */
+.sv-vault__card-label {
+  padding: 5px 7px 6px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border-faint);
+}
+.sv-vault__card-name {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-70);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sv-vault__card-sub {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  color: var(--text-45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+/* Footer / upload */
+.sv-vault__footer {
+  padding: 12px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sv-vault__upload-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 14px;
+  background: var(--cyan-07);
+  border: 1px dashed var(--border-cyan);
+  border-radius: 4px;
+  color: var(--cyan);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--t-fast) ease, box-shadow var(--t-fast) ease;
+}
+.sv-vault__upload-btn:hover {
+  background: var(--cyan-15);
+  box-shadow: var(--glow-cyan-s);
+}
+.sv-vault__upload-icon {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1;
+}
+.sv-vault__hint {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  color: var(--text-22);
+  letter-spacing: 0.08em;
+}

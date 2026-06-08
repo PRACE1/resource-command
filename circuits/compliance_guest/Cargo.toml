@@ -1,0 +1,28 @@
+[package]
+name = "compliance-guest"
+version = "1.0.0"
+edition = "2021"
+
+# RISC0 zkVM guest programs must target the riscv32im-risc0-zkvm-elf target.
+# Build with: cargo risczero build
+
+[[bin]]
+name = "compliance_guest"
+path = "src/main.rs"
+
+[dependencies]
+# Core RISC0 guest library
+risc0-zkvm = { version = "1.0", default-features = false, features = ["std"] }
+
+# Serialization (must be compatible with the host's deserialization)
+serde = { version = "1.0", features = ["derive"] }
+
+# Hashing (SHA2 is RISC0-accelerated — much faster in zkVM)
+sha2 = { version = "0.10", default-features = false }
+
+[profile.release]
+# Required for zkVM guest compilation
+panic = "abort"
+opt-level = 3
+lto = true
+codegen-units = 1

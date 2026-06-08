@@ -1,0 +1,242 @@
+{
+  "_comment": [
+    "Specter-Vision ELITE Workflow — Wan 2.1 I2V",
+    "Required custom nodes:",
+    "  • ComfyUI-WanVideoWrapper (kijai) — WanVideoModelLoader, WanImageToVideoConditioning",
+    "  • comfyui_controlnet_aux — DepthAnythingV2Preprocessor, CannyEdgePreprocessor",
+    "  • ComfyUI-Frame-Interpolation — RIFE VFI",
+    "  • ComfyUI-VideoHelperSuite — VHS_VideoCombine",
+    "  • ComfyUI-KJNodes — ImageResizeKJ",
+    "Required models:",
+    "  • models/diffusion_models/wan2.1_i2v_480p_14B_bf16.safetensors",
+    "  • models/vae/wan_2.1_vae.safetensors",
+    "  • models/clip_vision/clip_vision_h.safetensors",
+    "  • models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+    "  • models/controlnet/depth_anything_v2_controlnet.safetensors  (geometry lock depth)",
+    "  • models/controlnet/controlnet_canny_wan.safetensors           (geometry lock canny)",
+    "  • models/rife/rife47.pth                                       (temporal master)",
+    "Patchable node titles → patched by patch_workflow_elite() in comfy_client.py:",
+    "  positive_prompt, negative_prompt, sampler, motion_params,",
+    "  load_image, video_combine, depth_controlnet_apply,",
+    "  canny_controlnet_apply, frame_interpolation"
+  ],
+
+  "1": {
+    "inputs": {
+      "model":          "wan2.1_i2v_480p_14B_bf16.safetensors",
+      "base_precision": "bf16",
+      "quantization":   "fp8_e4m3fn",
+      "load_device":    "offload_device"
+    },
+    "class_type": "WanVideoModelLoader",
+    "_meta": { "title": "model_loader" }
+  },
+
+  "2": {
+    "inputs": {
+      "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "wan"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": { "title": "text_encoder_loader" }
+  },
+
+  "3": {
+    "inputs": {
+      "clip_name": "clip_vision_h.safetensors"
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": { "title": "clip_vision_loader" }
+  },
+
+  "4": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "AutoencoderKLWan",
+    "_meta": { "title": "vae_loader" }
+  },
+
+  "5": {
+    "inputs": {
+      "image":  "input.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": { "title": "load_image" }
+  },
+
+  "6": {
+    "inputs": {
+      "width":         832,
+      "height":        480,
+      "interpolation": "lanczos",
+      "method":        "keep proportion",
+      "condition":     "always",
+      "multiple_of":   64,
+      "image":         ["5", 0]
+    },
+    "class_type": "ImageResizeKJ",
+    "_meta": { "title": "resize_image" }
+  },
+
+  "7": {
+    "inputs": {
+      "text": "Anamorphic lens, cinematic industrial reveal, precision engineering",
+      "clip": ["2", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": { "title": "positive_prompt" }
+  },
+
+  "8": {
+    "inputs": {
+      "text": "blurry, distorted, low quality, watermark, text, CGI artifact",
+      "clip": ["2", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": { "title": "negative_prompt" }
+  },
+
+  "9": {
+    "inputs": {
+      "positive":          ["7", 0],
+      "negative":          ["8", 0],
+      "vae":               ["4", 0],
+      "clip_vision":       ["3", 0],
+      "start_image":       ["6", 0],
+      "motion_bucket_id":  110,
+      "augmentation_level": 0.0,
+      "num_frames":        81
+    },
+    "class_type": "WanImageToVideoConditioning",
+    "_meta": { "title": "motion_params" }
+  },
+
+  "10": {
+    "inputs": {
+      "model":                     "depth_anything_v2_controlnet.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": { "title": "depth_controlnet_loader" }
+  },
+
+  "11": {
+    "inputs": {
+      "model":                     "controlnet_canny_wan.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": { "title": "canny_controlnet_loader" }
+  },
+
+  "12": {
+    "inputs": {
+      "image":       ["6", 0],
+      "resolution":  512
+    },
+    "class_type": "DepthAnythingV2Preprocessor",
+    "_meta": { "title": "depth_preprocessor" }
+  },
+
+  "13": {
+    "inputs": {
+      "image":        ["6", 0],
+      "low_threshold":  100,
+      "high_threshold": 200,
+      "resolution":     512
+    },
+    "class_type": "CannyEdgePreprocessor",
+    "_meta": { "title": "canny_preprocessor" }
+  },
+
+  "14": {
+    "inputs": {
+      "positive":       ["9", 0],
+      "negative":       ["9", 1],
+      "control_net":    ["10", 0],
+      "image":          ["12", 0],
+      "strength":       0.80,
+      "start_percent":  0.0,
+      "end_percent":    0.65
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": { "title": "depth_controlnet_apply" }
+  },
+
+  "15": {
+    "inputs": {
+      "positive":       ["14", 0],
+      "negative":       ["14", 1],
+      "control_net":    ["11", 0],
+      "image":          ["13", 0],
+      "strength":       0.60,
+      "start_percent":  0.0,
+      "end_percent":    0.50
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": { "title": "canny_controlnet_apply" }
+  },
+
+  "16": {
+    "inputs": {
+      "seed":          0,
+      "steps":         25,
+      "cfg":           6.0,
+      "sampler_name":  "euler",
+      "scheduler":     "simple",
+      "denoise":       1.0,
+      "model":         ["1", 0],
+      "positive":      ["15", 0],
+      "negative":      ["15", 1],
+      "latent_image":  ["9", 2],
+      "num_frames":    81,
+      "context_size":  81
+    },
+    "class_type": "KSampler",
+    "_meta": { "title": "sampler" }
+  },
+
+  "17": {
+    "inputs": {
+      "samples": ["16", 0],
+      "vae":     ["4", 0],
+      "tile_sample_min_width":    256,
+      "tile_sample_min_height":   256,
+      "tile_overlap_factor_width":  0.25,
+      "tile_overlap_factor_height": 0.25
+    },
+    "class_type": "VAEDecodeTiledVideo",
+    "_meta": { "title": "tiled_vae_decode" }
+  },
+
+  "18": {
+    "inputs": {
+      "ckpt_name":                  "rife47.pth",
+      "frames":                     ["17", 0],
+      "clear_cache_after_n_frames": 10,
+      "multiplier":                 2,
+      "fast_mode":                  false,
+      "ensemble":                   true,
+      "scale_factor":               1.0
+    },
+    "class_type": "RIFE VFI",
+    "_meta": { "title": "frame_interpolation" }
+  },
+
+  "19": {
+    "inputs": {
+      "frame_rate":      24,
+      "loop_count":      0,
+      "filename_prefix": "specter_elite",
+      "format":          "video/h264-mp4",
+      "pix_fmt":         "yuv420p",
+      "crf":             18,
+      "save_metadata":   false,
+      "pingpong":        false,
+      "save_output":     true,
+      "images":          ["18", 0]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": { "title": "video_combine" }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "mine": "MPNI - Mopani, Mufulira, Zambia",
+  "coordinates": {
+    "lat": -12.5501,
+    "lon": 28.2371
+  },
+  "source": "ESA Copernicus Data Space Ecosystem",
+  "scenes": [
+    {
+      "id": "33c28a12-7d08-42f2-920e-08e97eff6b8f",
+      "name": "S2A_MSIL1C_20260523T081021_N0512_R078_T35LPG_20260523T132922.SAFE",
+      "date": "2026-05-23",
+      "cloud_cover": 0.0,
+      "size_mb": 602.1
+    },
+    {
+      "id": "c6c89162-b3d7-460d-907e-afc5f5623a3b",
+      "name": "S2A_MSIL2A_20260523T081021_N0512_R078_T35LPG_20260523T145930.SAFE",
+      "date": "2026-05-23",
+      "cloud_cover": 0.018228,
+      "size_mb": 880.5
+    },
+    {
+      "id": "548d2f2f-d1fd-4f6a-9e9c-ef188bf35c5d",
+      "name": "S2C_MSIL2A_20260521T080601_N0512_R078_T35LPG_20260521T133208.SAFE",
+      "date": "2026-05-21",
+      "cloud_cover": 1.069091,
+      "size_mb": 882.0
+    },
+    {
+      "id": "a0bdcb62-4a73-48a3-8c94-9fd055808015",
+      "name": "S2C_MSIL1C_20260521T080601_N0512_R078_T35LPG_20260521T114923.SAFE",
+      "date": "2026-05-21",
+      "cloud_cover": 0.061604455727,
+      "size_mb": 601.2
+    },
+    {
+      "id": "7d6b3e01-a2d6-4c30-a777-b6c6cd972abe",
+      "name": "S2B_MSIL2A_20260516T080559_N0512_R078_T35LPG_20260516T121521.SAFE",
+      "date": "2026-05-16",
+      "cloud_cover": 22.342749,
+      "size_mb": 878.7
+    }
+  ]
+}
