@@ -48,7 +48,7 @@ Private inputs use physics-derived bit widths rather than blanket `Num2Bits(64)`
 **Validator Infrastructure:**  
 The verifier is deployed across a five-node permissioned BFT network (n=5, f=1) comprising the MRC, ZRA, Ministry of Finance, AfDB, and the World Bank, implemented under the PBFT partial-synchrony framework. The inclusion of two independent international nodes ensures cryptographic attributability of any sovereign-level collusion attempt.
 
-**Reported constraint count:** 578 non-linear constraints (circom compile, Groth16 target).
+**Reported constraint count:** 839 non-linear constraints (circom compile, Groth16 target).
 
 ---
 
