@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Command — Logistics Operator Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F59E0B;
+    --gold-light: #FDE68A;
+    --green: #10B981;
+    --green-light: #D1FAE5;
+    --blue: #3B82F6;
+    --blue-light: #DBEAFE;
+    --red: #EF4444;
+    --red-light: #FEE2E2;
+    --purple: #8B5CF6;
+    --purple-light: #EDE9FE;
+    --dark: #0A0F1D;
+    --dark2: #141B2D;
+    --dark3: #1F293D;
+    --text: #F8FAFC;
+    --text-muted: #94A3B8;
+    --border: rgba(255,255,255,0.06);
+    --card-bg: rgba(20, 27, 45, 0.7);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ── SLIDE DECK CONTAINER ── */
+  .presentation {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+                var(--dark);
+  }
+
+  /* ── NAVIGATION TOP BAR ── */
+  .nav-header {
+    height: 70px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 15, 29, 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+  }
+
+  .brand {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .deck-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SLIDES STACK ── */
+  .slides-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: scale(0.98) translateY(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 80px;
+    z-index: 1;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) translateY(0);
+    z-index: 2;
+  }
+
+  /* ── SLIDE CONTENT LAYOUTS ── */
+  .slide-layout {
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .slide-header {
+    margin-bottom: 30px;
+  }
+
+  .slide-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    background: rgba(245, 158, 11, 0.08);
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+
+  .slide-title {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #FFF 0%, #E2E8F0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .slide-subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  /* ── CONTROLS FOOTER BAR ── */
+  .nav-footer {
+    height: 70px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    background: rgba(10, 15, 29, 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+  }
+
+  .progress-indicator {
+    display: flex;
+    gap: 6px;
+  }
+
+  .progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dark3);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .progress-dot.active {
+    background: var(--gold);
+    transform: scale(1.3);
+  }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn:hover {
+    background: var(--dark3);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: #FBBF24;
+  }
+
+  /* ── SLIDE SPECIAL ELEMENTS ── */
+
+  /* Cover Slide */
+  .cover-layout {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cover-gem {
+    font-size: 72px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 30px rgba(245, 158, 11, 0.35));
+  }
+
+  .cover-title {
+    font-size: 56px;
+    font-weight: 950;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #FFF 30%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+  }
+
+  .cover-desc {
+    font-size: 20px;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    border-top: 1px solid var(--border);
+    padding-top: 30px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .meta-box {
+    text-align: center;
+  }
+
+  .meta-val {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--gold);
+  }
+
+  .meta-lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* Two Columns Layout */
+  .content-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  /* Cards Grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s, border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245, 158, 11, 0.25);
+  }
+
+  .card-icon {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .card-tag {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  /* Comparison Columns */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .comp-column {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+  }
+
+  .comp-column.legacy {
+    border-left: 4px solid var(--red);
+  }
+
+  .comp-column.rc {
+    border-left: 4px solid var(--green);
+    background: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 60%), var(--card-bg);
+  }
+
+  .comp-header {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .comp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .comp-list li {
+    font-size: 14px;
+    color: var(--text-muted);
+    position: relative;
+    padding-left: 24px;
+    line-height: 1.4;
+  }
+
+  .comp-list li::before {
+    position: absolute;
+    left: 0;
+    font-weight: 800;
+  }
+
+  .legacy .comp-list li::before {
+    content: '✕';
+    color: var(--red);
+  }
+
+  .rc .comp-list li::before {
+    content: '✓';
+    color: var(--green);
+  }
+
+  .rc .comp-list li strong {
+    color: var(--text);
+  }
+
+  .comp-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .comp-footer-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .comp-footer-value {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .legacy .comp-footer-value { color: var(--red); }
+  .rc .comp-footer-value { color: var(--green); }
+
+  /* Flow Steps */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  .flow-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .flow-card:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--text-muted);
+    z-index: 2;
+  }
+
+  .flow-step-num {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  /* Table Style */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+  }
+
+  .pricing-table-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+  }
+
+  .pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  .pricing-table th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .pricing-table td {
+    padding: 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .pricing-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .pricing-table td strong {
+    color: var(--gold);
+  }
+
+  .sidebar-box {
+    background: radial-gradient(circle at 0% 0%, rgba(245, 158, 11, 0.06) 0%, transparent 60%), var(--card-bg);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .sidebar-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .sidebar-body {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .sidebar-body ul {
+    margin-top: 15px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sidebar-body ul li {
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .sidebar-body ul li::before {
+    content: '✓';
+    color: var(--gold);
+    position: absolute;
+    left: 0;
+  }
+
+  .sidebar-footer {
+    margin-top: 30px;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* Timeline */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .roadmap-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    position: relative;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .roadmap-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--border);
+    border-radius: 12px 12px 0 0;
+  }
+
+  .roadmap-card.active::before {
+    background: var(--gold);
+  }
+
+  .roadmap-card.completed::before {
+    background: var(--green);
+  }
+
+  .roadmap-week {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .roadmap-card.active .roadmap-week {
+    color: var(--gold);
+  }
+
+  .roadmap-card.completed .roadmap-week {
+    color: var(--green);
+  }
+
+  .roadmap-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .roadmap-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Interactive Architecture Diagram */
+  .architecture-diagram {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-top: 30px;
+    overflow-x: auto;
+  }
+
+  .arch-node {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-align: center;
+    z-index: 2;
+    min-width: 140px;
+  }
+
+  .arch-node.highlight {
+    border-color: var(--gold);
+    background: rgba(245, 158, 11, 0.05);
+  }
+
+  .arch-node.accent {
+    border-color: var(--blue);
+    background: rgba(59, 130, 246, 0.05);
+  }
+
+  .arch-node.success {
+    border-color: var(--green);
+    background: rgba(16, 185, 129, 0.05);
+  }
+
+  .arch-node-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .arch-node-desc {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .arch-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    z-index: 1;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .arch-arrow-line {
+    height: 2px;
+    background: var(--border);
+    width: 100%;
+    position: relative;
+  }
+
+  .arch-arrow-line::after {
+    content: '▶';
+    position: absolute;
+    right: -2px;
+    top: -5px;
+    font-size: 9px;
+    color: var(--text-muted);
+  }
+
+  .arch-node.success .arch-arrow-line::after {
+    color: var(--green);
+  }
+
+  .arch-arrow-label {
+    font-size: 9px;
+    color: var(--text-muted);
+  }
+
+  /* Contact slide spec */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+  }
+
+  .contact-info-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .contact-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .contact-det .lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-det .val {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 2px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="presentation">
+  
+  <!-- NAV HEADER -->
+  <header class="nav-header">
+    <div class="brand">⬡ Resource Command</div>
+    <div class="deck-title">Logistics Operator Pitch Deck</div>
+  </header>
+
+  <!-- SLIDES STACK -->
+  <main class="slides-container">
+
+    <!-- SLIDE 1: COVER -->
+    <section class="slide active" id="slide-1">
+      <div class="slide-layout cover-layout">
+        <div class="cover-gem">⬡</div>
+        <h1 class="cover-title">Resource Command<br>for Logistics Operators</h1>
+        <p class="cover-desc">
+          Eliminate border delays. Stabilize your Planning Time Index. Attach cryptographic compliance proofs directly to your eBLs to bypass border processing lines.
+        </p>
+        
+        <div class="cover-meta">
+          <div class="meta-box">
+            <div class="meta-val">15 Mins</div>
+            <div class="meta-lbl">Customs Clearance</div>
+          </div>
+          <div class="meta-box">
+            <div class="meta-val">+15-20%</div>
+            <div class="meta-lbl">Asset Velocity</div>
+          </div>
+          <div class="meta-box">
+            <div class="meta-val">Zero</div>
+            <div class="meta-lbl">Data Leakage Risk</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: THE CHALLENGE -->
+    <section class="slide" id="slide-2">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">The Bottleneck</span>
+          <h2 class="slide-title">Cross-Border Regulatory Delays</h2>
+          <p class="slide-subtitle">Manual customs audits and regulatory check-gates create a compounding logjam across your corridors.</p>
+        </div>
+
+        <div class="content-columns">
+          <div class="comp-column legacy">
+            <div class="comp-header">⚡ Operational Drag</div>
+            <ul class="comp-list">
+              <li><strong>Planning Time Index (PTI)</strong> becomes highly volatile and unpredictable.</li>
+              <li><strong>Fleet velocity</strong> drops by 15–20% on the high-tonnage Copperbelt routes.</li>
+              <li><strong>Late arrival penalties</strong> hit your bottom line and damage shipper relationships.</li>
+              <li><strong>Manual validation</strong> is required because customs agents cannot verify mine production volumes.</li>
+            </ul>
+            <div class="comp-footer">
+              <span class="comp-footer-label">Average Border Delay</span>
+              <span class="comp-footer-value">4–8 Hours</span>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 15px;">The Root Cause</h3>
+            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 25px;">
+              Mines cannot share raw production sheets to prove compliance without exposing competitive trade secrets. Because customs agents have no access to independent, trusted verification, they must manually inspect, audit, and hold every truckload at the border.
+            </p>
+            
+            <h4 style="font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--gold); letter-spacing: 0.05em; margin-bottom: 12px;">Compounding Delay Cascade</h4>
+            <div class="flow-grid">
+              <div class="flow-card">
+                <div class="flow-step-num">01</div>
+                <div class="roadmap-name">Plan</div>
+                <p class="roadmap-desc">Vague schedules</p>
+              </div>
+              <div class="flow-card">
+                <div class="flow-step-num">02</div>
+                <div class="roadmap-name">Create</div>
+                <p class="roadmap-desc">Data bottlenecks</p>
+              </div>
+              <div class="flow-card">
+                <div class="flow-step-num">03</div>
+                <div class="roadmap-name">Review</div>
+                <p class="roadmap-desc">Manual audits</p>
+              </div>
+              <div class="flow-card">
+                <div class="flow-step-num">04</div>
+                <div class="roadmap-name">Deliver</div>
+                <p class="roadmap-desc">Late penalties</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: THE SOLUTION -->
+    <section class="slide" id="slide-3">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">The Solution</span>
+          <h2 class="slide-title">Cryptographic Compliance Verification</h2>
+          <p class="slide-subtitle">A zero-knowledge pipeline that automates border compliance checks mathematically, keeping your trucks in continuous motion.</p>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-icon" style="color: var(--purple);">🔑</div>
+            <div class="card-title">Zero-Knowledge Proofs</div>
+            <p class="card-desc">Proves you are carrying compliant, royalty-paid copper without exposing commercial pricing or exact weight figures to third parties.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" style="color: var(--blue);">📡</div>
+            <div class="card-title">Independent Validation</div>
+            <p class="card-desc">Cross-references physical extraction data from ESA Copernicus satellite radars, preventing GIGO and providing objective, audit-ready data.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" style="color: var(--green);">🛡️</div>
+            <div class="card-title">Tamper-Proof IoT</div>
+            <p class="card-desc">Secures transit corridors. Cryptographically bound IoT trackers verify that loads were not altered or diverted between pit and port.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" style="color: var(--gold);">🇪🇺</div>
+            <div class="card-title">EU Customs Integration</div>
+            <p class="card-desc">Outputs proofs formatted to comply directly with EU Battery Regulation 2023/1542, guaranteeing fast-track entry into European markets.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: WHY RESOURCE COMMAND -->
+    <section class="slide" id="slide-4">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">Product Comparison</span>
+          <h2 class="slide-title">Why Resource Command is the Only Solution</h2>
+          <p class="slide-subtitle">Comparing legacy GovTech databases against cryptographic proof architecture.</p>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="comp-column legacy">
+            <div class="comp-header">⚠️ Existing Systems (MOSES, Smart Invoice)</div>
+            <ul class="comp-list">
+              <li>Reconciles operator-supplied documents against operator-supplied documents.</li>
+              <li>No independent verification of physical extraction or transit load integrity.</li>
+              <li>GPS tracking can be unplugged or shielded by local drivers.</li>
+              <li>Customs agents must perform manual paperwork checks on arrival.</li>
+            </ul>
+            <div class="comp-footer">
+              <span class="comp-footer-label">Resulting Delay</span>
+              <span class="comp-footer-value">4–8 Hours</span>
+            </div>
+          </div>
+
+          <div class="comp-column rc">
+            <div class="comp-header">💎 Resource Command</div>
+            <ul class="comp-list">
+              <li><strong>Satellite-derived</strong> production volumes create an objective physical audit trail.</li>
+              <li><strong>5 institutional validators</strong> (including AfDB and World Bank IFC) sign off on proofs.</li>
+              <li><strong>Cryptographically bound IoT</strong> transit trackers invalidate proofs if tampered with.</li>
+              <li><strong>Zero-Knowledge math</strong> creates instant, secure trust for customs portals.</li>
+            </ul>
+            <div class="comp-footer">
+              <span class="comp-footer-label">Resulting Delay</span>
+              <span class="comp-footer-value">15 Minutes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: SYSTEM INTEGRATION -->
+    <section class="slide" id="slide-5">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">Technical Architecture</span>
+          <h2 class="slide-title">Seamless eBL Integration</h2>
+          <p class="slide-subtitle">Sit natively on your Electronic Bill of Lading (eBL) infrastructure with zero operational disruption.</p>
+        </div>
+
+        <div class="architecture-diagram">
+          <div class="arch-node highlight">
+            <div class="arch-node-title">Your eBL System</div>
+            <div class="arch-node-desc">Standard operations</div>
+          </div>
+          
+          <div class="arch-arrow">
+            <span class="arch-arrow-label">Ingest Manifest</span>
+            <div class="arch-arrow-line"></div>
+          </div>
+
+          <div class="arch-node accent">
+            <div class="arch-node-title">Resource Command</div>
+            <div class="arch-node-desc">ZKP Prover (Keystone TEE)</div>
+          </div>
+
+          <div class="arch-arrow">
+            <span class="arch-arrow-label">Generate & Attach Proof</span>
+            <div class="arch-arrow-line"></div>
+          </div>
+
+          <div class="arch-node success">
+            <div class="arch-node-title">EU Customs Portal</div>
+            <div class="arch-node-desc">Verification node</div>
+          </div>
+        </div>
+
+        <div class="cards-grid" style="margin-top: 30px;">
+          <div class="card">
+            <div class="card-title" style="font-size: 15px;">🛠️ REST/SOAP APIs</div>
+            <p class="card-desc">Standard API connections link into your existing eBL tools in 2-3 days of IT support.</p>
+          </div>
+          <div class="card">
+            <div class="card-title" style="font-size: 15px;">🔒 Private Deployment</div>
+            <p class="card-desc">Deploy in your AWS environment or on-premise. All data remains within your sovereign control.</p>
+          </div>
+          <div class="card">
+            <div class="card-title" style="font-size: 15px;">⚡ Enterprise SLA</div>
+            <p class="card-desc">Full SOC 2 Type II compliance, complete encryption at rest/transit, and 24/7 monitoring.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: THE REGULATORY WINDOW -->
+    <section class="slide" id="slide-6">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">Market Timing</span>
+          <h2 class="slide-title">The Regulatory Window: January 2027</h2>
+          <p class="slide-subtitle">EU Battery Regulation 2023/1542 enforcement begins. Operators who prepare now will capture massive market share.</p>
+        </div>
+
+        <div class="roadmap-grid">
+          <div class="roadmap-card completed">
+            <div class="roadmap-week">Q3 2026</div>
+            <div class="roadmap-name">Pilot Phase</div>
+            <p class="roadmap-desc">Run a 90-day pilot on your primary routes with zero risk.</p>
+          </div>
+
+          <div class="roadmap-card active">
+            <div class="roadmap-week">Q4 2026</div>
+            <div class="roadmap-name">Scale Deployment</div>
+            <p class="roadmap-desc">Integrate across your entire logistics network.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week" style="color: var(--red);">Jan 2027</div>
+            <div class="roadmap-name" style="color: var(--red-light);">Enforcement Date</div>
+            <p class="roadmap-desc">EU customs mandates compliance proofs for copper imports.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week">Q1 2027</div>
+            <div class="roadmap-name">The Split</div>
+            <p class="roadmap-desc">Manual operators face 4-8 hour delays; RC users clear in 15 mins.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week">Q2 2027</div>
+            <div class="roadmap-name">Market Edge</div>
+            <p class="roadmap-desc">Logistics providers with RC capture premium battery-grade freight rates.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week">Ongoing</div>
+            <div class="roadmap-name">Standardization</div>
+            <p class="roadmap-desc">Cryptographic proof becomes standard for global trade corridors.</p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 30px;">
+          <strong>The Cost of Waiting:</strong> Late adopters will face high integration logjams in late 2026 as everyone rushes to comply. First-mover advantage lasts <strong>18 months</strong> before competitors can replicate.
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: VERIFIED GREEN CORRIDORS -->
+    <section class="slide" id="slide-7">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">Strategic Positioning</span>
+          <h2 class="slide-title">Verified "Green Corridors"</h2>
+          <p class="slide-subtitle">Transform your routes into lanes where compliance is mathematically guaranteed, not manually verified.</p>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-icon" style="color: var(--gold);">📈</div>
+            <div class="card-title">Premium Freight Rates</div>
+            <p class="card-desc">Attract premium pricing from EU battery manufacturers who require verified, compliant transport partners.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" style="color: var(--green);">🚛</div>
+            <div class="card-title">Asset Velocity (+15-20%)</div>
+            <p class="card-desc">Continuous truck movement means your fleet spends time moving copper, not sitting at border check-gates.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" style="color: var(--blue);">📊</div>
+            <div class="card-title">Stabilized Planning Index</div>
+            <p class="card-desc">Provide shippers with reliable, data-backed arrival times, eliminating corridor uncertainty.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" style="color: var(--red);">🛡️</div>
+            <div class="card-title">Regulatory Risk: Zero</div>
+            <p class="card-desc">Eliminate manual audit failures, border compliance disputes, and administrative fines.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: REVENUE MODEL -->
+    <section class="slide" id="slide-8">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">Commercial Strategy</span>
+          <h2 class="slide-title">A Multi-Sided Revenue Model</h2>
+          <p class="slide-subtitle">Mines subsidize the platform. Logistics fees are minor and offset immediately by corridor savings.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="pricing-table-container">
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 15px;">Revenue Flow Distribution</h3>
+            <ul class="comp-list">
+              <li><strong>Mines (Primary):</strong> Pay 2–3% fractional fee on newly recovered export revenue (e.g., $1M–$1.5M annually per mine). This anchor revenue funds our core infrastructure.</li>
+              <li><strong>Logistics Operators (You):</strong> Negligible shipment fees that represent less than 10% of the cost of a typical 4–8 hour border delay.</li>
+              <li><strong>Port Authorities:</strong> Pay integration fees to link ports directly to the verification pipeline.</li>
+              <li><strong>Validators (AfDB/World Bank):</strong> Align with the system to enable regional GDP growth and trace exports.</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-box">
+            <div>
+              <div class="sidebar-title">Why This Is Sustainable</div>
+              <p class="sidebar-body">
+                Because mine operators bear the cost of the sovereign validation layer, logistics operators only pay for eBL integration and local verification. 
+                <br><br>
+                Your investment is completely covered by the <strong>+15-20% asset utilization gain</strong> and the elimination of border delay costs.
+              </p>
+            </div>
+            <div class="sidebar-footer">
+              <strong>Zambia GDP Multiplier:</strong> One pilot at Mopani links logistics hubs, drives mine adoption, and creates a verified export loop.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: THE 90-DAY PILOT -->
+    <section class="slide" id="slide-9">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">Pilot Proposal</span>
+          <h2 class="slide-title">The 90-Day Pilot: Zero Risk</h2>
+          <p class="slide-subtitle">Deploy on your highest-tonnage Copperbelt corridor to prove delay reduction with no operational disruption.</p>
+        </div>
+
+        <div class="content-columns">
+          <div class="comp-column rc">
+            <div class="comp-header">📋 Pilot Scope</div>
+            <ul class="comp-list">
+              <li><strong>Corridor:</strong> Mopani → Beira or Dar es Salaam.</li>
+              <li><strong>Volume:</strong> 10–15 test shipments.</li>
+              <li><strong>Integration:</strong> Connection with your existing eBL system.</li>
+              <li><strong>Metrics:</strong> Live measurement of border delay reduction.</li>
+              <li><strong>Goal:</strong> 90%+ shipments clear in &lt;30 minutes.</li>
+            </ul>
+            <div class="comp-footer">
+              <span class="comp-footer-label">Pilot Rate</span>
+              <span class="comp-footer-value">$2,500 Total</span>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 12px;">What We Require From You</h3>
+            <ul class="comp-list" style="margin-bottom: 25px;">
+              <li>1 part-time logistics coordinator.</li>
+              <li>Access to 10–15 test shipments on the selected corridor.</li>
+              <li>2–3 days of integration support from your IT team.</li>
+            </ul>
+
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 12px;">Our Performance Guarantee</h3>
+            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">
+              If the pilot does not deliver a measurable reduction in border clearance times and Planning Time Index volatility, you owe nothing beyond the initial pilot fee.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: PRICING & COMMERCIAL TERMS -->
+    <section class="slide" id="slide-10">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">Commercials</span>
+          <h2 class="slide-title">Commercial Pricing Options</h2>
+          <p class="slide-subtitle">Simple, volume-aligned pricing designed to scale with your logistics operations.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="pricing-table-container" style="padding: 10px;">
+            <table class="pricing-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Option 1: Per-Shipment</th>
+                  <th>Option 2: Annual Contract</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Cost</strong></td>
+                  <td><strong>$500</strong> per shipment</td>
+                  <td><strong>$50k - $200k</strong> annual fee</td>
+                </tr>
+                <tr>
+                  <td><strong>Volume</strong></td>
+                  <td>Pay-as-you-go</td>
+                  <td>Unlimited within tier</td>
+                </tr>
+                <tr>
+                  <td><strong>Commitment</strong></td>
+                  <td>No upfront commitment</td>
+                  <td>12-month contract</td>
+                </tr>
+                <tr>
+                  <td><strong>Support</strong></td>
+                  <td>Standard support</td>
+                  <td>24/7 priority support</td>
+                </tr>
+                <tr>
+                  <td><strong>Best For</strong></td>
+                  <td>Testing & low volumes</td>
+                  <td>Operators with 100+ shipments</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="sidebar-box">
+            <div>
+              <div class="sidebar-title">What is Included</div>
+              <ul class="comp-list" style="font-size: 13px;">
+                <li>Full API integration with eBL infrastructure</li>
+                <li>24/7 uptime monitoring & incident response</li>
+                <li>Sovereign validator node registry security</li>
+                <li>Regular automated security audits & updates</li>
+                <li>Quarterly logistics corridor optimization reviews</li>
+              </ul>
+            </div>
+            <div class="sidebar-footer" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.2);">
+              <strong>Special Pilot Promo:</strong> Standard 10-15 shipment pricing would be $5,000–$7,500. Pilot rate is locked at **$2,500**.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: NEXT STEPS -->
+    <section class="slide" id="slide-11">
+      <div class="slide-layout">
+        <div class="slide-header">
+          <span class="slide-tag">Implementation Roadmap</span>
+          <h2 class="slide-title">Next Steps: Launching the Pilot</h2>
+          <p class="slide-subtitle">A standardized 6-week onboarding timeline to deploy Resource Command without disrupting operations.</p>
+        </div>
+
+        <div class="roadmap-grid">
+          <div class="roadmap-card active">
+            <div class="roadmap-week">Week 1</div>
+            <div class="roadmap-name">Discovery</div>
+            <p class="roadmap-desc">30-min call to review eBL systems and select pilot corridor.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week">Week 2</div>
+            <div class="roadmap-name">Tech Review</div>
+            <p class="roadmap-desc">Engineering assessment of integration endpoints.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week">Week 3</div>
+            <div class="roadmap-name">Agreement</div>
+            <p class="roadmap-desc">Execute 90-day pilot agreement and establish SLAs.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week">Week 4</div>
+            <div class="roadmap-name">Integration</div>
+            <p class="roadmap-desc">Deploy TEE prover client and connect eBL APIs.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week">Week 5-12</div>
+            <div class="roadmap-name">Live Pilot</div>
+            <p class="roadmap-desc">Run 10-15 shipments and log border delay reduction.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-week">Week 13</div>
+            <div class="roadmap-name">Results</div>
+            <p class="roadmap-desc">Present metrics to your board and decide on rollout.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: CALL TO ACTION -->
+    <section class="slide" id="slide-12">
+      <div class="slide-layout cover-layout">
+        <div class="cover-gem">⬡</div>
+        <h2 class="cover-title" style="font-size: 44px; margin-bottom: 12px;">Let's Schedule Your Discovery Call</h2>
+        <p class="cover-desc" style="font-size: 16px; margin-bottom: 40px; max-width: 500px;">
+          Set up a 30-minute operational review this week to see how we can eliminate border bottlenecks on your primary routes.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-info-box">
+            <div class="contact-title">Contact Information</div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">👤</div>
+              <div class="contact-det">
+                <div class="lbl">Founder & CEO</div>
+                <div class="val">Kennedy Thebe</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">📧</div>
+              <div class="contact-det">
+                <div class="lbl">Email</div>
+                <div class="val">kennedythebe0@gmail.com</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-det">
+                <div class="lbl">Phone</div>
+                <div class="val">(+267) 78486635</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-box" style="text-align: left; justify-content: center;">
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--gold); margin-bottom: 12px;">Kgosi Sovereign Holdings</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+              Sovereign wealth securement, cryptographic resource tracking, and high-velocity corridor compliance.
+              <br><br>
+              Gaborone, Botswana
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CONTROLS FOOTER BAR -->
+  <footer class="nav-footer">
+    <div class="progress-indicator" id="progress-dots">
+      <!-- Generated by JS -->
+    </div>
+    <div class="controls">
+      <button class="btn" id="btn-prev">◀ Previous</button>
+      <button class="btn btn-primary" id="btn-next">Next ▶</button>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsContainer = document.getElementById('progress-dots');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    let activeIndex = 0;
+
+    // Create dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('progress-dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(document.querySelectorAll('.progress-dot'));
+
+    function updateControls() {
+      // Toggle button states
+      btnPrev.disabled = activeIndex === 0;
+      if (activeIndex === slides.length - 1) {
+        btnNext.textContent = 'Restart ↺';
+      } else {
+        btnNext.textContent = 'Next ▶';
+      }
+
+      // Update dots
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function goToSlide(index) {
+      slides[activeIndex].classList.remove('active');
+      activeIndex = index;
+      slides[activeIndex].classList.add('active');
+      updateControls();
+    }
+
+    function nextSlide() {
+      if (activeIndex < slides.length - 1) {
+        goToSlide(activeIndex + 1);
+      } else {
+        goToSlide(0); // Loop back
+      }
+    }
+
+    function prevSlide() {
+      if (activeIndex > 0) {
+        goToSlide(activeIndex - 1);
+      }
+    }
+
+    // Button event listeners
+    btnNext.addEventListener('click', nextSlide);
+    btnPrev.addEventListener('click', prevSlide);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    updateControls();
+  });
+</script>
+
+</body>
+</html>
