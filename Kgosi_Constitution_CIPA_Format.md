@@ -34,7 +34,7 @@ In this constitution –
 "Act" means the Companies Act;
 "beneficial owner" has the meaning and understanding ascribed to it under section 2 of the Financial Intelligence Act; 
 "ultimate effective control" has the meaning and understanding ascribed to it under section 2 of the Financial Intelligence Act;
-"Founder" means Kennedy Oagile Morapedi;
+"Founder" means Kennedy Jr. Zibo Thebe;
 "IP Assets" means all intellectual property owned or licensed by the company, including but not limited to zero-knowledge royalty verification systems, IoT transit tracking integrations, and related cryptographic protocols;
 "SAFE" means a Simple Agreement for Future Equity.
 
@@ -72,7 +72,7 @@ Shareholders meetings shall be conducted in accordance with Part A of this Const
 
 ### 9. Directors
 (1) The directors of the company shall be such person or persons as may be appointed from time to time by ordinary resolution.
-(2) The Founder, Kennedy Oagile Morapedi, shall be a permanent director for so long as he holds shares in the company, and may not be removed by ordinary resolution.
+(2) The Founder, Kennedy Jr. Zibo Thebe, shall be a permanent director for so long as he holds shares in the company, and may not be removed by ordinary resolution.
 
 ### 10. Remuneration of directors
 The remuneration of directors shall be determined in accordance with section 157 of the Act.
@@ -214,7 +214,7 @@ Company Number: **[Pending]**
 **CONTROLLER'S DETAILS**
 
 **Controller's Name:**
-Kennedy Oagile Morapedi
+Kennedy Jr. Zibo Thebe
 
 **Residential Address:**
 _________________________________________________________________
@@ -239,5 +239,5 @@ Founder, Director, and Chief Executive Officer
 * where some shares are to be held by a foreign company, the identification of natural persons who own, hold shares and control the foreign company must be disclosed.
 * beneficial owner’s interest must be expressed in percentage.
 
-**Completed by:** Kennedy Oagile Morapedi
+**Completed by:** Kennedy Jr. Zibo Thebe
 **Postal Address:** _________________________________________________
