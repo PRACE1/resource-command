@@ -75,7 +75,7 @@ class BiometricAttestation:
     lux_level: float
     gaze_stable: bool
     timestamp: float
-    signature: str   # HMAC-SHA256 of (session_id + timestamp)
+    signature: str   # DEMO PLACEHOLDER: keyless SHA-256 hash, unverified — see threat model T5. Real HMAC requires HSM-bound key (pipe dependency).
 
 
 @dataclass

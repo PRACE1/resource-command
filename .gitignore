@@ -29,3 +29,16 @@ specter-vision/volumes/
 specter-vision/models/
 specter-vision/.cache/
 cloudflared*
+
+# ZK build artifacts & witness data — DO NOT COMMIT
+# (*.wtns and input*.json contain the PRIVATE witness the ZK proof exists to hide;
+#  *.ptau / *.zkey are large trusted-setup/proving artifacts)
+*.zkey
+*.ptau
+*.wtns
+*.r1cs
+*.sym
+circuits/input*.json
+circuits/cheater_input.json
+circuits/proof_*.json
+circuits/public_*.json

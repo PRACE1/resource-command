@@ -34,7 +34,7 @@ struct BiometricAttestation {
     lux_level: f32,           // Ambient light in lux
     gaze_stable: bool,        // Eye tracking stability
     timestamp: f64,
-    signature: String,        // HMAC-SHA256 of (session_id + timestamp)
+    signature: String,        // DEMO PLACEHOLDER: keyless SHA-256 hash, unverified — see threat model T5. Real HMAC requires HSM-bound key (pipe dependency).
 }
 
 #[derive(Deserialize)]
